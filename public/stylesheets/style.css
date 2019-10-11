@@ -56,6 +56,10 @@ li.dropdown {
   display: block;
 }
 /* Home Page Design*/
+#mainVidDiv{
+  width: auto;
+  height: 500px;
+}
 .highlightDiv {
   background-color: red;
   width: 426px;
@@ -64,8 +68,22 @@ li.dropdown {
   margin-right: auto;
   margin-top: 50px;
 }
-#highlightVideo {
+a{
   display: block;
+}
+.vidMainInfoDiv{
+  background-color: yellow;
+  width: 426px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+#photoMainVid{
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin-right: 25px;
 }
 .videoDiv {
   width: 1378px;
@@ -84,10 +102,27 @@ li.dropdown {
 .video1 {
   margin-right: 46px;
 }
-
-#acc {
-  float: right;
+.vidInfoDiv{
+  background-color: brown;
+  width: 1378px;
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
 }
+.individualInfoDiv{
+  display: inline-block;
+  background-color: yellow;
+  width: 426px;
+  height: 80px;
+}
+#photoVid{
+  width: 80px;
+  height: 80px;
+  float: left;
+  margin-right: 25px;
+}
+
+
 #logo {
   width: 20%;
   height: 20%;

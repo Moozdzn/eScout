@@ -6,4 +6,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'eScout' });
 });
 
+/* GET home page from profile. */
+router.get('/profile', function(req, res, next) {
+  res.render('profile', { title: 'eScout - Profile' });
+});
+
+
 module.exports = router;

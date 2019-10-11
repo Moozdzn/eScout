@@ -1,8 +1,8 @@
 
 <header>
-  <img src="/media/eScoutlogo.png" id="logo"></img>
+  <img src="/media/eScoutlogo.png" id="logo" >
     <ul>
-  <li><a href="#home">Home</a></li>
+  <li><a href="/">Home</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Events</a>
     <div class="dropdown-content">
@@ -13,7 +13,7 @@
         <a href="#">More...</a>  
     </div>
   </li>
-  <li class="dropdown"id="acc">
+  <li class="dropdown" style="float:right">
     <a href="javascript:void(0)" class="dropbtn" >Account</a>
     <div class="dropdown-content">
         <a href="profile">Profile</a>
@@ -23,16 +23,38 @@
   </li>
 </ul>
 </header>
-
-<div class="highlightDiv" id="highlightVideo"></div>
+<div id="mainVidDiv" >
+  <div class="highlightDiv" ></div>
+  <div class="vidMainInfoDiv">
+    <img src="/media/profileLogoPlaceholder.jpg" alt="profileLogo" id="photoMainVid">
+    <h4>Video Title</h4>
+    <a href="/profile">username</a>
+    <a href="">Game</a>
+  </div>
+</div>
 <button style="float:right">Filters</button>
 <div class="videoDiv">
   <div class="teste video1"></div>
   <div class="teste video1"></div>
   <div class="teste"></div>
 </div>
-
-<h1>{{title}}</h1>
+<div class="vidInfoDiv">
+  <div class="individualInfoDiv video1">
+    <img src="/media/profileLogoPlaceholder.jpg" alt="profileLogo" id="photoVid">
+    <h4>Video Title</h4>
+    <a href="/profile">username</a>
+    <a href="">Game</a></div>
+  <div class="individualInfoDiv video1">
+    <img src="/media/profileLogoPlaceholder.jpg" alt="profileLogo" id="photoVid">
+    <h4>Video Title</h4>
+    <a href="/profile">username</a>
+    <a href="">Game</a></div>
+  <div class="individualInfoDiv">
+    <img src="/media/profileLogoPlaceholder.jpg" alt="profileLogo" id="photoVid">
+    <h4>Video Title</h4>
+    <a href="/profile">username</a>
+    <a href="">Game</a></div>
+</div>
 
 <!-- na pagina principal os jogos a ser mostrados dao filtro automaticamente com base nos jogos definidos pelo utilizador -->
-<p>Welcome to {{title}}</p>
+
