@@ -54,8 +54,35 @@ li.dropdown {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+.highlightDiv {
+  background-color: red;
+  width: 426px;
+  height:240px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+#highlightVideo {
+  display: block;
+}
+.videoDiv {
+  width: 1378px;
+  height:240px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  background-color: blue;
+}
+.teste {
+  display: inline-block;
+  background-color: black;
+  width: 426px;
+  height:240px;
+}
+.video1 {
+  margin-right: 46px;
+}
 
-.head{}
 #acc {
   float: right;
 }
