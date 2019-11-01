@@ -4,8 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var guestRouter = require('./routes/guestRoute');
 
 var app = express();
 
@@ -19,8 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', guestRouter);
 
 
 // catch 404 and forward to error handler
@@ -38,19 +36,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://diogo-santos1:S%24nZK%23m2kJLFeV%24@escout-7d4bn.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("eScout").collection("escout");
-  // perform actions on the collection object
-  client.close();
-});
-
-
 
 
 module.exports = app;

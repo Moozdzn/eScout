@@ -5,6 +5,7 @@ body {
   background-color: white;
 }
 
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -13,6 +14,10 @@ ul {
   background-color: #333;
 }
 
+button {
+  float: right;
+  display: block;
+}
 li {
   float: left;
 }
@@ -54,6 +59,10 @@ li.dropdown {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+#acc{
+  float: right;
 }
 /* Home Page Design*/
 #mainVidDiv{
@@ -107,10 +116,10 @@ a{
 
 #logo {
   width: 20%;
-  height: 20%;
-  display: block;
+  height: 25%;
   margin-left: auto;
   margin-right: auto;
+  display: block;
 }
 /* Profile Page Design */
 #photo {
