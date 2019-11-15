@@ -6,12 +6,17 @@ body {
 }
 
 
-.nav {
+ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: #333;
+  display: block;
+ 
+}
+li{
+  float: left;
 }
 
 button {
@@ -145,20 +150,4 @@ a{
   height: 240px;
   background-color: blue;
   display:block;
-}
-
-/* Upload Video Design*/
-
-#uploadFormDiv{
-  margin: 50px auto 0px;
-}
-
-.uploadForm{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-  display: block;
-
 }
