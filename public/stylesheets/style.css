@@ -6,7 +6,7 @@ body {
 }
 
 
-ul {
+.nav {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -17,9 +17,6 @@ ul {
 button {
   float: right;
   display: block;
-}
-li {
-  float: left;
 }
 
 li a, .dropbtn {
@@ -55,7 +52,9 @@ li.dropdown {
   text-align: left;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1;}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
 
 .dropdown:hover .dropdown-content {
   display: block;
@@ -146,4 +145,20 @@ a{
   height: 240px;
   background-color: blue;
   display:block;
+}
+
+/* Upload Video Design*/
+
+#uploadFormDiv{
+  margin: 50px auto 0px;
+}
+
+.uploadForm{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  display: block;
+
 }
