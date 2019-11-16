@@ -151,3 +151,8 @@ a{
   background-color: blue;
   display:block;
 }
+
+#highlightRow {
+
+  float: right;
+}

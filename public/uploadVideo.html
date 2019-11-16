@@ -2,6 +2,9 @@
 
 <head>
     <link rel="stylesheet" href="./stylesheets/style.css">
+    
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script> 
 
 </head>
 
@@ -33,12 +36,12 @@
     
     
     <div id="uploadFormDiv">
-        <form>
+        <form action="fileupload" method="post" enctype="multipart/form-data">
             <ul class="uploadForm">
                 <li> <label> Video </label> </li>
-                <li><input type="file" name="Video"></li>
-                <li> <label > Thumbnail </label> </li>
-                <li><input type="file" name="thumbnail"></li>
+                <li><input type="file" name="video"></li>
+                <!--<li> <label > Thumbnail </label> </li>
+               <li><input type="file" name="thumbnail"></li> -->
                 <li><label>Video Title</label></li>
                 <li><input type="text" value="Video Title" placeholder="Video Title"></li>
                 <li><label>Description </label></li>
