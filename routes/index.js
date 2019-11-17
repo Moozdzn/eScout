@@ -14,5 +14,7 @@ router.get('/events',function(req,res, next){
 router.get('/createEvent',function(req,res, next){
   res.render('createEvent',{title: 'New Event'});
 });
-
+router.get('/uploadVideo',function(req,res, next){
+  res.render('uploadVideo',{title: 'Upload Video'});
+});
 module.exports = router;

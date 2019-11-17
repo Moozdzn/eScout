@@ -1,0 +1,55 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">eScout</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/">Home
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="events">Events
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div id="uploadFormDiv">
+    <form action="videoupload" method="post" enctype="multipart/form-data">
+        <ul class="uploadForm">
+            <li> <label> Video </label> </li>
+            <li><input type="file" name="video"></li>
+            <!--<li> <label > Thumbnail </label> </li>
+               <li><input type="file" name="thumbnail"></li> -->
+            <li><label>Video Title</label></li>
+            <li><input type="text" value="Video Title" placeholder="Video Title"></li>
+            <li><label>Description </label></li>
+            <li><input type="text" value="Description" placeholder="..."></li>
+            <li> <label>Game</label> <select>
+                    <option value="PUBG">PUBG</option>
+                    <option value="CSGO">CS:GO</option>
+                    <option value="LOL">League of Legends</option>
+                    <option value="Fortnite">Fortnite</option>
+                </select></li>
+
+            <li><input type="submit" value="Upload"></li>
+
+            <li><a href="profile"><button>Cancel</button></a></li>
+        </ul>
+    </form>
+</div>
