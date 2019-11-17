@@ -58,73 +58,24 @@
       </div>
     </div>
   </nav>
-
-  <!-- Page Content -->
-  <div class="container">
-		<div class="row"><p>Click the button to get your coordinates.</p>
-
-<button onclick="getLocation()">Try It</button>
-
-</div>
+  <!-- /.container -->
+	<div class="container">
 		<div class="row">
 			<div class="col">
-			<button>Filter</button>
-			<a href="createEvent.html"><button>Create Event</button></a>
+				<form action="/action_page.php">
+					Event Name: <input type="text" name="Ename"><br>
+					Event Description: <input type="text" name="Edesc"><br>
+					Event StartTime: <input type="time" name="Estart"><br>
+					Event Location: <input type="text" name="Eloc"><br>
+					Event Date: <input type="date" name="Edate"><br>
+					Ticket Price: <input type="number" name="Eprice"><br>
+					First name: <input type="text" name="fname"><br>
+					Last name: <input type="text" name="lname"><br>
+					<input type="submit" value="Submit">
+					</form>
 			</div>
 		</div>
-        <div class="row my-4">
-			<div class="col">
-					<div class="row">
-					<div class="col-lg-4 col-md-6 mb-4">
-					<div class="card h-100">
-					  <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-					  <div class="card-body">
-						<h4 class="card-title">
-						  <a href="#" onclick="showMarker(1)">Event One</a>
-						</h4>
-						  
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-					  </div>
-					</div>
-				  </div>
-
-				  <div class="col-lg-4 col-md-6 mb-4">
-					<div class="card h-100">
-					  <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-					  <div class="card-body">
-						<h4 class="card-title">
-						  <a href="#" onclick="showMarker(2)">Event Two</a>
-						</h4>
-						  
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-					  </div>
-					</div>
-				  </div>
-
-				  <div class="col-lg-4 col-md-6 mb-4">
-					<div class="card h-100">
-					  <a href="#" ><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-					  <div class="card-body">
-						<h4 class="card-title">
-						  <a href="#" onclick="showMarker(3)">Event Three</a>
-						</h4>
-						  
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-					  </div>
-					</div>
-				  </div>
-				  </div>
-			</div>
-			<div class="col">
-				<div id="mapid"></div>
-			</div>
-
-		</div>
-    <!-- /.row -->
-
-  </div>
-  <!-- /.container -->
-
+	</div>
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
