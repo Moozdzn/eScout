@@ -8,23 +8,50 @@ var guestRouter = require('./routes/guestRoute');
 
 var app = express();
 
-var fs = require('fs');
-var busboy = require('connect-busboy');
+var fileUpload = require('express-fileupload');
+var cors = require('cors');
+var bodyParser = require('body-parser');
+var _ = require('lodash');
 
-app.use(busboy()); 
+app.use(fileUpload({
+  createParentPath: true
+}));
 
-app.post('/fileupload', function(req, res) {
-    var fstream;
-    req.pipe(req.busboy);
-    req.busboy.on('file', function (fieldname, file, filename) {
-        console.log("Uploading: " + filename); 
-        fstream = fs.createWriteStream(__dirname + '/uploads/' + filename);
-        file.pipe(fstream);
-        fstream.on('close', function () {
-            res.redirect('back');
-        });
-    });
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(logger('dev'));
+
+app.post('/videoupload', async (req, res) => {
+  try {
+      if(!req.files) {
+          res.send({
+              status: false,
+              message: 'No file uploaded'
+          });
+      } else {
+          //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
+          let video = req.files.video;
+          
+          //Use the mv() method to place the file in upload directory (i.e. "uploads")
+          video.mv('./uploads/' + video.name);
+
+          //send response
+          res.send({
+              status: true,
+              message: 'File is uploaded',
+              data: {
+                  name: video.name,
+                  mimetype: video.mimetype,
+                  size: video.size
+              }
+          });
+      }
+  } catch (err) {
+      res.status(500).send(err);
+  }
 });
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
