@@ -12,6 +12,8 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-fileupload": "^1.1.6-alpha.6",
+    "formidable": "^1.2.1",
+    "googleapis": "^39.2.0",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "lodash": "^4.17.15",

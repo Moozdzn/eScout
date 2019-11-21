@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var formidable = require('formidable');
+
+
+
+const gdrive = require("./routes/gdrive");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,6 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev'));
 
+
 app.post('/videoupload', async (req, res) => {
   try {
       if(!req.files) {
@@ -36,6 +42,16 @@ app.post('/videoupload', async (req, res) => {
 
           //Use the mv() method to place the file in upload directory (i.e. "uploads")
           video.mv('./uploads/' + video.name);
+          try {
+            gdrive.imageUpload(video.name, './uploads/' + video.name, (id) => {
+              console.log(id);
+          });
+        }
+          catch(err1) {
+            res.status(500).send(err);
+            console.log(err);
+          
+          }
 
           //send response
           res.send({
@@ -50,9 +66,9 @@ app.post('/videoupload', async (req, res) => {
       }
   } catch (err) {
       res.status(500).send(err);
+      console.log(err);
   }
 });
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
