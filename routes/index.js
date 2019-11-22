@@ -17,4 +17,7 @@ router.get('/createEvent',function(req,res, next){
 router.get('/uploadVideo',function(req,res, next){
   res.render('uploadVideo',{title: 'Upload Video'});
 });
+router.get('/login',function(req,res, next){
+  res.render('login',{title: 'Login'});
+});
 module.exports = router;

@@ -6,6 +6,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
 		id: 'mapbox.streets'
 	}).addTo(mymap);
+
+
 /*
 var circle = L.circle([51.508, -0.11], {
 	color: 'red',
@@ -45,9 +47,19 @@ function getLocation() {
     navigator.geolocation.getCurrentPosition(showPosition);
   }
 }
+var userPos;
 function showPosition(position) {
-  var userPos = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap).bindPopup('You are here!<br>Or at least somewhere around')
+   userPos = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap).bindPopup('You are here!<br>Or at least somewhere around')
 		.openPopup();
+}
+
+function getRoute(){
+	L.Routing.control({
+		waypoints: [
+		  L.latLng(userPos._latlng.lat, userPos._latlng.lng),
+		  L.latLng(38.7150, -9.1310)
+		]
+	  }).addTo(mymap);
 }
 
 
