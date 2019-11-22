@@ -52,15 +52,24 @@ function showPosition(position) {
    userPos = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap).bindPopup('You are here!<br>Or at least somewhere around')
 		.openPopup();
 }
-
 function getRoute(){
-	L.Routing.control({
-		waypoints: [
-		  L.latLng(userPos._latlng.lat, userPos._latlng.lng),
-		  L.latLng(38.7150, -9.1310)
-		]
-	  }).addTo(mymap);
+	try{
+		L.Routing.control({
+			waypoints: [
+			L.latLng(userPos._latlng.lat, userPos._latlng.lng),
+			L.latLng(38.7150, -9.1310)
+			]
+		}).addTo(mymap);
+	}
+	catch(err){
+		if(err instanceof TypeError){
+			alert('Não temos acesso á sua localização');
+		}
+		
+	}
 }
+
+
 
 
 var clicked1 = false;
