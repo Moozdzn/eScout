@@ -30,17 +30,15 @@
 
 
 <div id="uploadFormDiv">
-    <form action="videoupload" method="post" enctype="multipart/form-data">
+    <form action="/videoupload" method="post" enctype="multipart/form-data" name="uploadVideoForm">
         <ul class="uploadForm">
             <li> <label> Video </label> </li>
             <li><input type="file" name="video"></li>
-            <!--<li> <label > Thumbnail </label> </li>
-               <li><input type="file" name="thumbnail"></li> -->
             <li><label>Video Title</label></li>
-            <li><input type="text" value="Video Title" placeholder="Video Title"></li>
+            <li><input type="text" name="VideoTitle" placeholder="Video Title"></li>
             <li><label>Description </label></li>
-            <li><input type="text" value="Description" placeholder="..."></li>
-            <li> <label>Game</label> <select>
+            <li><input type="text" name="Description" placeholder="..."></li>
+            <li> <label>Game</label> <select name="Game">
                     <option value="PUBG">PUBG</option>
                     <option value="CSGO">CS:GO</option>
                     <option value="LOL">League of Legends</option>

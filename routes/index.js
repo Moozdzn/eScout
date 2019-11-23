@@ -10,7 +10,7 @@ router.get('/profile',function(req,res, next){
 });
 router.get('/events',function(req,res, next){
   res.render('events',{title: 'Events'});
-});
+}); 
 router.get('/createEvent',function(req,res, next){
   res.render('createEvent',{title: 'New Event'});
 });
