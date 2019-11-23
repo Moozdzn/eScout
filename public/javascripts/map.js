@@ -63,7 +63,7 @@ function getRoute(){
 	}
 	catch(err){
 		if(err instanceof TypeError){
-			alert('Não temos acesso á sua localização');
+			alert('We don\'t have access to your location.');
 		}
 		
 	}
