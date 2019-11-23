@@ -3,7 +3,7 @@ var eventsDAO = require('../models/eventsDAO');
 var router = express.Router();
 
 
-router.get("/events", function(req,res,next){
+router.get("/", function(req,res,next){
     eventsDAO.getEvents(function(err,result){
         if(err){
             res.statusMessage = result.status;
