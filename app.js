@@ -35,6 +35,7 @@ app.use('/', indexRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/auth/register',authRouter);
 
 
 // catch 404 and forward to error handler

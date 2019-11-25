@@ -14,12 +14,17 @@ $('#confirm').submit(function (evt) {
         sessionStorage.userID = parseInt(Object.values(res[0]));;
         window.location.href = '/';
         
-        //
-      }
-      
-      , error : function() { alert(JSON.stringify('error')); }
-      
-      });
+        success: function(res, status){ 
+          alert('SUCCESS');
+          sessionStorage.userID = parseInt(Object.values(res[0]));;
+          window.location.href = '/';
+          
+          //
+        }
+        
+        , error : function() { alert(JSON.stringify('error')); }
+        
+        });
 })
 
 $(document).ready(function(){
