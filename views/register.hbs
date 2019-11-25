@@ -12,14 +12,20 @@
           <div class="card-body">
             <h5 class="card-title text-center">Register</h5>
             <form class="form-signin">
+              
               <div class="form-label-group">
-                <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
-                <label for="inputUserame">Username</label>
+                <input type="text" id="inputName" class="form-control" placeholder="Name"  required autofocus>
+                <label for="inputName">Name</label>
               </div>
 
               <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-                <label for="inputEmail">Email address</label>
+                <input type="text" id="inputUsername" class="form-control" placeholder="Username"  required >
+                <label for="inputUsername">Username</label>
+              </div>
+
+              <div class="form-label-group">
+                <input type="date" id="inputDate" class="form-control" placeholder="BirthDate" required>
+                <label for="inputDate">BirthDate</label>
               </div>
               
               <hr>
@@ -35,11 +41,12 @@
               </div>
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
-              <a class="d-block text-center mt-2 small" href="#">Sign In</a>
+              <a class="d-block text-center mt-2 small" href="auth">Sign In</a>
             </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <script src="javascripts/register.js"></script>
   

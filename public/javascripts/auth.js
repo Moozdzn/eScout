@@ -11,12 +11,8 @@
             }),
         
         success: function(res, status){ 
-          // NEEDS IMPROVEMENT
-          var response = JSON.stringify(res);
-          var ID = parseInt(response.substring(11, response .length-2));
-          console.log(ID);
           alert('SUCCESS');
-          sessionStorage.userID = ID;
+          sessionStorage.userID = parseInt(Object.values(res[0]));;
           window.location.href = '/';
           
           //
