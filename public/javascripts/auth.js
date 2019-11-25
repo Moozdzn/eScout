@@ -1,18 +1,14 @@
-$('#confirm').submit(function (evt) {
-  evt.preventDefault();
-  $.ajax({
-      url: "/api/auth",
-      method : "post",
-      contentType : "application/json",
-      data : JSON.stringify({ 
-              username: $("#inputUsername").val(), 
-              password: $("#inputPassword").val(),  
-          }),
-      
-      success: function(res, status){ 
-        alert('SUCCESS');
-        sessionStorage.userID = parseInt(Object.values(res[0]));;
-        window.location.href = '/';
+
+  $('#confirm').submit(function (evt) {
+    evt.preventDefault();
+    $.ajax({
+        url: "/api/auth",
+        method : "post",
+        contentType : "application/json",
+        data : JSON.stringify({ 
+                username: $("#inputUsername").val(), 
+                password: $("#inputPassword").val(),  
+            }),
         
         success: function(res, status){ 
           alert('SUCCESS');
@@ -28,5 +24,5 @@ $('#confirm').submit(function (evt) {
 })
 
 $(document).ready(function(){
-  
+    
 });
