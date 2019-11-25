@@ -30,15 +30,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<form action="/action_page.php">
-					Event Name: <input type="text" name="Ename"><br>
-					Event Description: <input type="text" name="Edesc"><br>
-					Event StartTime: <input type="time" name="Estart"><br>
-					Event Location: <input type="text" name="Eloc"><br>
-					Event Date: <input type="date" name="Edate"><br>
-					Ticket Price: <input type="number" name="Eprice"><br>
-					Organizer name: <input type="text" name="fname"><br>
-					Organizer website: <input type="text" name="lname"><br>
+				<form action="/newEvent" id="confirm">
+					Event Name: <input type="text" id="Ename" name="Ename"><br>
+					Event Description: <input type="text" id="Edesc" name="Edesc"><br>
+					Event StartTime: <input type="time" id="Estart" name="Estart"><br>
+					Event Location: <input type="text" id="Eloc" name="Eloc"><br>
+					Event Date: <input type="date" id="Edate" name="Edate"><br>
+					Ticket Price: <input type="number" id="Eprice" name="Eprice"><br>
+					Organizer name: <input type="text" id="Oname" name="Oname"><br>
 					<input type="submit" value="Submit">
 					</form>
           <a href="events"><button>Cancel</button></a>
@@ -52,3 +51,4 @@
     </div>
     <!-- /.container -->
   </footer>
+  <script src="/javascripts/createEvent.js"></script>

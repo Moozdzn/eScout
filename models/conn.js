@@ -4,7 +4,7 @@ var pool  = mysql.createPool({
     connectionLimit : 10,
     host     : 'remotemysql.com',
     user     : 'xtgAoUoOEz',
-    password : process.env.DBPASSWORD,
+    password : 'JjzNSoWVCE',
     database : 'xtgAoUoOEz'
 });
 

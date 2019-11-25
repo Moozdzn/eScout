@@ -11,6 +11,7 @@ const gdrive = require("./routes/gdrive");
 
 var indexRouter = require('./routes/index');
 var eventsRouter = require('./routes/eventsRouter');
+var authRouter = require('./routes/authRouter');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/events', eventsRouter);
+app.use('/api/auth', authRouter);
 
 
 // catch 404 and forward to error handler
