@@ -11,22 +11,24 @@ window.onload = function () {
         pBio = document.getElementById("pBio");
 
         $.ajax({
-            url: "/api/profile?user",
+            url: "/api/profile?id="+sessionStorage.userID,
             method: "get",
             dataType: "json",
             success: function (res, status) {
                 if (res.err) return;
-                pusername.innerHTML = res.username;
-                pName.innerHTML = res.name;
-                pAge.innerHTML = currentDate.getFullYear() - res.birthDate.getFullYear();
-                pRegion.innerHTML = res.region;
-                pGame.innerHTML = res.game;
-                pMainPos.innerHTML = res.mainPosition;
-                pTeam.innerHTML = res.teamName;
-                pBio.innerHTML = res.bio;
                 
+                var s = JSON.stringify(res);
+                var data = JSON.parse(s); 
+                
+                pusername.innerHTML = data[0].username;
+                pName.innerHTML += data[0].name;
+                pAge.innerHTML += currentDate.getFullYear() - data[0].birthDate.substring(0, data[0].birthDate.length-20);
+                pRegion.innerHTML += data[0].region;
+                pGame.innerHTML += data[0].game;
+                pMainPos.innerHTML += data[0].mainPosition;
+                pTeam.innerHTML += data[0].teamName;
+                pBio.innerHTML = data[0].bio;
             }
-
         })
 }
 

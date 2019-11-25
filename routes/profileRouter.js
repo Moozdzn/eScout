@@ -4,7 +4,8 @@ var router = express.Router();
 
 
 router.get("/", function(req,res,next){
-    profileDAO.getProfileInfo(function(err,result){
+    var user = req.query.id;
+    profileDAO.getProfileInfo(user,function(err,result){
         if(err){
             res.statusMessage = result.status;
             res.status(result.code).json(err);

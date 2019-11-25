@@ -11,7 +11,6 @@
             }),
         
         success: function(res, status){ 
-          alert('SUCCESS');
           sessionStorage.userID = parseInt(Object.values(res[0]));;
           window.location.href = '/';
           
