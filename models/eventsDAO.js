@@ -28,7 +28,7 @@ module.exports.newEvent = function (cb, next) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
-        conn.query("INSERT INTO Event (eventName,eventDescription,eventDate) VALUES ("+ eventName + ","+ eventDesc + ","+ eventDate + "); INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + ",Organizer)", function (err, results) {
+        conn.query("INSERT INTO Event (eventName,eventDescription,eventDate) VALUES (\"""+ eventName + "\"",\"""+ eventDesc + "\","+ eventDate + "); INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + ",Organizer)", function (err, results) {
             conn.release();
             if (err) {
                 cb(err, { code: 500, status: "Error in a database query" })

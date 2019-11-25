@@ -21,7 +21,7 @@ router.get('/auth',function(req,res, next){
   res.render('auth',{title: 'Login'});
 });
 
-router.get('/register',function(req,res, next){
+router.get('/auth/register',function(req,res, next){
   res.render('register',{title: 'Register'});
 });
 module.exports = router;
