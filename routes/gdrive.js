@@ -2,7 +2,7 @@
 const fs = require("fs");
 const {google} = require('googleapis');
  
-function imageUpload(fileName, filePath, callback){
+function videoUpload(fileName, filePath, callback){
     require("./gdrive-auth")((auth) => {
         const fileMetadata = {
             name: fileName
@@ -29,4 +29,4 @@ function imageUpload(fileName, filePath, callback){
     });
 }
  
-module.exports = { imageUpload };
+module.exports = { videoUpload };
