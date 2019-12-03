@@ -21,14 +21,13 @@ module.exports.getEvents = function (cb, next) {
 
 
 };
-/* COME BACK HERE WHEN SIMPLE AUTH IS IMPLEMENTED
 module.exports.newEvent = function (cb, next) {
     pool.getConnection(function (err, conn) {
         if (err) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
-        conn.query("INSERT INTO Event (eventName,eventDescription,eventDate) VALUES (\"""+ eventName + "\"",\"""+ eventDesc + "\","+ eventDate + "); INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + ",Organizer)", function (err, results) {
+        conn.query("INSERT INTO Event (eventName,eventDescription,eventDate) VALUES (\""+ eventName + "\",\""+ eventDesc + "\","+ eventDate + "); INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + ",Organizer)", function (err, results) {
             conn.release();
             if (err) {
                 cb(err, { code: 500, status: "Error in a database query" })
@@ -38,4 +37,3 @@ module.exports.newEvent = function (cb, next) {
         })
     })
 };
-*/

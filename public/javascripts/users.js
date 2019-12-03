@@ -11,11 +11,12 @@ window.onload = function () {
         pBio = document.getElementById("pBio");
 
         $.ajax({
-            url: "/api/profile?id="+sessionStorage.userID,
+            url: "/api/users/profile/"+sessionStorage.userID,
             method: "get",
             dataType: "json",
             success: function (res, status) {
                 if (res.err) return;
+                
                 
                 var s = JSON.stringify(res);
                 var data = JSON.parse(s); 
@@ -28,6 +29,9 @@ window.onload = function () {
                 pMainPos.innerHTML += data[0].mainPosition;
                 pTeam.innerHTML += data[0].teamName;
                 pBio.innerHTML = data[0].bio;
+            },
+            error: function() {
+                alert("Please Log in.");
             }
         })
 }

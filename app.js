@@ -10,7 +10,7 @@ const gdrive = require("./routes/gdrive");
 var indexRouter = require('./routes/index');
 var eventsRouter = require('./routes/eventsRouter');
 var authRouter = require('./routes/authRouter');
-var profileRouter = require('./routes/profileRouter');
+var usersRouter = require('./routes/usersRouter');
 
 var app = express();
 
@@ -54,7 +54,6 @@ app.post('/videoupload', async (req, res) => {
             console.log(err1);
 
           }
-
           //send response
           res.send({
               status: true,
@@ -88,8 +87,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/profile', profileRouter);
-app.use('/api/videoupload', profileRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/videoupload', usersRouter);
 app.use('/api/auth/register',authRouter);
 
 

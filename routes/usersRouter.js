@@ -1,10 +1,11 @@
 var express = require('express');
-var profileDAO = require('../models/profileDAO');
+var profileDAO = require('../models/usersDAO');
 var router = express.Router();
 
 
-router.get("/", function(req,res,next){
-    var user = req.query.id;
+router.get("/profile/:id", function(req,res,next){
+    var user = req.params.id;
+    console.log(user);
     profileDAO.getProfileInfo(user,function(err,result){
         if(err){
             res.statusMessage = result.status;
