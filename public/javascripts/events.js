@@ -25,7 +25,7 @@ window.onload = function () {
             for (i in res) {
                 markerList.push([[res[i].latitude, res[i].longitude], res[i].eventName, false]);
                 console.log(markerList[i]);
-                html += '<div class="col-lg-4 col-md-6 mb-4" onclick="showMarker(' + markerList[i] + ')"><div class="card h-100"><div class="card-body"> <h4 class="card-title"><a href="#">' + res[i].eventName + '</a></h4><p class="card-text">' + res[i].eventDescription + '</p></div></div></div>';
+                html += '<div class="col-lg-4 col-md-6 mb-4" onclick="showMarker(' + i + ')"><div class="card h-100"><div class="card-body"> <h4 class="card-title"><a href="#">' + res[i].eventName + '</a></h4><p class="card-text">' + res[i].eventDescription + '</p></div></div></div>';
                 pepehands++;
 
             }
@@ -36,12 +36,14 @@ window.onload = function () {
     })
 };
 
-function showMarker(marker) {
+function showMarker(id) {
     console.log(pepehands);
     /*  $("#eventslist").on("click",'#'+pepehands , function(){  id="'+pepehands+'
          alert(i);
      }); */
+    var marker = markerList[id];
     
+    console.log(marker)
     if (marker[2] === false) {
         L.marker(marker[0]).addTo(mymap).bindPopup(marker[1]).openPopup();
         marker[2] = true;
