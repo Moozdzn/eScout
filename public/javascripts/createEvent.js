@@ -6,10 +6,10 @@
             contentType : "application/json",
             data : JSON.stringify({ eventName:$("#Ename").val(), 
                     eventDesc: $("#Edesc").val(),  
-                    eventStart: $("#Estart").val(),
+                    eventStartTime: $("#Estart").val(),
                     eventLoc:$("#Eloc").val(),
                     eventDate:$("#Edate").val(),
-                    eventPrice:$("#Eprice").val(),
+                    eventTicketPrice:$("#Eprice").val(),
                     organizerName:$("#Oname").val(),
     
                 }),
