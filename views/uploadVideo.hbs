@@ -27,10 +27,9 @@
         </div>
     </div>
 </nav>
-
-
+ 
 <div id="uploadFormDiv">
-    <form action="/videoupload" method="post" enctype="multipart/form-data" name="uploadVideoForm">
+    <form action="/api/users/videoupload" method="post" enctype="multipart/form-data" name="uploadVideoForm" id='submitVideo'>
         <ul class="uploadForm">
             <li> <label> Video </label> </li>
             <li><input type="file" name="video"></li>
@@ -39,6 +38,7 @@
             <li><label>Description </label></li>
             <li><input type="text" name="Description" placeholder="..."></li>
             <li> <label>Game</label> <select name="Game">
+                
                     <option value="PUBG">PUBG</option>
                     <option value="CSGO">CS:GO</option>
                     <option value="LOL">League of Legends</option>
@@ -51,3 +51,6 @@
         </ul>
     </form>
 </div>
+
+
+<script src="javascripts/uploadVideo.js"></script>

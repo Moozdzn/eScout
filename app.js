@@ -3,10 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var formidable = require('formidable');
 
-const gdrive = require("./routes/gdrive");
-
+//Routes
 var indexRouter = require('./routes/index');
 var eventsRouter = require('./routes/eventsRouter');
 var authRouter = require('./routes/authRouter');
@@ -30,46 +28,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev'));
 
 
-app.post('/videoupload', async (req, res) => {
-  try {
-      if(!req.files) {
-          res.send({
-              status: false,
-              message: 'No file uploaded'
-          });
-      } else {
-          //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-          let video = req.files.video;
-
-          //Use the mv() method to place the file in upload directory (i.e. "uploads")
-          video.mv('./uploads/' + video.name);
-          try {
-            gdrive.videoUpload(video.name, './uploads/' + video.name, (id) => {
-              //NEED TO STORE id ON DATABASE
-              console.log(id);
-          });
-        }
-          catch(err1) {
-            res.status(500).send(err1);
-            console.log(err1);
-
-          }
-          //send response
-          res.send({
-              status: true,
-              message: 'File is uploaded',
-              data: {
-                  name: video.name,
-                  mimetype: video.mimetype,
-                  size: video.size
-              }
-          });
-      }
-  } catch (err) {
-      res.status(500).send(err);
-      console.log(err);
-  }
-});
 // END
 
 
@@ -88,7 +46,6 @@ app.use('/', indexRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/videoupload', usersRouter);
 app.use('/api/auth/register',authRouter);
 
 

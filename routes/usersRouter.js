@@ -1,4 +1,5 @@
 var express = require('express');
+const gdrive = require('./gdrive');
 var profileDAO = require('../models/usersDAO');
 var router = express.Router();
 
@@ -16,5 +17,47 @@ router.get("/profile/:id", function(req,res,next){
     }, next)
 
 });
+
+router.post("/videoupload", function(req,res){
+    try {
+        console.log(req)
+        if(!req.files) {
+            res.send({
+                status: false,
+                message: 'No file uploaded'
+            });
+        } else {
+            //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
+            let video = req.files.video;
+            console.log(video);
+            //Use the mv() method to place the file in upload directory (i.e. "uploads")
+            video.mv('./uploads/' + video.name);
+            try {
+              gdrive.videoUpload(video.name, './uploads/' + video.name, (id) => {
+                //NEED TO STORE id ON DATABASE
+                console.log(id);
+            });
+          }
+            catch(err1) {
+              res.status(500).send(err1);
+              console.log(err1);
+  
+            }
+            //send response
+            res.send({
+                status: true,
+                message: 'File is uploaded',
+                data: {
+                    name: video.name,
+                    mimetype: video.mimetype,
+                    size: video.size
+                }
+            });
+        }
+    } catch (err) {
+        res.status(500).send(err);
+        console.log(err);
+    }
+  });
 
 module.exports = router;
