@@ -22,10 +22,13 @@ window.onload = function () {
             if (res.err) return;
 
             var html = "";
+            
             for (i in res) {
+                date = res[i].eventStartTime.slice(0,10);
+                time = res[i].eventStartTime.slice(11,16);
                 markerList.push([[res[i].latitude, res[i].longitude], res[i].eventName, false]);
                 console.log(markerList[i]);
-                html += '<div class="col-lg-4 col-md-6 mb-4" onclick="showMarker(' + i + ')"><div class="card h-100"><div class="card-body"> <h4 class="card-title"><a href="#">' + res[i].eventName + '</a></h4><p class="card-text">' + res[i].eventDescription + '</p></div></div></div>';
+                html += '<div class="col-lg-4 col-md-6 mb-4" onclick="showMarker(' + i + ')"><div class="card h-100"><div class="card-body"> <h4 class="card-title"><a href="#">' + res[i].eventName + '</a></h4><p class="card-text">' + res[i].eventDescription + '</p><p>'+date+'  '+time+'H </p></div></div></div>';
                 pepehands++;
 
             }
