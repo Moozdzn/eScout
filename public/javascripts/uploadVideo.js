@@ -9,7 +9,7 @@ $('#sendVideo').click(function (evt) {
         method : "post",
         data : data,
         processData: false,
-contentType: false,
+        contentType: false,
         success: function(res, status){ 
          console.log(res)
         }

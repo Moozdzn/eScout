@@ -1,6 +1,7 @@
 var express = require('express');
 const gdrive = require('./gdrive');
 var profileDAO = require('../models/usersDAO');
+var videoDAO = require('../models/videoDAO');
 var router = express.Router();
 
 
@@ -31,7 +32,7 @@ router.get("/profile/:id/videos", function(req,res,next){
 
 router.post("/videoupload", function(req,res){
     try {
-        console.log(req)
+        console.log(req.body.VideoTitle)
         if(!req.files) {
             res.send({
                 status: false,
@@ -45,8 +46,8 @@ router.post("/videoupload", function(req,res){
             video.mv('./uploads/' + video.name);
             try {
               gdrive.videoUpload(video.name, './uploads/' + video.name, (id) => {
-                //NEED TO STORE id ON DATABASE
                 console.log(id);
+                dataBase(req.body,id);
             });
           }
             catch(err1) {
@@ -71,4 +72,15 @@ router.post("/videoupload", function(req,res){
     }
   });
 
+function dataBase(data,id){
+    videoDAO.newVideo(data,id, function(err,result){
+        if(err){
+            res.statusMessage = result.status;
+            res.status(result.code).json(err);
+            return;
+        }
+        res.status(result.code).send(result.data);
+    })
+}
+  
 module.exports = router;
