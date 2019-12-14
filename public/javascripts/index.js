@@ -1,55 +1,25 @@
 
 var homevideos = document.getElementById("homeVideos");
 
-var PUBG = document.getElementById("PUBGF");
-var LOL = document.getElementById("LOLF");
+var PUBG = document.getElementById("PUBG");
+var LOL = document.getElementById("LOL");
+
+var active = PUBG;
 
 window.onload = function(){
-	showPUBGvids();
+	showVids('PUBG');
+
+
 }
 
-/* function changeGame(Game) {
-	var PUBG = document.getElementById("PUBGF");
-	var LOL = document.getElementById("LOLF");
-	switch (Game) {
-		case 'PUBG':
-			var show = document.getElementById("PUBG");
-			var hide = document.getElementById("LOL");
-			showPUBGvids();
-			if (show.style.display === "none") {
-				show.style.display = "flex";
-				hide.style.display = "none";
-			}
-			if (!PUBG.classList.contains('active')) {
-				PUBG.classList.add('active');
-				LOL.classList.remove('active');
-
-
-			}
-			break;
-		case 'LOL':
-			var show = document.getElementById("LOL");
-			var hide = document.getElementById("PUBG");
-			showLOLvids();
-			if (show.style.display === "none") {
-				show.style.display = "flex";
-				hide.style.display = "none";
-			}
-			if (!LOL.classList.contains('active')) {
-				LOL.classList.add('active');
-				PUBG.classList.remove('active');
-			}
-			break;
-	}
-
-}; */
-
-function showPUBGvids() {
-	//PUBG.classList.add('active');
-	//LOL.classList.remove('active');
+function showVids(game) {
+	active.classList.remove('active');
+	var currGame = document.getElementById(game)
+	currGame.classList.add('active');
+	active = currGame;
 
 	$.ajax({
-		url: '/api/videos/pubg',
+		url: '/api/videos/'+game,
 		method: 'get',
 		dataType: 'json',
 		success: function (res, status) {
@@ -58,7 +28,7 @@ function showPUBGvids() {
 			var html = "";
 
 			for (i in res) {
-				html += '<div class="card h-100"><a href="#"><iframe src="https://drive.google.com/file/d/' + res[i].reference + '/preview"></iframe></a><div class="card-body"><h4 class="card-title"><a href="#">' + res[i].videoTitle + '</a></h4><p class="card-text">' + res[i].videoDescription + '</p><p><a href="">' + res[i].username + '</a> </p></div></div>';
+				html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100"><iframe class="card-img-top" src="https://drive.google.com/file/d/'+res[i].reference+'/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">'+ res[i].videoTitle +'</a></h4><p class="card-text">'+ res[i].videoDescription +'</p><a href="">'+res[i].username+'</a></div></div></div></div>';
 			}
 			homevideos.innerHTML = html;
 		}
@@ -66,8 +36,8 @@ function showPUBGvids() {
 };
 
 function showLOLvids() {
-	//LOL.classList.add('active');
-	//PUBG.classList.remove('active');
+	LOL.classList.add('active');
+	PUBG.classList.remove('active');
 	$.ajax({
 		url: '/api/videos/lol',
 		method: 'get',
@@ -84,3 +54,7 @@ function showLOLvids() {
 		}
 	})
 };
+
+function messagePlayer(){
+	$("#messageModal").modal();
+}

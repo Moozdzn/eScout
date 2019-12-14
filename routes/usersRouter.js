@@ -39,10 +39,8 @@ router.post("/videoupload", function(req,res){
                 message: 'No file uploaded'
             });
         } else {
-            //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
             let video = req.files.video;
             console.log(video);
-            //Use the mv() method to place the file in upload directory (i.e. "uploads")
             video.mv('./uploads/' + video.name);
             try {
               gdrive.videoUpload(video.name, './uploads/' + video.name, (id) => {

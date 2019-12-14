@@ -4,8 +4,9 @@ var router = express.Router();
 
 
 
-router.get("/pubg", function(req,res,next){
-    videosDAO.getPUBGvideos(function(err,result){
+router.get("/:game", function(req,res,next){
+    var game = req.params.game;
+    videosDAO.getVideos(game,function(err,result){
         if(err){
             res.statusMessage = result.status;
             res.status(result.code).json(err);
@@ -16,16 +17,5 @@ router.get("/pubg", function(req,res,next){
 
 });
 
-router.get("/lol", function(req,res,next){
-    videosDAO.getLOLvideos(function(err,result){
-        if(err){
-            res.statusMessage = result.status;
-            res.status(result.code).json(err);
-            return;
-        }
-        res.status(result.code).send(result.data);
-    }, next)
-
-});
 
 module.exports = router;

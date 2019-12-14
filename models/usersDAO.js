@@ -7,10 +7,9 @@ module.exports.getProfileInfo = function (user, cb, next) {
             return;
         }
         
-        console.log(user);
         if (user != null) {
 
-            conn.query("SELECT User.username, User.name, User.birthDate, User.region, User.bio, User.game, User.mainPosition, Team.teamName FROM User INNER JOIN Team ON User.teamID = Team.teamID WHERE User.userID=" + user , function (err, results) {
+            conn.query("SELECT User.username, User.Type, User.name, User.birthDate, User.region, User.bio, User.game, User.mainPosition, Team.teamName FROM User INNER JOIN Team ON User.teamID = Team.teamID WHERE User.userID=" + user + "; " , function (err, results) {
                 conn.release();
                 if (err) {
                     cb(err, { code: 500, status: "Error in a database query" });

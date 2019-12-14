@@ -21,16 +21,15 @@ window.onload = function () {
             var s = JSON.stringify(res);
             var data = JSON.parse(s);
 
-            console.log(data)
-
             pusername.innerHTML = data[0].username;
             pName.innerHTML += data[0].name;
             pAge.innerHTML += currentDate.getFullYear() - data[0].birthDate.substring(0, data[0].birthDate.length - 20);
             pRegion.innerHTML += data[0].region;
             pGame.innerHTML += data[0].game;
+            console.log(data[0].mainPosition);
             if (data[0].mainPosition != null)
                 pMainPos.innerHTML = "Main Position: " + data[0].mainPosition;
-            if (data[0].teamName != null)
+            if (data[0].teamName != 'Null')
                 pTeam.innerHTML = "Team: " + data[0].teamName;
             pBio.innerHTML = data[0].bio;
         },
@@ -55,7 +54,7 @@ function getVideos(){
 
             var html ="";
             for(i in res){
-                html += '<div class="card h-100"><iframe class="card-img-top" src="https://drive.google.com/file/d/'+res[i].reference+'/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">'+ res[i].videoTitle +'</a></h4><p class="card-text">'+ res[i].videoDescription +'</p></div></div></div>'
+                html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100"><iframe class="card-img-top" src="https://drive.google.com/file/d/'+res[i].reference+'/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">'+ res[i].videoTitle +'</a></h4><p class="card-text">'+ res[i].videoDescription +'</p></div></div></div></div>'
             }
             videosList.innerHTML = html;
         }
