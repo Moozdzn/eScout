@@ -1,9 +1,14 @@
 
+var homevideos = document.getElementById("homeVideos");
+
+var PUBG = document.getElementById("PUBGF");
+var LOL = document.getElementById("LOLF");
+
 window.onload = function(){
 	showPUBGvids();
 }
 
-function changeGame(Game) {
+/* function changeGame(Game) {
 	var PUBG = document.getElementById("PUBGF");
 	var LOL = document.getElementById("LOLF");
 	switch (Game) {
@@ -37,11 +42,12 @@ function changeGame(Game) {
 			break;
 	}
 
-};
+}; */
 
 function showPUBGvids() {
+	PUBG.classList.add('active');
+	LOL.classList.remove('active');
 
-	var pubg = document.getElementById("PUBG");
 	$.ajax({
 		url: '/api/videos/pubg',
 		method: 'get',
@@ -54,14 +60,14 @@ function showPUBGvids() {
 			for (i in res) {
 				html += '<div class="card h-100"><a href="#"><iframe src="https://drive.google.com/file/d/' + res[i].reference + '/preview"></iframe></a><div class="card-body"><h4 class="card-title"><a href="#">' + res[i].videoTitle + '</a></h4><p class="card-text">' + res[i].videoDescription + '</p><p><a href="">' + res[i].username + '</a> </p></div></div>';
 			}
-			pubg.innerHTML = html;
+			homevideos.innerHTML = html;
 		}
 	})
 };
 
 function showLOLvids() {
-
-	var lol = document.getElementById("LOL");
+	LOL.classList.add('active');
+	PUBG.classList.remove('active');
 	$.ajax({
 		url: '/api/videos/lol',
 		method: 'get',
@@ -74,7 +80,7 @@ function showLOLvids() {
 			for (i in res) {
 				html += '<div class="card h-100"><a href="#"><iframe src="https://drive.google.com/file/d/' + res[i].reference + '/preview"></iframe></a><div class="card-body"><h4 class="card-title"><a href="#">' + res[i].videoTitle + '</a></h4><p class="card-text">' + res[i].videoDescription + '</p><p><a href="">' + res[i].username + '</a> </p></div></div>';
 			}
-			lol.innerHTML = html;
+			homevideos.innerHTML = html;
 		}
 	})
 };
