@@ -9,7 +9,7 @@ module.exports.getProfileInfo = function (user, cb, next) {
         
         if (user != null) {
 
-            conn.query("SELECT User.username, User.Type, User.name, User.birthDate, User.region, User.bio, User.game, User.mainPosition, Team.teamName FROM User INNER JOIN Team ON User.teamID = Team.teamID WHERE User.userID=" + user + "; " , function (err, results) {
+            conn.query("SELECT User.username, User.userType, User.name, User.birthDate, User.region, User.bio, User.game, User.mainPosition, Team.teamName FROM User INNER JOIN Team ON User.teamID = Team.teamID WHERE User.userID=" + user + "; " , function (err, results) {
                 conn.release();
                 if (err) {
                     cb(err, { code: 500, status: "Error in a database query" });
@@ -41,6 +41,25 @@ module.exports.getUserMessages = function(logUser,contact,cb,next){
     })
 
 }
+
+module.exports.getContacts = function(logUser, cb, next){
+    pool.getConnection(function (err, conn) {
+        if (err) {
+            cb(err, { code: 500, status: "Error connecting to database." })
+            return;
+        }
+
+            conn.query("SELECT  User.username, User.userID FROM Message INNER JOIN User ON User.userID = Message.messageToID WHERE Message.messageFromID = "+ logUser +" UNION SELECT  User.username, User.userID FROM Message  INNER JOIN User ON User.userID = Message.messageFromID WHERE Message.messageToID ="+ logUser , function (err, results) {
+                conn.release();
+                if (err) {
+                    cb(err, { code: 500, status: "Error in a database query" });
+                    return;
+                }
+                cb(false, { code: 200, status: "ok", data: results });
+            })
+        
+    })
+} 
 
 module.exports.getUserVideos = function(user, cb, next){
     pool.getConnection(function (err, conn) {

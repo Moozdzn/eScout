@@ -35,6 +35,7 @@ window.onload = function () {
         },
         error: function () {
             window.location.href = "auth";
+
         }
     })
 
