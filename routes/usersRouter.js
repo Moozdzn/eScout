@@ -29,6 +29,7 @@ router.get("/:loggedUser/messages", function(req,res,next){
     }, next)
 });
 router.get("/:loggedUser/messages/:contactID", function(req,res,next){
+    // mudar para ficar igual á nova mensagem
     var logUser = req.params.loggedUser;
     var contact = req.params.contactID;
     profileDAO.getUserMessages(logUser,contact,function(err,result){
@@ -92,6 +93,23 @@ router.post("/videoupload", function(req,res){
         console.log(err);
     }
   });
+
+  router.post("/:logUser/messages/:contactID/new", function(req,res,next){
+    var user = req.params.logUser;
+    var contact = req.params.contactID;
+    req.body["user"] = user;
+    req.body["contact"] = contact;
+    console.log(req.body);  
+    profileDAO.newMessage(req.body, function(err,result){
+        if(err){
+            res.statusMessage = result.status;
+            res.status(result.code).json(err);
+            return;
+        }
+        res.status(result.code).send(result.data);
+    }, next)
+
+});
 
 function dataBase(data,id){
     videoDAO.newVideo(data,id, function(err,result){
