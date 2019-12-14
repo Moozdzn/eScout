@@ -17,6 +17,18 @@ router.get("/profile/:id", function(req,res,next){
     }, next)
 
 });
+router.get("/:loggedUser/messages/:contactID", function(req,res,next){
+    var logUser = req.params.loggedUser;
+    var contact = req.params.contactID;
+    profileDAO.getUserMessages(logUser,contact,function(err,result){
+        if(err){
+            res.statusMessage = result.status;
+            res.status(result.code).json(err);
+            return;
+        }
+        res.status(result.code).send(result.data);
+    }, next)
+})
 
 router.get("/profile/:id/videos", function(req,res,next){
     var user = req.params.id;

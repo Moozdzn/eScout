@@ -23,4 +23,7 @@ router.get('/auth',function(req,res, next){
 router.get('/register',function(req,res, next){
   res.render('register',{title: 'Register'});
 });
+router.get('/chat',function(req,res,next){
+  res.render('chat',{title: 'Messages'})
+})
 module.exports = router;
