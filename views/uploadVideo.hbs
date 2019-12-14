@@ -27,12 +27,14 @@
         </div>
     </div>
 </nav>
+
+
  
 <div id="uploadFormDiv">
-    <form action="/api/users/videoupload" method="post" enctype="multipart/form-data" name="uploadVideoForm" id='submitVideo'>
+    <form id="formFile">
         <ul class="uploadForm">
             <li> <label> Video </label> </li>
-            <li><input type="file" name="video"></li>
+            <li><input type="file" name="video" id="video"></li>
             <li><label>Video Title</label></li>
             <li><input type="text" name="VideoTitle" placeholder="Video Title"></li>
             <li><label>Description </label></li>
@@ -45,7 +47,7 @@
                     <option value="Fortnite">Fortnite</option>
                 </select></li>
 
-            <li><input type="submit" value="Upload"></li>
+            <li><button id="sendVideo">Submit</button></li>
 
             <li><a href="profile"><button>Cancel</button></a></li>
         </ul>
