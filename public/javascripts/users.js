@@ -26,7 +26,6 @@ window.onload = function () {
             pAge.innerHTML += currentDate.getFullYear() - data[0].birthDate.substring(0, data[0].birthDate.length - 20);
             pRegion.innerHTML += data[0].region;
             pGame.innerHTML += data[0].game;
-            console.log(data[0].mainPosition);
             if (data[0].mainPosition != null)
                 pMainPos.innerHTML = "Main Position: " + data[0].mainPosition;
             if (data[0].teamName != 'Null')
