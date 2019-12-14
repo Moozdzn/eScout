@@ -9,7 +9,6 @@ var active = PUBG;
 window.onload = function(){
 	showVids('PUBG');
 
-
 }
 
 function showVids(game) {
