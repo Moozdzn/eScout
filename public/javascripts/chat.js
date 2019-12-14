@@ -83,3 +83,4 @@ $('#sendMessage').click(function (evt) {
 window.onload = function () {
     getContacts();
 }
+setInterval(function(){getMessages(active.id)},500)
