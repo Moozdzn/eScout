@@ -17,7 +17,7 @@ router.get("/pubg", function(req,res,next){
 });
 
 router.get("/lol", function(req,res,next){
-    videosDAO.getPUBGvideos(function(err,result){
+    videosDAO.getLOLvideos(function(err,result){
         if(err){
             res.statusMessage = result.status;
             res.status(result.code).json(err);
