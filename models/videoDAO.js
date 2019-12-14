@@ -1,25 +1,25 @@
 var pool = require("./conn").pool;
 
-module.exports.newVideo = function (videoInfo,id, cb, next) {
+module.exports.newVideo = function (user, cb, next) {
     pool.getConnection(function (err, conn) {
         if (err) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
         
-        console.log(videoInfo);
-        console.log(id);
+        console.log(user);
+        if (user != null) {
 
-            conn.query("INSERT INTO Video (userID,videoTitle,videoDescription,uploadDate,game,rating,reference,views) VALUES("+videoInfo.UserID+",'"+videoInfo.VideoTitle+"','"+videoInfo.Description+"','2019-12-13','"+videoInfo.Game+"',"+0+",'"+id+"',"+0+") ", function (err, results) {
+            conn.query("SELECT User.username, User.name, User.birthDate, User.region, User.bio, User.game, User.mainPosition, Team.teamName FROM User INNER JOIN Team ON User.teamID = Team.teamID WHERE User.userID=" + user , function (err, results) {
                 conn.release();
                 if (err) {
-                    console.log(err);
                     cb(err, { code: 500, status: "Error in a database query" });
                     return;
                 }
                 cb(false, { code: 200, status: "ok", data: results });
             })
-        
+        } else
+            console.log("try again");
     })
 
 }

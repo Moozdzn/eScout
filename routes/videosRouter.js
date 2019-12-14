@@ -1,10 +1,11 @@
 var express = require('express');
-var eventsDAO = require('../models/eventsDAO');
+var videosDAO = require('../models/videosDAO');
 var router = express.Router();
 
 
-router.get("/", function(res,next){
-    eventsDAO.getEvents(function(err,result){
+
+router.get("/pubg", function(req,res,next){
+    videosDAO.getPUBGvideos(function(err,result){
         if(err){
             res.statusMessage = result.status;
             res.status(result.code).json(err);
@@ -15,8 +16,8 @@ router.get("/", function(res,next){
 
 });
 
-router.post("/newEvent", function(req,res,next){
-    eventsDAO.newEvent(req.body, function(err,result){
+router.get("/lol", function(req,res,next){
+    videosDAO.getLOLvideos(function(err,result){
         if(err){
             res.statusMessage = result.status;
             res.status(result.code).json(err);
