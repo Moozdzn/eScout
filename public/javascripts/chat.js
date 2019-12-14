@@ -1,7 +1,7 @@
 var chatbox = document.getElementById("messages");
 var contacts = document.getElementById("messageContacts");
 
-var active ;
+var active;
 
 function getMessages(contactID){
     if(active != undefined) active.classList.remove("active");
@@ -58,10 +58,28 @@ function getContacts() {
             contacts.innerHTML = html;
         }
     })
-
-
-
 }
+
+$('#sendMessage').click(function (evt) {
+    evt.preventDefault();
+    var contact = active.id;
+    $.ajax({
+        url: "/api/users/"+sessionStorage.userID+"/messages/"+contact+"/new",
+        method : "post",
+        contentType : "application/json",
+        data : JSON.stringify({message:$('#Message').val()}),
+        
+        success: function(res, status){
+            $('#Message').val("")
+            getMessages(contact);
+        }
+        
+        , error : function() {}
+        
+        });
+    
+})
+
 window.onload = function () {
     getContacts();
 }

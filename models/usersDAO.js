@@ -60,7 +60,24 @@ module.exports.getContacts = function(logUser, cb, next){
         
     })
 } 
+module.exports.newMessage = function(body,cb,next){
+    pool.getConnection(function (err, conn) {
+        if (err) {
+            cb(err, { code: 500, status: "Error connecting to database." })
+            return;
+        }
 
+            conn.query("INSERT INTO Message (messageToID,messageFromID,message) VALUES ("+body.contact+","+body.user+",'"+body.message+"') " , function (err, results) {
+                conn.release();
+                if (err) {
+                    cb(err, { code: 500, status: "Error in a database query" });
+                    return;
+                }
+                cb(false, { code: 200, status: "ok", data: results });
+            })
+        
+    })
+}
 module.exports.getUserVideos = function(user, cb, next){
     pool.getConnection(function (err, conn) {
         if (err) {

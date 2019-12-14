@@ -1,7 +1,7 @@
 
 $('#sendVideo').click(function (evt) {
     evt.preventDefault();
-    console.log('test1')
+    
     var data = new FormData($("#formFile")[0]);
     data.append('UserID', sessionStorage.userID)
     $.ajax({
