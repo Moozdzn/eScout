@@ -45,8 +45,8 @@ window.onload = function(){
 }; */
 
 function showPUBGvids() {
-	PUBG.classList.add('active');
-	LOL.classList.remove('active');
+	//PUBG.classList.add('active');
+	//LOL.classList.remove('active');
 
 	$.ajax({
 		url: '/api/videos/pubg',
@@ -66,8 +66,8 @@ function showPUBGvids() {
 };
 
 function showLOLvids() {
-	LOL.classList.add('active');
-	PUBG.classList.remove('active');
+	//LOL.classList.add('active');
+	//PUBG.classList.remove('active');
 	$.ajax({
 		url: '/api/videos/lol',
 		method: 'get',
