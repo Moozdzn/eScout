@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var eventsRouter = require('./routes/eventsRouter');
 var authRouter = require('./routes/authRouter');
 var usersRouter = require('./routes/usersRouter');
+var videosRouter = require('./routes/videosRouter');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use('/api/events', eventsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/auth/register',authRouter);
+app.use('/api/videos', videosRouter);
 
 
 // catch 404 and forward to error handler
