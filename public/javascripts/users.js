@@ -9,40 +9,45 @@ var pusername = document.getElementById("pusername"),
     pTeam = document.getElementById("pTeam"),
     pBio = document.getElementById("pBio");
 var buttons = document.getElementById("buttons");
+var highlight = document.getElementById("highlight");
 var urlParams = new URLSearchParams(window.location.search);
 
+var user = sessionStorage.userID;
+
 window.onload = function () {
-    if (urlParams.has('id') && urlParams.get('id') != sessionStorage.userID) {
-        getProfile(parseInt(urlParams.get('id')));
+    if (urlParams.has('id') && urlParams.get('id') != user) {
+        getProfile(parseInt(urlParams.get('id')), true);
         getVideos(parseInt(urlParams.get('id')));
-        buttons.innerHTML += '<button onclick="message()">Message</button>';
+        buttons.innerHTML = '<button onclick="message()">Message</button>';
     }
     else {
-        getProfile(sessionStorage.userID);
-        getVideos(sessionStorage.userID);
+        getProfile(user);
+        getVideos(user);
+
+        if (urlParams.has('type') && urlParams.get('type') == 'Player' && urlParams.get('id') == user)
+            buttons.innerHTML = '<a href="uploadVideo"><button>Upload</button></a>';
+        
     }
 
 }
 
 
-function message(){
+function message() {
     $.ajax({
-        url: "/api/users/"+sessionStorage.userID+"/messages/"+parseInt(urlParams.get('id'))+"/new",
-        method : "post",
-        contentType : "application/json",
-        data : JSON.stringify({message:'Started a conversation.'}),
-        
-        success: function(res, status){
-          window.location.href = 'chat';
+        url: "/api/users/" + sessionStorage.userID + "/messages/" + parseInt(urlParams.get('id')) + "/new",
+        method: "post",
+        contentType: "application/json",
+        data: JSON.stringify({ message: 'Started a conversation.' }),
+
+        success: function (res, status) {
+            window.location.href = 'chat';
         }
-        
-        , error : function() {}
-        
-        });
-    };
+        , error: function () { }
 
+    });
+};
 
-function getProfile(id) {
+function getProfile(id, bool) {
     $.ajax({
         url: "/api/users/profile/" + id,
         method: "get",
@@ -64,10 +69,19 @@ function getProfile(id) {
             if (data[0].teamName != 'Null')
                 pTeam.innerHTML = "Team: " + data[0].teamName;
             pBio.innerHTML = data[0].bio;
+
+
+            if (data[0].userType === 'Player' || data[0].userType === 'Pro')
+                highlight.innerHTML = '<h2>Highlights</h2>';
+            
+
+            if (data[0].userType != 'Scout' && bool == undefined)
+                buttons.innerHTML = '<a href="uploadVideo"><button>Upload</button></a>';
+
+
         },
         error: function () {
             window.location.href = "auth";
-
         }
     })
 
