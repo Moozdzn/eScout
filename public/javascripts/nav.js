@@ -25,7 +25,6 @@ function showClickedHighlight() {
     var profilePage = document.getElementById("profilePage");
     var eventsPage = document.getElementById("eventsPage");
     var activePage = homePage;
-    console.log(activePage)
     switch (window.location.pathname) {
         case '/':
             activePage.classList.remove("active");

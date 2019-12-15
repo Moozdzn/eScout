@@ -1,17 +1,31 @@
 var currentDate = new Date();
 
-window.onload = function () {
-    var pusername = document.getElementById("pusername"),
-        pName = document.getElementById("pName"),
-        pAge = document.getElementById("pAge"),
-        pRegion = document.getElementById("pRegion"),
-        pGame = document.getElementById("pGame"),
-        pMainPos = document.getElementById("pMainPos"),
-        pTeam = document.getElementById("pTeam"),
-        pBio = document.getElementById("pBio");
+var pusername = document.getElementById("pusername"),
+    pName = document.getElementById("pName"),
+    pAge = document.getElementById("pAge"),
+    pRegion = document.getElementById("pRegion"),
+    pGame = document.getElementById("pGame"),
+    pMainPos = document.getElementById("pMainPos"),
+    pTeam = document.getElementById("pTeam"),
+    pBio = document.getElementById("pBio");
+var urlParams = new URLSearchParams(window.location.search);
 
+window.onload = function () {
+    if (urlParams.has('id')) {
+        getProfile(parseInt(urlParams.get('id')));
+        getVideos(parseInt(urlParams.get('id')));
+    }
+    else {
+        getProfile(sessionStorage.userID);
+        getVideos(sessionStorage.userID);
+    }
+
+}
+
+
+function getProfile(id) {
     $.ajax({
-        url: "/api/users/profile/" + sessionStorage.userID,
+        url: "/api/users/profile/" + id,
         method: "get",
         dataType: "json",
         success: function (res, status) {
@@ -38,23 +52,21 @@ window.onload = function () {
         }
     })
 
-    getVideos();
 }
 
-
-function getVideos(){
+function getVideos(id) {
     var videosList = document.getElementById("videosList");
 
     $.ajax({
-        url: "/api/users/profile/"+sessionStorage.userID+"/videos",
+        url: "/api/users/profile/" + id + "/videos",
         method: "get",
         dataType: "json",
-        success: function(res, status){
-            if(res.err) return;
+        success: function (res, status) {
+            if (res.err) return;
 
-            var html ="";
-            for(i in res){
-                html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100"><iframe class="card-img-top" src="https://drive.google.com/file/d/'+res[i].reference+'/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">'+ res[i].videoTitle +'</a></h4><p class="card-text">'+ res[i].videoDescription +'</p></div></div></div></div>'
+            var html = "";
+            for (i in res) {
+                html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100"><iframe class="card-img-top" src="https://drive.google.com/file/d/' + res[i].reference + '/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">' + res[i].videoTitle + '</a></h4><p class="card-text">' + res[i].videoDescription + '</p></div></div></div></div>'
             }
             videosList.innerHTML = html;
         }
