@@ -8,12 +8,14 @@ var pusername = document.getElementById("pusername"),
     pMainPos = document.getElementById("pMainPos"),
     pTeam = document.getElementById("pTeam"),
     pBio = document.getElementById("pBio");
+var buttons = document.getElementById("buttons");
 var urlParams = new URLSearchParams(window.location.search);
 
 window.onload = function () {
-    if (urlParams.has('id')) {
+    if (urlParams.has('id') && urlParams.get('id') != sessionStorage.userID) {
         getProfile(parseInt(urlParams.get('id')));
         getVideos(parseInt(urlParams.get('id')));
+        buttons.innerHTML += '<button onclick="message()">Message</button>';
     }
     else {
         getProfile(sessionStorage.userID);
@@ -21,6 +23,23 @@ window.onload = function () {
     }
 
 }
+
+
+function message(){
+    $.ajax({
+        url: "/api/users/"+sessionStorage.userID+"/messages/"+parseInt(urlParams.get('id'))+"/new",
+        method : "post",
+        contentType : "application/json",
+        data : JSON.stringify({message:'Started a conversation.'}),
+        
+        success: function(res, status){
+          window.location.href = 'chat';
+        }
+        
+        , error : function() {}
+        
+        });
+    };
 
 
 function getProfile(id) {
@@ -66,7 +85,7 @@ function getVideos(id) {
 
             var html = "";
             for (i in res) {
-                html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100"><iframe class="card-img-top" src="https://drive.google.com/file/d/' + res[i].reference + '/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">' + res[i].videoTitle + '</a></h4><p class="card-text">' + res[i].videoDescription + '</p></div></div></div></div>'
+                html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100"><iframe class="card-img-top" src="https://drive.google.com/file/d/' + res[i].reference + '/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">' + res[i].videoTitle + '</a></h4><p class="card-text">' + res[i].videoDescription + '</p><p> <i style="color:green" class="fas fa-thumbs-up"></i>   <i style="color:darkred" class="fas fa-thumbs-down"></i></p></div></div></div></div>'
             }
             videosList.innerHTML = html;
         }
