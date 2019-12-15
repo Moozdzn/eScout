@@ -18,7 +18,8 @@ window.onload = function () {
     if (urlParams.has('id') && urlParams.get('id') != user) {
         getProfile(parseInt(urlParams.get('id')), true);
         getVideos(parseInt(urlParams.get('id')));
-        buttons.innerHTML = '<button onclick="message()">Message</button>';
+        if(user != undefined)
+            buttons.innerHTML = '<button onclick="message()">Message</button>';
     }
     else {
         getProfile(user);
