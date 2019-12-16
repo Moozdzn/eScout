@@ -425,3 +425,10 @@ iframe {
 
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/
+
+.liked {
+  color: green;
+}
+.disliked {
+  color: darkred;
+}
