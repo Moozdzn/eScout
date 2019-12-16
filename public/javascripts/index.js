@@ -29,8 +29,8 @@ function showVids(game) {
 			var html = "";
 			
 			for (i in res) {
-				html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100" ><iframe id="frame'+res[i].videoID+'" class="card-img-top" src="https://drive.google.com/file/d/'+res[i].reference+'/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">'+ res[i].videoTitle +'</a></h4><p class="card-text">'+ res[i].videoDescription +'</p><a href="profile?id='+res[i].userID+'&type='+res[i].userType+'" >'+res[i].username+'</a><p><i id="like'+res[i].videoID+'" onclick="rating('+res[i].videoID+','+1+')" class="fas fa-thumbs-up"></i> <i id="dislike'+res[i].videoID+'" onclick="rating('+res[i].videoID+','+-1+')" class="fas fa-thumbs-down"></i> - '+res[i].rating+'</p></div></div></div></div>';
-				videos[res[i].videoID] = res[i].rating;			
+				html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100" ><iframe id="'+res[i].videoID+'" class="card-img-top" src="https://drive.google.com/file/d/'+res[i].reference+'/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">'+ res[i].videoTitle +'</a></h4><p class="card-text">'+ res[i].videoDescription +'</p><a href="profile?id='+res[i].userID+'&type='+res[i].userType+'" >'+res[i].username+'</a><p><i id="like'+res[i].videoID+'" onclick="rating('+res[i].videoID+','+1+')" class="fas fa-thumbs-up"></i> <i id="dislike'+res[i].videoID+'" onclick="rating('+res[i].videoID+','+-1+')" class="fas fa-thumbs-down"></i> - '+res[i].rating+'</p></div></div></div></div>';
+				videos[res[i].videoID] = {rate: res[i].rating,userRating: 0, viewed: 0};			
 			}
 			homevideos.innerHTML = html;
 		}
@@ -42,10 +42,6 @@ function goToProfile(user){
 	window.location.ref = "profile";
 }
 
-function messagePlayer(){
-	$("#messageModal").modal();
-}
-
 function rating(videoID,rate){
 	var thumbsUp = document.getElementById('like'+videoID);
 	var thumbsDown = document.getElementById('dislike'+videoID);
@@ -53,27 +49,27 @@ function rating(videoID,rate){
 	if (rate == -1){
 		if(thumbsDown.hasAttribute('style')) {
 			thumbsDown.removeAttribute('style')
-			videos[videoID] += 1;
-			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+videos[videoID]
+			videos[videoID].userRating = 0;
+			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+videos[videoID].rate;
 		}
 		else if (thumbsUp.hasAttribute('style')) alert('video already rated, remove prev rating')
 		else {
 			thumbsDown.style.color = "red";
-			videos[videoID] -= 1;
-			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+videos[videoID];
+			videos[videoID].userRating = -1;
+			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+parseInt(videos[videoID].rate + videos[videoID].userRating);
 		}
 	}
 	else {
 		if(thumbsUp.hasAttribute('style')) {
 			thumbsUp.removeAttribute('style')
-			videos[videoID] -= 1;
-			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+videos[videoID]
+			videos[videoID].userRating = 0;
+			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+videos[videoID].rate;
 		}
 		else if (thumbsDown.hasAttribute('style')) alert('video already rated, remove prev rating')
 		else {
 			thumbsUp.style.color = "green";
-			videos[videoID] += 1;
-			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+videos[videoID];
+			videos[videoID].userRating = 1;
+			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+parseInt(videos[videoID].rate + videos[videoID].userRating);
 		}
 	}
 }
@@ -85,9 +81,16 @@ function rating(videoID,rate){
     if(elem && elem.tagName == 'IFRAME'){
 				console.log('Clicked ' + elem.id);
 				elem.blur();
+				videos[elem.id].viewed = 1;
 				//clearInterval(monitor);
 				
     } else {
         		
     }
 }, 500);
+
+window.onbeforeunload = closingCode();
+function closingCode(){
+   alert('left');
+   return null;
+}
