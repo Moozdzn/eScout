@@ -6,10 +6,6 @@ module.exports.newVideo = function (videoInfo,id, cb, next) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
-        
-        console.log(videoInfo);
-        console.log(id);
-
             conn.query("INSERT INTO Video (userID,videoTitle,videoDescription,game,reference) VALUES("+videoInfo.UserID+",'"+videoInfo.VideoTitle+"','"+videoInfo.Description+"','"+videoInfo.Game+"','"+id+"') ", function (err, results) {
                 conn.release();
                 if (err) {
@@ -18,8 +14,6 @@ module.exports.newVideo = function (videoInfo,id, cb, next) {
                     return;
                 }
                 cb(false, { code: 200, status: "ok", data: results });
-            })
-        
+            })   
     })
-
 }

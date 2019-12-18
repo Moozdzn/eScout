@@ -3,9 +3,15 @@ $('#sendVideo').click(function (evt) {
     evt.preventDefault();
     
     var data = new FormData($("#formFile")[0]);
-    data.append('UserID', sessionStorage.userID)
+    //data.append('UserID', sessionStorage.userID)
+    /*curl https://api.streamable.com/upload
+        -u email:password
+        -F file=@myvideo.mp4*/
     $.ajax({
-        url: "/api/users/videoupload",
+        url: "https://api.streamable.com/upload",
+        beforeSend: function(xhr) { 
+            xhr.setRequestHeader("Authorization", "Basic " + btoa("escout.app@gmail.com:escout123")); 
+          },
         method : "post",
         data : data,
         processData: false,
@@ -14,7 +20,7 @@ $('#sendVideo').click(function (evt) {
          console.log(res)
         }
         
-        , error : function() { alert(JSON.stringify('error')); }
+        , error : function(res) {console.log(res) }
         
         });
 })
