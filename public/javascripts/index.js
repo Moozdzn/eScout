@@ -45,6 +45,7 @@ function goToProfile(user){
 function rating(videoID){
 	var thumbsUp = document.getElementById('like'+videoID);
 	var parent = thumbsUp.parentElement;
+	if(sessionStorage.userID != undefined){
 		if(thumbsUp.hasAttribute('style')) {
 			thumbsUp.removeAttribute('style');
 			parent.innerHTML = thumbsUp.outerHTML + " Rating: "+videos[videoID];
@@ -54,7 +55,8 @@ function rating(videoID){
 			thumbsUp.style.color = "green";
 			parent.innerHTML = thumbsUp.outerHTML + " Rating: "+parseInt(videos[videoID] + 1);
 			updateRating({vID: videoID, rating:true});
-		}
+		}}
+		else alert("You must be logged in to rate videos.")
 }
 function updateRating(rating){
 	$.ajax({
