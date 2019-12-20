@@ -84,8 +84,6 @@ module.exports.getUserVideos = function(user, cb, next){
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
-        
-        console.log(user);
         if (user != null) {
 
             conn.query("SELECT videoTitle, videoDescription, game, rating, reference FROM Video WHERE userID=" + user +" ORDER BY uploadDate" , function (err, results) {

@@ -46,29 +46,26 @@ function rating(videoID){
 	var thumbsUp = document.getElementById('like'+videoID);
 	var parent = thumbsUp.parentElement;
 		if(thumbsUp.hasAttribute('style')) {
-			thumbsUp.removeAttribute('style')
+			thumbsUp.removeAttribute('style');
 			parent.innerHTML = thumbsUp.outerHTML + " Rating: "+videos[videoID];
-			updateRating({vID: videoID,rating:1});
+			updateRating({vID: videoID, rating:false});
 		}
 		else {
 			thumbsUp.style.color = "green";
 			parent.innerHTML = thumbsUp.outerHTML + " Rating: "+parseInt(videos[videoID] + 1);
-			updateRating({vID: videoID,rating:0});
+			updateRating({vID: videoID, rating:true});
 		}
 }
 function updateRating(rating){
 	$.ajax({
         url: "/api/videos/updateRating",
         method : "post",
-        data : rating,
-        processData: false,
-        contentType: false,
+        contentType: "application/json",
+        data : JSON.stringify(rating),
         success: function(res, status){ 
-         console.log(res)
+		 console.log(res);
         }
-        
-        , error : function(res) { console.log(res); }
-        
+        , error : function(res) {console.log(res); }
         });
 }
 
