@@ -89,8 +89,4 @@ function rating(videoID,rate){
     }
 }, 500);
 
-window.onbeforeunload = closingCode();
-function closingCode(){
-   alert('left');
-   return null;
-}
+
