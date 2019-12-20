@@ -29,8 +29,8 @@ function showVids(game) {
 			var html = "";
 			
 			for (i in res) {
-				html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100" ><iframe id="'+res[i].videoID+'" class="card-img-top" src="https://drive.google.com/file/d/'+res[i].reference+'/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">'+ res[i].videoTitle +'</a></h4><p class="card-text">'+ res[i].videoDescription +'</p><a href="profile?id='+res[i].userID+'&type='+res[i].userType+'" >'+res[i].username+'</a><p><i id="like'+res[i].videoID+'" onclick="rating('+res[i].videoID+','+1+')" class="fas fa-thumbs-up"></i> <i id="dislike'+res[i].videoID+'" onclick="rating('+res[i].videoID+','+-1+')" class="fas fa-thumbs-down"></i> - '+res[i].rating+'</p></div></div></div></div>';
-				videos[res[i].videoID] = {rate: res[i].rating,userRating: 0, viewed: 0};			
+				html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100" ><iframe id="'+res[i].videoID+'" class="card-img-top" src="https://drive.google.com/file/d/'+res[i].reference+'/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">'+ res[i].videoTitle +'</a></h4><p class="card-text">'+ res[i].videoDescription +'</p><a href="profile?id='+res[i].userID+'&type='+res[i].userType+'" >'+res[i].username+'</a><p><i id="like'+res[i].videoID+'" onclick="rating('+res[i].videoID+')" class="fas fa-thumbs-up"></i> Rating: '+res[i].rating+'</p></div></div></div></div>';
+				videos[res[i].videoID] = res[i].rating;			
 			}
 			homevideos.innerHTML = html;
 		}
@@ -42,36 +42,34 @@ function goToProfile(user){
 	window.location.ref = "profile";
 }
 
-function rating(videoID,rate){
+function rating(videoID){
 	var thumbsUp = document.getElementById('like'+videoID);
-	var thumbsDown = document.getElementById('dislike'+videoID);
 	var parent = thumbsUp.parentElement;
-	if (rate == -1){
-		if(thumbsDown.hasAttribute('style')) {
-			thumbsDown.removeAttribute('style')
-			videos[videoID].userRating = 0;
-			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+videos[videoID].rate;
-		}
-		else if (thumbsUp.hasAttribute('style')) alert('video already rated, remove prev rating')
-		else {
-			thumbsDown.style.color = "red";
-			videos[videoID].userRating = -1;
-			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+parseInt(videos[videoID].rate + videos[videoID].userRating);
-		}
-	}
-	else {
 		if(thumbsUp.hasAttribute('style')) {
 			thumbsUp.removeAttribute('style')
-			videos[videoID].userRating = 0;
-			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+videos[videoID].rate;
+			parent.innerHTML = thumbsUp.outerHTML + " Rating: "+videos[videoID];
+			updateRating({vID: videoID,rating:1});
 		}
-		else if (thumbsDown.hasAttribute('style')) alert('video already rated, remove prev rating')
 		else {
 			thumbsUp.style.color = "green";
-			videos[videoID].userRating = 1;
-			parent.innerHTML = thumbsUp.outerHTML + " "+ thumbsDown.outerHTML + " - "+parseInt(videos[videoID].rate + videos[videoID].userRating);
+			parent.innerHTML = thumbsUp.outerHTML + " Rating: "+parseInt(videos[videoID] + 1);
+			updateRating({vID: videoID,rating:0});
 		}
-	}
+}
+function updateRating(rating){
+	$.ajax({
+        url: "/api/videos/updateRating",
+        method : "post",
+        data : rating,
+        processData: false,
+        contentType: false,
+        success: function(res, status){ 
+         console.log(res)
+        }
+        
+        , error : function(res) { console.log(res); }
+        
+        });
 }
 
 

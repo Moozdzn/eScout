@@ -17,5 +17,20 @@ router.get("/:game", function(req,res,next){
 
 });
 
+router.post("/updateRating",function(req,res,next){
+    console.log(req.body);
+    var rating = req.body;
+    console.log(rating)
+    videosDAO.updateRating(req.body,function(err,result){
+        if(err){
+            res.statusMessage = result.status;
+            res.status(result.code).json(err);
+            return;
+        }
+        res.status(result.code).send(result.data);
+    }, next)
+
+})
+
 
 module.exports = router;

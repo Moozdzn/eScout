@@ -17,3 +17,26 @@ module.exports.getVideos = function (game,cb, next){
         )
 }
 
+module.exports.updateRating = function(rating,cb,next){
+    pool.getConnection(function (err, conn) {
+        if (err) {
+            cb(err, { code: 500, status: "Error connecting to database." })
+            return;
+        }
+        console.log(rating);
+        var signal; 
+        if(rating.rating == 1) signal = "+";
+        else signal = "-";
+        conn.query("UPDATE Video SET rating = rating "+signal+" 1 WHERE videoID ="+rating.vID+";", function (err, results) {                
+            conn.release();
+                if (err) {
+                    cb(err, { code: 500, status: "Error in a database query" });
+                    return;
+                }
+                cb(false, { code: 200, status: "ok", data: results });
+            })
+        } 
+        )
+
+}
+
