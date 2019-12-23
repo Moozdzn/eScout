@@ -21,13 +21,15 @@ module.exports.getEvents = function (cb, next) {
 
 
 };
-module.exports.newEvent = function (cb, next) {
+module.exports.newEvent = function (body, cb, next) {
     pool.getConnection(function (err, conn) {
         if (err) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
-        conn.query("INSERT INTO Event (eventName, eventDescription, eventStartTime, eventTicketPrice) VALUES ('"+ eventName + "','"+ eventDesc + "','" + eventStartTime +"',"+ eventTicketPrice + "); INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + "," + type + ");", function (err, results) {
+        
+        conn.query("INSERT INTO Event (eventName, eventDescription, eventStartTime, eventTicketPrice, locationID) VALUES ('"+ body.Ename + "','"+ body.Edesc + "','" + body.Edate+ " " +body.Estart +"',"+ body.Eprice + ",3); "  , function (err, results) {
+        //INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + "," + type + ");"
             conn.release();
             if (err) {
                 cb(err, { code: 500, status: "Error in a database query" })

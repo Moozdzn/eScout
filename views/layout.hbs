@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!-- JQuery has duplicate reference -->
+
 <head>
   <title>{{title}}</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -28,15 +29,13 @@
     crossorigin=""></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
+
 </head>
 
 <body>
-  
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
@@ -45,55 +44,57 @@
     crossorigin="anonymous"></script>
   <script src="javascripts/nav.js"></script>
 
-    <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container">
-    
-    <a class="navbar-brand" href="/">   eScout <img src="/images/favicon.png" alt="logo" style="height: 35px;widht:35px;"></a>
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarResponsive"
-      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active" id="homePage">
-          <a class="nav-link"   href="/">Home
-            <!--<span class="sr-only">(current)</span> -->
-          </a>
-        </li>
-        <li class="nav-item" id="eventsPage">
-          <a class="nav-link"  href="events">Events</a>
-        </li>
-        <li class="nav-item" id="profilePage">
-          <div class="dropdown" >
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
 
-            <a class="nav-link  dropdown-toggle" href="profile" role="button" id="dropdownMenuLink"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Account
+      <a class="navbar-brand" href="/"> eScout <img src="/images/favicon.png" alt="logo"
+          style="height: 35px;widht:35px;">
+      </a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active" id="homePage">
+            <a class="nav-link" href="/">Home
+              <!--<span class="sr-only">(current)</span> -->
             </a>
+          </li>
+          <li class="nav-item" id="eventsPage">
+            <a class="nav-link" href="events">Events</a>
+          </li>
+          <li class="nav-item" id="profilePage">
+            <div class="dropdown">
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a id="ddprofile" class="dropdown-item" href="profile" style="display:none;">Profile</a>
-              <a id="ddmessages" class="dropdown-item" href="chat" style="display:none;">Messages</a>
-              <a id="ddlogout" onclick="logOut()" class="dropdown-item" href="/" style="display:none;">Log Out</a>
-              <a id="ddlogin" class="dropdown-item" href="auth" style="display:none;">Log In</a>
+              <a class="nav-link  dropdown-toggle" href="profile" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Account
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a id="ddprofile" class="dropdown-item" href="profile" style="display:none;">Profile</a>
+                <a id="ddmessages" class="dropdown-item" href="chat" style="display:none;">Messages</a>
+                <a id="ddlogout" onclick="logOut()" class="dropdown-item" href="/" style="display:none;">Log Out</a>
+                <a id="ddlogin" class="dropdown-item" href="auth" style="display:none;">Log In</a>
+              </div>
             </div>
-          </div>
+          </li>
+        </ul>
+      </div>
     </div>
-    </li>
-    </ul>
-  </div>
-  </div>
-</nav>
-{{{body}}}
+  </nav>
+  {{{body}}}
 
 
 </body>
 <!-- Footer -->
 <footer class="py-5 bg-dark">
-	<div class="container">
-		<p class="m-0 text-center text-white">Copyright &copy; eScout 2019</p>
-	</div>
-	<!-- /.container -->
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; eScout 2019</p>
+  </div>
+  <!-- /.container -->
 </footer>
+
 </html>

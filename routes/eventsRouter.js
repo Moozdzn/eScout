@@ -16,6 +16,8 @@ router.get("/", function(req,res,next){
 });
 
 router.post("/newEvent", function(req,res,next){
+    console.log(req.body)
+    
     eventsDAO.newEvent(req.body, function(err,result){
         if(err){
             res.statusMessage = result.status;
