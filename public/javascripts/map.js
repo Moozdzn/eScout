@@ -1,4 +1,15 @@
-/*var mymap = L.map('mapid').setView([38.7127, -9.1371], 13);
+
+
+/* mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjb3V0YXBwIiwiYSI6ImNrNGx1aDRlbDA5Y3gzbG81MmdwNjkybm8ifQ.UkXi3bv_-HTlgp612_qBYg';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11'
+}); */
+
+/* var eventCoords;
+var eventAdress;
+
+var mymap = L.map('mapid').setView([38.7127, -9.1371], 13);
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -7,7 +18,21 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 		id: 'mapbox.streets'
 	}).addTo(mymap);
 
+	var geocoder = L.Control.geocoder().on('markgeocode', function(event) {
+		//event.geocode.name
+		//event.properties.adress
+		var center = event.geocode.center;
+		eventCoords = center;
+		eventAdress = event.geocode.properties.address;
+    	L.marker(center).addTo(mymap);
+    	mymap.setView(center, mymap.getZoom());
+		}).addTo(mymap); */
 
+	/* geocoder.on('markgeocode', function(e) {
+			console.log(e)
+		})
+		.addTo(mymap); */
+/*
 ////
 var circle = L.circle([51.508, -0.11], {
 	color: 'red',

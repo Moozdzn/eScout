@@ -3,18 +3,50 @@
   <div class="row">
     <div class="col">
       <form id="evtForm"> 
-        <label>Event Name </label> <input type="text" id="Ename" name="Ename"><br>
-        <label>Event Description </label> <input type="text" id="Edesc" name="Edesc"><br>
-        <label>Event StartTime</label><input type="time" id="Estart" name="Estart"><br>
-        <label>Event Location</label><input type="text" id="Eloc" name="Eloc"><br>
-        <label>Event Date </label><input type="date" id="Edate" name="Edate"><br>
-        <label>Ticket Price </label><input type="number" id="Eprice" name="Eprice"><br>
-        <label>Organizer name </label><input type="text" id="Oname" name="Oname"><br>
-        <button id="createEvt">Submit</button>
+        <div class='form-row'>
+          <div class='form-group col-md-6'>
+            <label>Organizer name</label><input class="form-control" type="text" id="Oname" name="Oname">
+          </div>
+          <div class='form-group col-md-6'>
+            <label>Event Name</label> <input class="form-control" type="text" id="Ename" name="Ename">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Address (Type it on the map)</label><input type='text' class="form-control" id="Eloc" name="Eloc"></textarea>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Date</label><input class="form-control" type="date" id="Edate" name="Edate">
+          </div>
+          <div class="form-group col-md-2">
+            <label>StartTime</label><input class="form-control" type="time" id="Estart" name="Estart">
+          </div> 
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Description </label> <input class="form-control" type="text" id="Edesc" name="Edesc">
+          </div>
+          <div class="form-group col-md-6">
+            <label>Ticket Price </label><input class="form-control" type="number" id="Eprice" name="Eprice">
+          </div>
+        </div>
+        
+        <button type="button" class="btn btn-primary" id="createEvt">Submit</button>
       </form>
-      <a href="events"><button>Cancel</button></a>
+      <a href="events"><button type="button" class="btn btn-secondary" id="createEvt">Cancel</button></a>
     </div>
+    <div class="col">
+			<div id='mapid' style='width: 400px; height: 300px;'></div>
+		</div>
   </div>
 </div>
-
+{{!-- CDN - LeafLeet Map --}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+{{!-- CDN - LeafLeet Geocoder --}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+{{!-- Local files --}}
 <script src="javascripts/createEvent.js"></script>
+
+

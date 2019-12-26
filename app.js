@@ -10,6 +10,8 @@ var eventsRouter = require('./routes/eventsRouter');
 var authRouter = require('./routes/authRouter');
 var usersRouter = require('./routes/usersRouter');
 var videosRouter = require('./routes/videosRouter');
+//DAO - Run function on startup
+
 
 var app = express();
 

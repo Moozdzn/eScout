@@ -5,7 +5,8 @@ var pool  = mysql.createPool({
     host     : 'remotemysql.com',
     user     : 'xtgAoUoOEz',
     password : 'JjzNSoWVCE',
-    database : 'xtgAoUoOEz'
+    database : 'xtgAoUoOEz',
+    multipleStatements: true
 });
 
 module.exports.pool = pool;
