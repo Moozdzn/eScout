@@ -76,7 +76,6 @@ $(document).ready(function () {
 
 
 function getRegions() {
-    console.log('entrei na funçao')
     $.ajax({
         url: '/api/events/newEvent',
         method: 'get',
@@ -85,7 +84,7 @@ function getRegions() {
             if (res.err) return;
 
             for (i in res) {
-                var r = res[i].regionRadius * 2500
+                var r = res[i].regionRadius * 2000
                 if (res[i].regionRadius > 5000) {
                     regionCircles.push(L.circle([res[i].regionLat, res[i].regionLong], { radius: 5000 }).addTo(mymap));
 
