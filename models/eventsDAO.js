@@ -29,8 +29,8 @@ module.exports.newEvent = function (body, cb, next) {
             return;
         }
         lastLocationID++;
-        conn.query("INSERT INTO `EventLocation`(`latitude`, `longitude`, `eventlocationName`) VALUES ("+body.Elat+","+body.Elng+",'"+ body.Eadress + "'); INSERT INTO Event (eventName, eventDescription, eventStartTime, eventTicketPrice, locationID) VALUES ('"+ body.Ename + "','"+ body.Edesc + "','" + body.Edate+ " " +body.Estart +"',"+ body.Eprice + ","+lastLocationID+");"  , function (err, results) {
-        //INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + "," + type + ");"
+        conn.query("INSERT INTO `EventLocation`(`latitude`, `longitude`, `eventlocationName`) VALUES (" + body.Elat + "," + body.Elng + ",'" + body.Eadress + "'); INSERT INTO Event (eventName, eventDescription, eventStartTime, eventTicketPrice, locationID) VALUES ('" + body.Ename + "','" + body.Edesc + "','" + body.Edate + " " + body.Estart + "'," + body.Eprice + "," + lastLocationID + ");", function (err, results) {
+            //INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + "," + type + ");"
             conn.release();
             if (err) {
                 cb(err, { code: 500, status: "Error in a database query" })
@@ -48,7 +48,7 @@ module.exports.lastAddressID = function () {
             return;
         }
 
-        conn.query("Select `locationID` from EventLocation where `locationID` = ( SELECT MAX(`locationID`) FROM EventLocation)"  , function (err, results) {
+        conn.query("Select `locationID` from EventLocation where `locationID` = ( SELECT MAX(`locationID`) FROM EventLocation)", function (err, results) {
             conn.release();
             if (err) {
                 return;
@@ -57,5 +57,21 @@ module.exports.lastAddressID = function () {
         })
     })
 };
+
+module.exports.getRegions = function (cb,next) {
+    pool.getConnection(function (err, conn) {
+        if (err) {
+            cb(err, { code: 500, status: "Error connecting to database." })
+            return;
+        }
+        conn.query("SELECT Region.regionID, Region.regionName , COUNT(userID) AS regionRadius, Region.regionLat, Region.regionLong FROM User INNER JOIN Region ON User.regionID = Region.regionID GROUP BY Region.regionID;", function (err, results) {
+            conn.release();
+            if (err) {
+                return;
+            }
+            cb(false, { code: 200, status: "ok", data: results })
+        })
+    })
+}
 
 //Select `locationID` from EventLocation where `locationID` = ( SELECT MAX(`locationID`) FROM EventLocation)
