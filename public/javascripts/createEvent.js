@@ -115,7 +115,6 @@ function getRegions() {
                 regionDensity[i] = {name: res[i].regionName,density: res[i].regionRadius}
             }
             $.getJSON("geodata/portugal.json",function(data){
-                // L.geoJson function is used to parse geojson file and load on to map
                 geojson = L.geoJson(data,{style: style, onEachFeature: onEachFeature}).addTo(mymap);
             });
 
