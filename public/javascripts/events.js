@@ -9,6 +9,10 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
 var userPos;
 var markerList = [];
+var lastEventClicked;
+var lastID;
+var routesList = [];
+var route;
 
 var eventslist = document.getElementById("eventslist");
 
@@ -21,14 +25,12 @@ window.onload = function () {
             if (res.err) return;
 
             var html = "";
-            
-            for (i in res) {
-                date = res[i].eventStartTime.slice(0,10);
-                time = res[i].eventStartTime.slice(11,16);
-                markerList.push([[res[i].latitude, res[i].longitude], res[i].eventName, false]);
-                html += '<div class="col-lg-4 col-md-6 mb-4" onclick="showMarker(' + i + ')"><div class="card h-100"><div class="card-body"> <h4 class="card-title"><a href="#">' + res[i].eventName + '</a></h4><p class="card-text">' + res[i].eventDescription + '</p><p>'+date+'  '+time+'H </p></div></div></div>';
-               
 
+            for (i in res) {
+                date = res[i].eventStartTime.slice(0, 10);
+                time = res[i].eventStartTime.slice(11, 16);
+                markerList.push([L.marker([res[i].latitude, res[i].longitude]).bindPopup(res[i].eventName), false]);
+                html += '<div class="col-lg-4 col-md-6 mb-4" onclick="showMarker(' + i + ')"><div class="card h-100"><div class="card-body"> <h4 class="card-title"><a href="#">' + res[i].eventName + '</a></h4><p class="card-text">' + res[i].eventDescription + '</p><p>' + date + '  ' + time + 'H </p></div></div></div>';
             }
             eventslist.innerHTML = html;
 
@@ -38,19 +40,25 @@ window.onload = function () {
 };
 
 function showMarker(id) {
-    /*  $("#eventslist").on("click",'#'+pepehands , function(){  id="'+pepehands+'
-         alert(i);
-     }); */
     var marker = markerList[id];
-    
-    console.log(marker)
-    if (marker[2] === false) {
-        L.marker(marker[0]).addTo(mymap).bindPopup(marker[1]).openPopup();
-        marker[2] = true;
+
+
+
+    if (marker[1] === false) {
+        marker[0].addTo(mymap).openPopup();
+        marker[1] = true;
+        lastEventClicked = marker[0];
     } else {
-        mymap.removeLayer(L.marker(marker[0]).addTo(mymap).bindPopup(marker[1]).openPopup());
-        marker[2] = false;
+        mymap.removeLayer(marker[0]);
+        marker[1] = false;
+        lastID = id;
+
     }
+}
+
+
+function showPosition(position) {
+    userPos = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap).bindPopup('You are here!<br>Or at least somewhere around').openPopup();
 }
 
 function getLocation() {
@@ -58,23 +66,36 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition(showPosition);
     }
 }
-function showPosition(position) {
-    userPos = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap).bindPopup('You are here!<br>Or at least somewhere around')
-        .openPopup();
-}
+
 function getRoute() {
+
+    if (lastEventClicked === undefined) {
+        alert("There is no event selected.");
+        return;
+    }
+
+    console.log(routesList[0])
     try {
-        L.Routing.control({
+        if (routesList.length === 0) {
+
+            routesList.push([lastEventClicked._latlng.lat, lastEventClicked._latlng.lng]);
+            
+            route =  L.Routing.control({
             waypoints: [
                 L.latLng(userPos._latlng.lat, userPos._latlng.lng),
-                L.latLng(38.7150, -9.1310)
+                L.latLng(lastEventClicked._latlng.lat, lastEventClicked._latlng.lng)
             ]
-        }).addTo(mymap);
-    }
-    catch (err) {
+          }).addTo(mymap);
+
+        } else {
+            route.spliceWaypoints(route.getWaypoints().length - 1, 1, e._latlng);
+           
+            routesList.pop();
+        } 
+
+    } catch (err) {
         if (err instanceof TypeError) {
             alert('We don\'t have access to your location.');
         }
-
     }
-} 
+}   

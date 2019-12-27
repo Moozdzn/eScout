@@ -1,8 +1,7 @@
-
-<div class="container" style="margin: 20px 20px 20px 20px">
+<div class="container" style="margin: 20px 20px 110px 20px">
   <div class="row">
     <div class="col">
-      <form id="evtForm"> 
+      <form id="evtForm">
         <div class='form-row'>
           <div class='form-group col-md-6'>
             <label>Organizer name</label><input class="form-control" type="text" id="Oname" name="Oname">
@@ -13,14 +12,15 @@
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label>Address (Type it on the map)</label><input type='text' class="form-control" id="Eloc" name="Eloc"></textarea>
+            <label>Address (Type it on the map)</label><input type='text' class="form-control" id="Eloc"
+              name="Eloc"></textarea>
           </div>
           <div class="form-group col-md-4">
             <label>Date</label><input class="form-control" type="date" id="Edate" name="Edate">
           </div>
           <div class="form-group col-md-2">
             <label>StartTime</label><input class="form-control" type="time" id="Estart" name="Estart">
-          </div> 
+          </div>
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -30,14 +30,14 @@
             <label>Ticket Price </label><input class="form-control" type="number" id="Eprice" name="Eprice">
           </div>
         </div>
-        
+
         <button type="button" class="btn btn-primary" id="createEvt">Submit</button>
       </form>
       <a href="events"><button type="button" class="btn btn-secondary" id="createEvt">Cancel</button></a>
     </div>
     <div class="col">
-			<div id='mapid' style='width: 400px; height: 550px; '></div>
-		</div>
+      <div id='mapid' style='width: 400px; height: 550px; margin-left: 50%'></div>
+    </div>
   </div>
 </div>
 {{!-- CDN - LeafLeet Map --}}
@@ -48,5 +48,3 @@
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 {{!-- Local files --}}
 <script src="javascripts/createEvent.js"></script>
-
-
