@@ -1,5 +1,5 @@
 
-<div class="container" style="margin: 20px 20px 20px 20px">
+<div class="container" style="margin-top: 20px;margin-bottom 20px;">
   <div class="row">
     <div class="col">
       <form id="evtForm"> 
@@ -34,9 +34,11 @@
         <button type="button" class="btn btn-primary" id="createEvt">Submit</button>
       </form>
       <a href="events"><button type="button" class="btn btn-secondary" id="createEvt">Cancel</button></a>
+      
     </div>
     <div class="col">
-			<div id='mapid' style='width: 400px; height: 550px; '></div>
+			<div id='mapid' style='width: 576px; height: 550px; '></div>
+      <button type="button" class="btn btn-success btn-block" id="btnHeatmap" onclick="toggle()">Toggle Heatmap: ON</button>
 		</div>
   </div>
 </div>
@@ -48,5 +50,8 @@
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 {{!-- Local files --}}
 <script src="javascripts/createEvent.js"></script>
+<style>#map { width: 800px; height: 500px; }
+.info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
+.legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }</style>
 
 
