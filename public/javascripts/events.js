@@ -14,12 +14,20 @@ var initRoute = true;
 var Route;
 var eventCoord;
 
-
+var activeEventGame = PUBG
 var eventslist = document.getElementById("eventslist");
 
 window.onload = function () {
+    showEvents('PUBG');
+}
+
+function showEvents(game) {
+    activeEventGame.classList.remove('active');
+	var currGame = document.getElementById(game)
+	currGame.classList.add('active');
+	activeEventGame = currGame;
     $.ajax({
-        url: '/api/events',
+        url: '/api/events/'+game,
         method: 'get',
         dataType: "json",
         success: function (res, status) {
@@ -31,7 +39,7 @@ window.onload = function () {
                 date = res[i].eventStartTime.slice(0, 10);
                 time = res[i].eventStartTime.slice(11, 16);
                 markerList.push([L.marker([res[i].latitude, res[i].longitude]).bindPopup(res[i].eventName), false]);
-                html += '<div class="col-lg-4 col-md-6 mb-4" onclick="showMarker(' + i + ')"><div class="card h-100"><div class="card-body"> <h4 class="card-title"><a href="#">' + res[i].eventName + '</a></h4><p class="card-text">' + res[i].eventDescription + '</p><p>' + date + '  ' + time + 'H </p></div></div></div>';
+                html += '<div class="col-lg-4 col-md-6 mb-4" onclick="showMarker(' + i + ')" style="min-width: 200px"><div class="card h-100"><div class="card-body"> <h4 class="card-title"><a href="#">' + res[i].eventName + '</a></h4><p class="card-text">' + res[i].eventDescription + '</p><p>' + date + '  ' + time + 'H </p></div></div></div>';
 
 
             }
@@ -71,11 +79,11 @@ function getRoute() {
 
     try {
         eventCoord = L.latLng(markedEvent._latlng.lat, markedEvent._latlng.lng)
-    } catch (TypeError){
+    } catch (TypeError) {
         alert('You must select an event.');
         return;
     }
-    
+
     if (initRoute) {
         initRoute = false;
         Route = L.Routing.control({

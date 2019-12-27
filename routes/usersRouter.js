@@ -111,7 +111,7 @@ router.post("/videoupload", function(req,res){
 
 });
 
-function dataBase(data,id){
+function dataBase(data, id){
     videoDAO.newVideo(data,id, function(err,result){
         if(err){
             res.statusMessage = result.status;

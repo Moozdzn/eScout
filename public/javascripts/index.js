@@ -3,7 +3,6 @@ var homevideos = document.getElementById("homeVideos");
 
 
 var PUBG = document.getElementById("PUBG");
-var LOL = document.getElementById("LOL");
 
 var activeGame = PUBG;
 

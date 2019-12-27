@@ -10,6 +10,7 @@
 
 <!-- Page Content -->
 <div class="container">
+	 
 	<div class="row">
 		<p>Click the button to get your coordinates.</p>
 
@@ -19,12 +20,21 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<button>Filter</button>
 			<a href="createEvent"><button>Create Event</button></a>
 		</div>
 	</div>
 	<div class="row my-4">
+		<div class="col-lg-3">
+
+      <div class="list-group">
+        <a href="#" class="list-group-item active" onclick="showEvents('PUBG')" id="PUBG">PUBG</a>
+        <a href="#" class="list-group-item" onclick="showEvents('LOL')" id="LOL">LOL</a>
+        <a href="#" class="list-group-item" onclick="showEvents('CSGO')" id="CSGO">CS:GO</a>
+      </div>
+
+    </div>
 		<div class="col">
+			
 			<div class="row" id="eventslist">
 
 			</div>

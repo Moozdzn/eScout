@@ -2,13 +2,13 @@ var pool = require("./conn").pool;
 var lastLocationID;
 
 
-module.exports.getEvents = function (cb, next) {
+module.exports.getEvents = function (game,cb, next) {
     pool.getConnection(function (err, conn) {
         if (err) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
-        conn.query("SELECT * FROM Event INNER JOIN EventLocation ON Event.locationID = EventLocation.locationID ORDER BY Event.eventStartTime", function (err, results) {
+        conn.query("SELECT * FROM Event INNER JOIN EventLocation ON Event.locationID = EventLocation.locationID WHERE Event.eventGame = '"+game+"'ORDER BY Event.eventStartTime", function (err, results) {
             conn.release();
             if (err) {
                 cb(err, { code: 500, status: "Error in a database query" })
@@ -29,7 +29,7 @@ module.exports.newEvent = function (body, cb, next) {
             return;
         }
         lastLocationID++;
-        conn.query("INSERT INTO `EventLocation`(`latitude`, `longitude`, `eventlocationName`) VALUES (" + body.Elat + "," + body.Elng + ",'" + body.Eadress + "'); INSERT INTO Event (eventName, eventDescription, eventStartTime, eventTicketPrice, locationID) VALUES ('" + body.Ename + "','" + body.Edesc + "','" + body.Edate + " " + body.Estart + "'," + body.Eprice + "," + lastLocationID + ");", function (err, results) {
+        conn.query("INSERT INTO `EventLocation`(`latitude`, `longitude`, `eventlocationName`) VALUES (" + body.Elat + "," + body.Elng + ",'" + body.Eadress + "'); INSERT INTO Event (eventName, eventGame, eventDescription, eventStartTime, eventTicketPrice, locationID) VALUES ('" + body.Ename + "','"+body.Egame+"','" + body.Edesc + "','" + body.Edate + " " + body.Estart + "'," + body.Eprice + "," + lastLocationID + ");", function (err, results) {
             //INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + "," + type + ");"
             conn.release();
             if (err) {
