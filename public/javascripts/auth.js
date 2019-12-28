@@ -11,13 +11,13 @@ $('#confirm').submit(function (evt) {
     }),
 
     success: function (res, status) {
-      sessionStorage.userID = res.userID;
-      sessionStorage.userType = res.userType;
+      sessionStorage.userID = res[0].userID;
+      sessionStorage.userType = res[0].userType;
       window.location.href = '/';
     }
-
-    , error: function () { alert(JSON.stringify('error')); }
-
+    , error: function () {
+      alert(JSON.stringify('error'));
+    }
   });
 })
 
