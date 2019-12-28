@@ -1,29 +1,41 @@
 
 
- 
-<div >
-    <form id="formFile">
-        <ul >
-            <li> <label> Video </label> </li>
-            <li><input type="file" name="video" id="video"></li>
-            <li><label>Video Title</label></li>
-            <li><input type="text" name="VideoTitle" placeholder="Video Title"></li>
-            <li><label>Description </label></li>
-            <li><input type="text" name="Description" placeholder="..."></li>
-            <li> <label>Game</label> <select name="Game">
-                
-                    <option value="PUBG">PUBG</option>
+ <div class="container" style="margin-top: 20px;margin-bottom 20px;">
+     <form id="formFile">
+        <div class='form-row'>
+            <div class='form-group col-md-6'>
+                <label>Video Title</label><input class="form-control" type="text" name="VideoTitle" placeholder="Video Title">
+            </div>
+            <div class='form-group col-md-6'>
+                <label>Game</label><select class="custom-select" name="Game">
+                    <option value="PUBG" selected>PUBG</option>
                     <option value="CSGO">CS:GO</option>
                     <option value="LOL">League of Legends</option>
                     <option value="Fortnite">Fortnite</option>
-                </select></li>
-
-            <li><button id="sendVideo">Submit</button></li>
-
-            <li><a href="profile"><button>Cancel</button></a></li>
-        </ul>
+                </select>
+            </div>
+        </div>
+        <div class='form-row'>
+            <label>Description </label>
+            <textarea class="form-control" name="Description" placeholder="..." rows="3"></textarea>
+        </div>
+        <div class='form-row mt-3'>
+            <label>Video </label>
+           <div class="input-group ">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="video" id="video" onchange="getVideoName()">
+                    <label class="custom-file-label" for="video" id="videoLabel" >Choose file</label>
+                </div>
+            </div>
+        </div>
+        <div class='form-row mt-3'>
+            <button type="button" class="btn btn-primary btn-block" id="sendVideo" >Upload Video</button>
+            <a class="btn btn-danger btn-block" href="profile" role="button">Cancel</a>
+        </div>
     </form>
-</div>
+ </div>
+
+
 
 
 <script src="javascripts/uploadVideo.js"></script>

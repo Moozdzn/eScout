@@ -12,9 +12,19 @@ $('#sendVideo').click(function (evt) {
         contentType: false,
         success: function(res, status){ 
          console.log(res)
+         if(res.status && res.dbStatus){
+             alert('File Uploaded successfully')
+             window.location.href = 'profile'
+
+         }
+         else alert('Error Uploading File - Please try again later')
         }
         
         , error : function() { alert(JSON.stringify('error')); }
         
         });
 })
+
+function getVideoName(){
+    $('#videoLabel').text($('#video')[0].files[0].name)
+}

@@ -2,7 +2,7 @@
 const fs = require("fs");
 const {google} = require('googleapis');
  
-function videoUpload(fileName, filePath, callback){
+module.exports.videoUpload = function(fileName, filePath, callback){
     require("./gdrive-auth")((auth) => {
       var folderId = '1r4WOAHH2cJ9jvGtVifM6LLOYYXvvY8nD';
         const fileMetadata = {
@@ -30,5 +30,21 @@ function videoUpload(fileName, filePath, callback){
           });
     });
 }
+
+module.exports.videoDelete = function(id,callback) {
+  require("./gdrive-auth")((auth) => {
+      
+      const drive = google.drive({version: 'v3', auth});
+      drive.files.delete({
+          fields: id
+        }, function (err) {
+          if (err) {
+            // Handle error
+            console.error(err);
+          } else {
+            callback('deleted');
+          }
+        });
+  });
+}
  
-module.exports = { videoUpload };

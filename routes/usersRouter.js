@@ -3,6 +3,7 @@ const gdrive = require('./gdrive');
 var profileDAO = require('../models/usersDAO');
 var videoDAO = require('../models/videoDAO');
 var router = express.Router();
+var response = {};
 
 
 router.get("/profile/:id", function(req,res,next){
@@ -69,7 +70,16 @@ router.post("/videoupload", function(req,res){
             try {
               gdrive.videoUpload(video.name, './uploads/' + video.name, (id) => {
                 console.log(id);
-                dataBase(req.body,id);
+                response = {
+                    status: true,
+                    driveMessage: 'File is uploaded',
+                    data: {
+                        name: video.name,
+                        mimetype: video.mimetype,
+                        size: video.size
+                    }
+                }
+                dataBase(req.body,id,res);
             });
           }
             catch(err1) {
@@ -78,15 +88,7 @@ router.post("/videoupload", function(req,res){
   
             }
             //send response
-            res.send({
-                status: true,
-                message: 'File is uploaded',
-                data: {
-                    name: video.name,
-                    mimetype: video.mimetype,
-                    size: video.size
-                }
-            });
+            
         }
     } catch (err) {
         res.status(500).send(err);
@@ -111,15 +113,25 @@ router.post("/videoupload", function(req,res){
 
 });
 
-function dataBase(data, id){
-    videoDAO.newVideo(data,id, function(err,result){
+function dataBase(data,id,res){
+    videoDAO.newVideo(data,id, function(err){  
         if(err){
-            res.statusMessage = result.status;
-            res.status(result.code).json(err);
-            return;
+            response.dbStatus = 500;
+            response.dbMessage = "File uploaded to Drive but id was not saved on DB";
+            gdrive.videoDelete(id, (result) => {
+                console.log(result)
+            })
+            return res.send(response)
+        }  
+        //res.status(result.code).send(result.data);
+        else {
+            response.dbStatus = 200;
+            response.dbMessage = "File uploaded to Drive and id saved on DB";
+            console.log(response)
+            return res.send(response)
         }
-        res.status(result.code).send(result.data);
     })
+    
 }
   
 module.exports = router;
