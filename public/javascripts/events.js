@@ -8,7 +8,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 }).addTo(mymap);
 
 var userPos;
-var markerList = [];
+var markerList;
 var markedEvent;
 var initRoute = true;
 var Route;
@@ -16,18 +16,26 @@ var eventCoord;
 
 var activeEventGame = PUBG
 var eventslist = document.getElementById("eventslist");
+var createEvtBtn = document.getElementById("newevtbtn");
 
 window.onload = function () {
     showEvents('PUBG');
+    getLocation();
+
+    if(sessionStorage == 'EO')
+        createEvtBtn.innerHTML = '<input type="button" value="Create Event">';
+   
+
 }
 
 function showEvents(game) {
+    markerList = [];
     activeEventGame.classList.remove('active');
-	var currGame = document.getElementById(game)
-	currGame.classList.add('active');
-	activeEventGame = currGame;
+    var currGame = document.getElementById(game)
+    currGame.classList.add('active');
+    activeEventGame = currGame;
     $.ajax({
-        url: '/api/events/'+game,
+        url: '/api/events/' + game,
         method: 'get',
         dataType: "json",
         success: function (res, status) {
@@ -72,29 +80,30 @@ function showPosition(position) {
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
+
     }
+    
 }
 
 function getRoute() {
+       try {
+            eventCoord = L.latLng(markedEvent._latlng.lat, markedEvent._latlng.lng)
+        } catch (TypeError) {
+            alert('You must select an event.');
+            return;
+        }
+        
+        if (initRoute) {
+            initRoute = false;
+            Route = L.Routing.control({
+                waypoints: [
+                    L.latLng(userPos._latlng.lat, userPos._latlng.lng),
+                    eventCoord
+                ]
+            }).addTo(mymap)
 
-    try {
-        eventCoord = L.latLng(markedEvent._latlng.lat, markedEvent._latlng.lng)
-    } catch (TypeError) {
-        alert('You must select an event.');
-        return;
-    }
-
-    if (initRoute) {
-        initRoute = false;
-        Route = L.Routing.control({
-            waypoints: [
-                L.latLng(userPos._latlng.lat, userPos._latlng.lng),
-                eventCoord
-            ]
-        }).addTo(mymap)
-
-    }
-    else {
-        Route.spliceWaypoints(Route.getWaypoints().length - 1, 1, eventCoord);
-    }
+        }
+        else {
+            Route.spliceWaypoints(Route.getWaypoints().length - 1, 1, eventCoord);
+        }
 } 
