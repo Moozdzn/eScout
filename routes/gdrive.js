@@ -4,8 +4,10 @@ const {google} = require('googleapis');
  
 function videoUpload(fileName, filePath, callback){
     require("./gdrive-auth")((auth) => {
+      var folderId = '1r4WOAHH2cJ9jvGtVifM6LLOYYXvvY8nD';
         const fileMetadata = {
-            name: fileName
+            name: fileName,
+            parents: [folderId]
         };
  
         const media = {
