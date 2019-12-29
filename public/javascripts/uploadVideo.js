@@ -1,6 +1,8 @@
 
 $('#sendVideo').click(function (evt) {
     evt.preventDefault();
+    $(this).prop('disabled', true);
+    $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Uploading...')
     
     var data = new FormData($("#formFile")[0]);
     data.append('UserID', sessionStorage.userID)
@@ -13,6 +15,8 @@ $('#sendVideo').click(function (evt) {
         success: function(res, status){ 
          console.log(res)
          if(res.status && res.dbStatus){
+            $(this).prop('disabled', false);
+            $(this).html('Upload')
              alert('File Uploaded successfully')
              window.location.href = 'profile'
 
@@ -22,7 +26,7 @@ $('#sendVideo').click(function (evt) {
         
         , error : function() { alert(JSON.stringify('error')); }
         
-        });
+        }); 
 })
 
 function getVideoName(){
