@@ -38,3 +38,28 @@ body {
     color: #999;
   }
   
+/* TESTING */
+
+#bottom-bar button i {
+  margin-right: 3px;
+  font-size: 1em;
+}
+#bottom-bar button:hover {
+  background: #47a0ff;
+}
+#bottom-bar button {
+  float: none;
+  width: 100%;
+  padding: 15px 0;
+}
+#bottom-bar button {
+  float: left;
+  border: none;
+  padding: 10px 0;
+  background: #007bff;
+}
+#bottom-bar {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}

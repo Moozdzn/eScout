@@ -18,15 +18,15 @@ window.onload = function () {
     if (urlParams.has('id') && urlParams.get('id') != user) {
         getProfile(parseInt(urlParams.get('id')), true);
         getVideos(parseInt(urlParams.get('id')));
-        if(user != undefined)
-            buttons.innerHTML = '<button onclick="message()">Message</button>';
+        if(user != undefined) 
+            buttons.innerHTML = '<button type="button" class="btn btn-warning" onclick="message()">Message</button>';
     }
     else {
         getProfile(user);
         getVideos(user);
 
         if (urlParams.has('type') && urlParams.get('type') == 'Player' && urlParams.get('id') == user)
-            buttons.innerHTML = '<a href="uploadVideo"><button>Upload</button></a>';
+            buttons.innerHTML = '<a href="uploadVideo"><button type="button" class="btn btn-primary">Upload</button></a>';
         
     }
 
@@ -77,7 +77,7 @@ function getProfile(id, bool) {
             
 
             if (data[0].userType != 'Scout' && bool == undefined)
-                buttons.innerHTML = '<a href="uploadVideo"><button>Upload</button></a>';
+                buttons.innerHTML = '<a href="uploadVideo"><button type="button" class="btn btn-primary">Upload</button></a>';
 
 
         },

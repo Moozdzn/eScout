@@ -30,10 +30,9 @@ router.get("/:loggedUser/messages", function(req,res,next){
     }, next)
 });
 router.get("/:loggedUser/messages/:contactID", function(req,res,next){
-    // mudar para ficar igual á nova mensagem
-    var logUser = req.params.loggedUser;
-    var contact = req.params.contactID;
-    profileDAO.getUserMessages(logUser,contact,function(err,result){
+    req.body["user"] = req.params.loggedUser;
+    req.body["contact"] = req.params.contactID;
+    profileDAO.getUserMessages(req.body,function(err,result){
         if(err){
             res.statusMessage = result.status;
             res.status(result.code).json(err);
