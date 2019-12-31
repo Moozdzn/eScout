@@ -22,7 +22,7 @@ window.onload = function () {
     showEvents('PUBG');
     getLocation();
 
-    if(sessionStorage == 'EO')
+    if(sessionStorage.userType == 'EO')
         createEvtBtn.innerHTML = '<input type="button" value="Create Event">';
    
 
