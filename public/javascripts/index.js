@@ -72,7 +72,7 @@ function updateRating(rating){
 
 
 
-	var monitor = setInterval(function(){
+var monitor = setInterval(function(){
     var elem = document.activeElement;
     if(elem && elem.tagName == 'IFRAME'){
 				console.log('Clicked ' + elem.id);

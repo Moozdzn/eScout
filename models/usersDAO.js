@@ -23,7 +23,7 @@ module.exports.getProfileInfo = function (user, cb, next) {
 
 }
 module.exports.getUserMessages = function(body,cb,next){
-    console.log(JSON.stringify(body))
+    
     
     pool.getConnection(function (err, conn) {
         if (err) {
@@ -109,7 +109,7 @@ module.exports.getUserVideos = function(user, cb, next){
         }
         if (user != null) {
 
-            conn.query("Select videoTitle,videoDescription,game,rating,reference from Video Where userID ="+user+" Order by uploadDate DESC;" , function (err, results) {
+            conn.query("Select videoID,videoTitle,videoDescription,game,rating,reference from Video Where userID ="+user+" Order by uploadDate DESC;" , function (err, results) {
                 conn.release();
                 if (err) {
                     cb(err, { code: 500, status: "Error in a database query" });

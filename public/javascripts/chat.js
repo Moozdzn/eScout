@@ -44,7 +44,6 @@ function getContacts() {
         success: function (res, status) {
             if (res.err) return;
             var html = "";
-            console.log(res)
             for (i in res) {
                 if(res[i].userID != sessionStorage.messageToID && sessionStorage.messageToName != res[i].username){
                     html += '<a id="' + res[i].userID + '" onclick="getMessages(' + res[i].userID + ')" class="list-group-item list-group-item-action  rounded-0"><div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">' + res[i].username + '</h6></div></div></div></a>'
