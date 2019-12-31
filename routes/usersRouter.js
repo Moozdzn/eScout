@@ -29,9 +29,11 @@ router.get("/:loggedUser/messages", function(req,res,next){
         res.status(result.code).send(result.data);
     }, next)
 });
-router.get("/:loggedUser/messages/:contactID", function(req,res,next){
-    req.body["user"] = req.params.loggedUser;
+router.get("/:logUser/messages/:contactID", function(req,res,next){
+    req.body["user"] = req.params.logUser;
     req.body["contact"] = req.params.contactID;
+    console.log(JSON.stringify(req.body))
+    
     profileDAO.getUserMessages(req.body,function(err,result){
         if(err){
             res.statusMessage = result.status;
@@ -96,11 +98,8 @@ router.post("/videoupload", function(req,res){
   });
 
   router.post("/:logUser/messages/:contactID/new", function(req,res,next){
-    var user = req.params.logUser;
-    var contact = req.params.contactID;
-    req.body["user"] = user;
-    req.body["contact"] = contact;
-    console.log(req.body);  
+    req.body["user"] = req.params.logUser;
+    req.body["contact"] = req.params.contactID; 
     profileDAO.newMessage(req.body, function(err,result){
         if(err){
             res.statusMessage = result.status;
@@ -132,5 +131,17 @@ function dataBase(data,id,res){
     })
     
 }
+
+router.get("/:user", function(req,res,next){
+    profileDAO.getContact(req.params.user, function(err,result){
+        if(err){
+            res.statusMessage = result.status;
+            res.status(result.code).json(err);
+            return;
+        }
+        res.status(result.code).send(result.data);
+    }, next)
+
+});
   
 module.exports = router;

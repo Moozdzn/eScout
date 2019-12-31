@@ -11,10 +11,12 @@ var pusername = document.getElementById("pusername"),
 var buttons = document.getElementById("buttons");
 var highlight = document.getElementById("highlight");
 var urlParams = new URLSearchParams(window.location.search);
+//var urlParamsSearch = 
 
 var user = sessionStorage.userID;
 
 window.onload = function () {
+    
     if (urlParams.has('id') && urlParams.get('id') != user) {
         getProfile(parseInt(urlParams.get('id')), true);
         getVideos(parseInt(urlParams.get('id')));
@@ -29,12 +31,15 @@ window.onload = function () {
             buttons.innerHTML = '<a href="uploadVideo"><button type="button" class="btn btn-primary">Upload</button></a>';
         
     }
-
+    
 }
 
 
 function message() {
-    $.ajax({
+    sessionStorage.messageToID = urlParams.get('id');
+    sessionStorage.messageToName = $('#pusername').text();
+    window.location.href = 'chat';
+    /* $.ajax({
         url: "/api/users/" + sessionStorage.userID + "/messages/" + parseInt(urlParams.get('id')) + "/new",
         method: "post",
         contentType: "application/json",
@@ -45,7 +50,7 @@ function message() {
         }
         , error: function () { }
 
-    });
+    }); */
 };
 
 function getProfile(id, bool) {

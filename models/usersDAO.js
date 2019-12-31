@@ -22,14 +22,16 @@ module.exports.getProfileInfo = function (user, cb, next) {
     })
 
 }
-module.exports.getUserMessages = function(logUser,contact,cb,next){
+module.exports.getUserMessages = function(body,cb,next){
+    console.log(JSON.stringify(body))
+    
     pool.getConnection(function (err, conn) {
         if (err) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
 
-            conn.query("SELECT messageFromID,message,messageDate FROM Message WHERE (messageToID ="+logUser+" OR messageFromID = "+logUser+") AND (messageToID = "+contact+" OR messageFromID = "+contact+");" , function (err, results) {
+            conn.query("SELECT messageFromID,message,messageDate FROM Message WHERE (messageToID ="+body.user+" OR messageFromID = "+body.user+") AND (messageToID = "+body.contact+" OR messageFromID = "+body.contact+");" , function (err, results) {
                 conn.release();
                 if (err) {
                     cb(err, { code: 500, status: "Error in a database query" });
@@ -78,7 +80,7 @@ module.exports.newMessage = function(body,cb,next){
         
     })
 }
-module.exports.getUserVideos = function(user, cb, next){
+module.exports.getContact = function(user, cb, next){
     pool.getConnection(function (err, conn) {
         if (err) {
             cb(err, { code: 500, status: "Error connecting to database." })
@@ -86,7 +88,7 @@ module.exports.getUserVideos = function(user, cb, next){
         }
         if (user != null) {
 
-            conn.query("SELECT videoTitle, videoDescription, game, rating, reference FROM Video WHERE userID=" + user +" ORDER BY uploadDate DESC" , function (err, results) {
+            conn.query("Select userID from User where username ='"+user+"';" , function (err, results) {
                 conn.release();
                 if (err) {
                     cb(err, { code: 500, status: "Error in a database query" });
@@ -97,5 +99,26 @@ module.exports.getUserVideos = function(user, cb, next){
         } else
             console.log("try again");
     })
-
 }
+
+module.exports.getUserVideos = function(user, cb, next){
+    pool.getConnection(function (err, conn) {
+        if (err) {
+            cb(err, { code: 500, status: "Error connecting to database." })
+            return;
+        }
+        if (user != null) {
+
+            conn.query("Select videoTitle,videoDescription,game,rating,reference from Video Where userID ="+user+" Order by uploadDate DESC;" , function (err, results) {
+                conn.release();
+                if (err) {
+                    cb(err, { code: 500, status: "Error in a database query" });
+                    return;
+                }
+                cb(false, { code: 200, status: "ok", data: results });
+            })
+        } else
+            console.log("try again");
+    })
+}
+
