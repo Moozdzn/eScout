@@ -83,35 +83,11 @@ $(document).ready(function () {
 
 function getRegions() {
     $.ajax({
-        url: '/api/events/newEvent',
+        url: "/api/events/heatmap/regions",
         method: 'get',
-        dataType: "json",
         success: function (res, status) {
             if (res.err) return;
-            /*
-            for (i in res) {
-                var r = res[i].regionRadius * 2000
-                if (res[i].regionRadius > 5000) {
-                    regionCircles.push(L.circle([res[i].regionLat, res[i].regionLong], { radius: 5000 }).addTo(mymap));
-
-                }
-                else {
-                    regionCircles.push(L.circle([res[i].regionLat, res[i].regionLong], { radius: r }).addTo(mymap));
-                }
-
-                var popUp ="<dl><dt>"+ res[i].regionName+"</dt>"
-                            + "<dd>" + res[i].regionRadius + " players</dd>"
-
-                regionCircles[i].bindPopup(popUp);
-                regionCircles[i].on('mouseover', function (e) {
-                       this.openPopup();
-                   });
-                   regionCircles[i].on('mouseout', function (e) {
-                       this.closePopup();
-                   }) 
-
-
-            }*/
+            
             for(i in res){
                 regionDensity[i] = {name: res[i].regionName,density: res[i].regionRadius}
             }
@@ -120,8 +96,8 @@ function getRegions() {
             });
 
 
-        }, error: function () {
-            alert(JSON.stringify('error'));
+        }, error: function (res) {
+            alert(JSON.stringify(res));
         }
 
     })

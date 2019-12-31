@@ -12,7 +12,7 @@ router.get("/:game", function (req, res, next) {
             return;
         }
         res.status(result.code).send(result.data);
-    }, next)
+    }, next) 
 
 });
 
@@ -30,7 +30,7 @@ router.post("/newEvent", function (req, res, next) {
 
 });
 
-router.get("/newEvent", function (req, res, next) {
+router.get("/heatmap/regions", function (req, res, next) {
     eventsDAO.getRegions(function (err, result) {
         if (err) {
             res.statusMessage = result.status;
@@ -39,7 +39,6 @@ router.get("/newEvent", function (req, res, next) {
         }
         res.status(result.code).send(result.data);
     }, next)
-
 });
 
 
