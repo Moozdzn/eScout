@@ -1,4 +1,4 @@
-$(window).on('load', function () {
+$(document).ready(function(){
     var profile = document.getElementById("ddprofile");
     var login = document.getElementById("ddlogin");
     var logout = document.getElementById("ddlogout");

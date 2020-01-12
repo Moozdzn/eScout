@@ -63,7 +63,7 @@ module.exports.getRegions = function (cb,next) {
         if (err) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
-        }
+        }//MUDAR
         conn.query("SELECT Region.regionID, Region.regionName , COUNT(userID) AS regionRadius, Region.regionLat, Region.regionLong FROM User INNER JOIN Region ON User.regionID = Region.regionID GROUP BY Region.regionID;", function (err, results) {
             conn.release();
             if (err) {
