@@ -29,7 +29,8 @@ module.exports.newEvent = function (body, cb, next) {
             return;
         }
         lastLocationID++;
-        conn.query("INSERT INTO `EventLocation`(`latitude`, `longitude`, `eventlocationName`) VALUES (" + body.Elat + "," + body.Elng + ",'" + body.Eadress + "'); INSERT INTO Event (eventName, eventGame, eventDescription, eventStartTime, eventTicketPrice, locationID) VALUES ('" + body.Ename + "','"+body.Egame+"','" + body.Edesc + "','" + body.Edate + " " + body.Estart + "'," + body.Eprice + "," + lastLocationID + ");", function (err, results) {
+        var eventDate = body.Edate + " " + body.Estart;
+        conn.query("INSERT INTO `EventLocation`(`latitude`, `longitude`, `eventlocationName`) VALUES (?,?,?); INSERT INTO Event (eventName, eventGame, eventDescription, eventStartTime, eventTicketPrice, locationID) VALUES (?,?,?,?,?,?);",[body.Elat, body.Elng, body.Eadress,body.Ename, body.Egame, body.Edesc, eventDate, body.Eprice, lastLocationID], function (err, results) {
             //INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + "," + type + ");"
             conn.release();
             if (err) {
