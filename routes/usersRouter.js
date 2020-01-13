@@ -64,7 +64,9 @@ router.post("/videoupload", function(req,res){
                 status: false,
                 message: 'No file uploaded'
             });
-        } else {
+        }
+        
+        else {
             let video = req.files.video;
             
             video.mv('./uploads/' + video.name);

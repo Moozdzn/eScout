@@ -95,14 +95,15 @@ function newContactBox(id,name){
     for(i in contactList){
         if(contactList[i] == id){
             alert('Chat already created, check your Recent tab');
-            return
+            return;
         }
     }
     var html = "";
         html += '<a id="' + id + '" onclick="getMessages(' + id + ')" class="list-group-item list-group-item-action  rounded-0"><div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">' + name + '</h6></div></div></div></a>'
         contacts.innerHTML = html + contacts.innerHTML;
-    manageActive(id)
-    getMessages(id)
+
+    manageActive(id);
+    getMessages(id);
 }
 function newContact(){
     var user = prompt("Enter username (WARNING: Usernames are case sensitive)", "ex:Mooz");
@@ -118,7 +119,7 @@ function newContact(){
             }
         }
         , error: function () { 
-            alert('Theres was an error between you and us, we are sorry about that. Please try again later')
+            alert('There was an error between you and us, we are sorry about that. Please try again later')
         }
     });
     }

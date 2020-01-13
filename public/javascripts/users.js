@@ -73,15 +73,14 @@ function getProfile(id, bool) {
             if (data[0].mainPosition != null)
                 pMainPos.innerHTML = "Main Position: " + data[0].mainPosition;
             if (data[0].teamName != 'Null')
-                pTeam.innerHTML = "Team: " + data[0].teamName;
+                pTeam.innerHTML = "Team: <a href='team?id="+data[0].teamID+"'>"+data[0].teamName+"</a>"
             pBio.innerHTML = data[0].bio;
-
 
             if (data[0].userType === 'Player' || data[0].userType === 'Pro')
                 highlight.innerHTML = '<h2>Highlights</h2>';
             
 
-            if (data[0].userType != 'Scout' && bool == undefined)
+            if (data[0].userType != 'Scout' && data[0].userType != 'EO' && bool == undefined)
                 buttons.innerHTML = '<a href="uploadVideo"><button type="button" class="btn btn-primary">Upload</button></a>';
 
 

@@ -10,6 +10,7 @@ var eventsRouter = require('./routes/eventsRouter');
 var authRouter = require('./routes/authRouter');
 var usersRouter = require('./routes/usersRouter');
 var videosRouter = require('./routes/videosRouter');
+var teamRouter = require('./routes/teamRouter');
 //DAO - Run function on startup
 
 
@@ -51,6 +52,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/auth/register',authRouter);
 app.use('/api/videos', videosRouter);
+app.use('/api/team', teamRouter);
 
 
 // catch 404 and forward to error handler
