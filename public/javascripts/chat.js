@@ -7,7 +7,7 @@ var active;
 function getMessages(contactID) {
     manageActive(contactID);
     $.ajax({
-        url: "/api/users/" + sessionStorage.userID + "/messages/" + contactID,
+        url: "/api/users/" + sessionStorage.userID + "/contacts/" + contactID+"/messages",
         method: "get",
         dataType: "json",
         success: function (res, status) {
@@ -38,7 +38,7 @@ function getMessages(contactID) {
 
 function getContacts() {
     $.ajax({
-        url: '/api/users/' + sessionStorage.userID + '/messages',
+        url: '/api/users/' + sessionStorage.userID + '/contacts',
         method: 'get',
         dataType: 'json',
         success: function (res, status) {
@@ -67,18 +67,15 @@ $('#sendMessage').click(function (evt) {
     evt.preventDefault();
     var contact = active.id;
     $.ajax({
-        url: "/api/users/" + sessionStorage.userID + "/messages/" + contact + "/new",
+        url: "/api/users/" + sessionStorage.userID + "/contacts/" + contact + "/messages",
         method: "post",
         contentType: "application/json",
         data: JSON.stringify({ message: $('#Message').val() }),
-
         success: function (res, status) {
             $('#Message').val("")
             getMessages(contact);
         }
-
         , error: function () { }
-
     });
 
 })
@@ -118,7 +115,7 @@ function newContact(){
             }
         }
         , error: function () { 
-            alert('Theres was an error between you and us, we are sorry about that. Please try again later')
+            alert('There was an error between you and us, we are sorry about that. Please try again later')
         }
     });
     }

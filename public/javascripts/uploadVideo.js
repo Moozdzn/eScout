@@ -7,7 +7,7 @@ $('#sendVideo').click(function (evt) {
     var data = new FormData($("#formFile")[0]);
     data.append('UserID', sessionStorage.userID)
     $.ajax({
-        url: "/api/users/videoupload",
+        url: "/api/users/:id/videos",
         method : "post",
         data : data,
         processData: false,

@@ -55,7 +55,7 @@ function message() {
 
 function getProfile(id, bool) {
     $.ajax({
-        url: "/api/users/profile/" + id,
+        url: "/api/users/"+ id +"/profile" ,
         method: "get",
         dataType: "json",
         success: function (res, status) {
@@ -97,7 +97,7 @@ function getVideos(id) {
     var videosList = document.getElementById("videosList");
 
     $.ajax({
-        url: "/api/users/profile/" + id + "/videos",
+        url: "/api/users/" + id + "/videos",
         method: "get",
         dataType: "json",
         success: function (res, status) {
