@@ -9,7 +9,7 @@ module.exports.getTeamInfo = function (id, cb, next) {
         
         if (id != null) {
 
-            conn.query("SELECT * FROM Team WHERE teamID = "+ id , function (err, results) {
+            conn.query("SELECT * FROM Team WHERE teamID = ?", id , function (err, results) {
                 conn.release();
                 if (err) {
                     cb(err, { code: 500, status: "Error in a database query" });

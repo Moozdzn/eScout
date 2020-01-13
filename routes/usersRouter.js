@@ -1,7 +1,7 @@
 var express = require('express');
 const gdrive = require('./gdrive');
 var profileDAO = require('../models/usersDAO');
-var videoDAO = require('../models/videoDAO');
+var videoDAO = require('../models/videosDAO');
 var router = express.Router();
 var response = {};
 
