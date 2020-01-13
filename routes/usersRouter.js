@@ -5,7 +5,7 @@ var videoDAO = require('../models/videoDAO');
 var router = express.Router();
 var response = {};
 
-
+// id,profile 
 router.get("/profile/:id", function(req,res,next){
     var user = req.params.id;
     profileDAO.getProfileInfo(user,function(err,result){
@@ -18,6 +18,7 @@ router.get("/profile/:id", function(req,res,next){
     }, next)
 
 });
+// id, contacts
 router.get("/:loggedUser/messages", function(req,res,next){
     var logUser = req.params.loggedUser;
     profileDAO.getContacts(logUser,function(err,result){
@@ -29,6 +30,8 @@ router.get("/:loggedUser/messages", function(req,res,next){
         res.status(result.code).send(result.data);
     }, next)
 });
+
+//id, contacts, idcontact (. messages)
 router.get("/:logUser/messages/:contactID", function(req,res,next){
     req.body["user"] = req.params.logUser;
     req.body["contact"] = req.params.contactID;
@@ -43,7 +46,7 @@ router.get("/:logUser/messages/:contactID", function(req,res,next){
         res.status(result.code).send(result.data);
     }, next)
 });
-
+//id, videos
 router.get("/profile/:id/videos", function(req,res,next){
     var user = req.params.id;
     profileDAO.getUserVideos(user, function(err,result){
@@ -55,7 +58,7 @@ router.get("/profile/:id/videos", function(req,res,next){
         res.status(result.code).send(result.data);
     }, next)
 });
-
+//id,video
 router.post("/videoupload", function(req,res){
     try {
         

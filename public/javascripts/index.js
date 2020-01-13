@@ -7,8 +7,8 @@ var PUBG = document.getElementById("PUBG");
 var activeGame = PUBG;
 
 var videos = [];
+$(window).on('load', function () {
 
-$(document).ready(function(){
 	 showVids('PUBG');
 });
 
