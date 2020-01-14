@@ -40,16 +40,19 @@ function showEvents(game) {
         dataType: "json",
         success: function (res, status) {
             if (res.err) return;
-
+            var gameIcon = L.icon({
+                iconUrl: 'images/'+game+'.png',
+                iconSize:     [70, 70], 
+                iconAnchor:   [35, 63], 
+                popupAnchor:  [0, -63] 
+            });
             var html = "";
 
             for (i in res) {
                 date = res[i].eventStartTime.slice(0, 10);
                 time = res[i].eventStartTime.slice(11, 16);
-                markerList.push([L.marker([res[i].latitude, res[i].longitude]).bindPopup(res[i].eventName), false]);
+                markerList.push([L.marker([res[i].latitude, res[i].longitude],{icon: gameIcon}).bindPopup(res[i].eventName), false]);
                 html += '<div class="col-lg-4 col-md-6 mb-4" onclick="showMarker(' + i + ')" style="min-width: 200px"><div class="card h-100"><div class="card-body"> <h4 class="card-title"><a href="#">' + res[i].eventName + '</a></h4><p class="card-text">' + res[i].eventDescription + '</p><p>' + date + '  ' + time + 'H </p></div></div></div>';
-
-
             }
             eventslist.innerHTML = html;
 
@@ -74,15 +77,19 @@ function showMarker(id) {
 
 
 function showPosition(position) {
-    userPos = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap).bindPopup('You are here!<br>Or at least somewhere around').openPopup();
+    var userIcon = L.icon({
+        iconUrl: 'images/position.png',
+        iconSize:     [50, 50], 
+        iconAnchor:   [25, 45], 
+        popupAnchor:  [0, -45]
+    });
+    userPos = L.marker([position.coords.latitude, position.coords.longitude],{icon: userIcon}).addTo(mymap).bindPopup('You are here!<br>Or at least somewhere around').openPopup();
 }
 
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-
-    }
-    
+    }  
 }
 
 function getRoute() {
@@ -99,11 +106,15 @@ function getRoute() {
                 waypoints: [
                     L.latLng(userPos._latlng.lat, userPos._latlng.lng),
                     eventCoord
-                ]
-            }).addTo(mymap)
+                ],
+                createMarker: function() { return null; }
+            }).addTo(mymap).hide()
 
         }
         else {
             Route.spliceWaypoints(Route.getWaypoints().length - 1, 1, eventCoord);
         }
 } 
+$("#eventslist").on("mouseenter", "div", function(e) {
+    $(this).css('cursor', 'pointer');
+})
