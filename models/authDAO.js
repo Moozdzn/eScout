@@ -7,7 +7,7 @@ module.exports.verifyUser = function (data,cb, next) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
-        conn.query("SELECT userID, userType FROM User WHERE username = '"+ data.username +"' AND password ='"+data.password+"';", function (err, results) {
+        conn.query("SELECT userID, userType FROM User WHERE username = ? AND password =?", [data.username, data.password], function (err, results) {
             conn.release();
             if (err) {
                 cb(err, { code: 500, status: "Error in a database query" })

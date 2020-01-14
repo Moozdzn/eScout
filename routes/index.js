@@ -25,5 +25,9 @@ router.get('/register',function(req,res, next){
 });
 router.get('/chat',function(req,res,next){
   res.render('chat',{title: 'Messages'})
-})
+});
+router.get('/team',function(req,res,next){
+  res.render('team',{title: 'Team Page'})
+});
+
 module.exports = router;

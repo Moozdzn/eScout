@@ -9,7 +9,7 @@ var activeGame = PUBG;
 var videos = [];
 $(window).on('load', function () {
 
-	 showVids('PUBG');
+	showVids('PUBG');
 });
 
 function showVids(game) {
@@ -28,7 +28,11 @@ function showVids(game) {
 			var html = "";
 			
 			for (i in res) {
-				html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100" ><iframe id="'+res[i].videoID+'" class="card-img-top" src="https://drive.google.com/file/d/'+res[i].reference+'/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">'+ res[i].videoTitle +'</a></h4><p class="card-text">'+ res[i].videoDescription +'</p><a href="profile?id='+res[i].userID+'&type='+res[i].userType+'" >'+res[i].username+'</a><p><i id="like'+res[i].videoID+'" onclick="rating('+res[i].videoID+')" class="fas fa-thumbs-up"></i> Rating: '+res[i].rating+'</p></div></div></div></div>';
+				html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100" ><iframe id="'+res[i].videoID+'" class="card-img-top" src="https://drive.google.com/file/d/'+res[i].reference+'/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">'+ res[i].videoTitle +'</a></h4><p class="card-text">'+ res[i].videoDescription +'</p><a href="profile?id='+res[i].userID+'&type='+res[i].userType+'" >'+res[i].username+'</a>';
+				if(sessionStorage.userType == 'Scout')
+					html += '<p><i id="like'+res[i].videoID+'" onclick="rating('+res[i].videoID+')" class="fas fa-thumbs-up"></i> Rating: '+res[i].rating+'</p></div></div></div></div>';
+				else
+					html +=  '<p>Rating: '+res[i].rating+'</p></div></div></div></div>';
 				videos[res[i].videoID] = res[i].rating;			
 			}
 			homevideos.innerHTML = html;

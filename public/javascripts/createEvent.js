@@ -36,7 +36,7 @@ $('#createEvt').click(function (evt) {
     evt.preventDefault();
     var event = JSON.stringify({
         Ename: $("#Ename").val(),
-        Egame: $("$Egame").val(),
+        Egame: $("#Egame").val(),
         Edesc: $("#Edesc").val(),
         Estart: $("#Estart").val(),
         Edate: $("#Edate").val(),
