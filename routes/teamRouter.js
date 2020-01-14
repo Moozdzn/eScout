@@ -15,5 +15,16 @@ router.get("/:id", function (req, res, next) {
 
 });
 
+router.get("/:id/videos", function (req, res, next) {
+    var id = req.params.id;
+    teamDAO.getTeamVideos(id, function (err, result) {
+        if (err) {
+            res.statusMessage = result.status;
+            res.status(result.code).json(err);
+            return;
+        } res.status(result.code).send(result.data);
+    }, next)
+
+});
 
 module.exports = router;

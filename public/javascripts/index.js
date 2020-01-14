@@ -9,7 +9,7 @@ var activeGame = PUBG;
 var videos = [];
 $(window).on('load', function () {
 
-	 showVids('PUBG');
+	showVids('PUBG');
 });
 
 function showVids(game) {
