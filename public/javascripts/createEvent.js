@@ -11,6 +11,10 @@ var toggled = true;
 
 window.onload = function () {
     getRegions()
+    const myInput = document.getElementById('Eloc');
+    myInput.onpaste = function(e) {
+        e.preventDefault();
+    }
 }
 var mymap = L.map('mapid').setView([39.359785, -8.074951], 6);
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -32,47 +36,39 @@ var geocoder = L.Control.geocoder().on('markgeocode', function (event) {
     mymap.setView(center, mymap.getZoom());
 }).addTo(mymap);
 
-$('#createEvt').click(function (evt) {
+$('#evtForm').submit(function (evt) {
     evt.preventDefault();
-    var event = JSON.stringify({
-        Ename: $("#Ename").val(),
-        Egame: $("#Egame").val(),
-        Edesc: $("#Edesc").val(),
-        Estart: $("#Estart").val(),
-        Edate: $("#Edate").val(),
-        Eprice: $("#Eprice").val(),
-        Oname: $("#Oname").val(),
-        Elat: eventCoords.lat,
-        Elng: eventCoords.lng,
-        Eadress: $("#Eloc").val()
-    })
+        var event = JSON.stringify({
+            Ename: $("#Ename").val(),
+            Egame: $("#Egame").val(),
+            Edesc: $("#Edesc").val(),
+            Estart: $("#Estart").val(),
+            Edate: $("#Edate").val(),
+            Eprice: $("#Eprice").val(),
+            Oname: $("#Oname").val(),
+            Elat: eventCoords.lat,
+            Elng: eventCoords.lng,
+            Eadress: $("#Eloc").val()
+        })
 
-    $.ajax({
-        url: "/api/events/newEvent",
-        method: "post",
-        contentType: "application/json",
-        data: event,
-        processData: false,
-        success: function (res, status) {
-            //document.getElementById("res").innerHTML = JSON.stringify(res); 
+        $.ajax({
+            url: "/api/events/newEvent",
+            method: "post",
+            contentType: "application/json",
+            data: event,
+            processData: false,
+            success: function (res, status) {
+                //document.getElementById("res").innerHTML = JSON.stringify(res); 
+                console.log("aqui puta")
 
-            window.location.href = "events";
-        }
-        , error: function () {
-            alert(JSON.stringify('error'));
-        }
-    });
+                window.location.href = "events";
+            }
+            , error: function () {
+                alert(JSON.stringify('error'));
+            }
+        });
+    
 })
-
-
-
-
-$(document).ready(function () {
-    $("#Eloc").prop("disabled", true);
-})
-
-
-
 
 //////////////////////////////////////////////////////////
 
@@ -87,12 +83,12 @@ function getRegions() {
         method: 'get',
         success: function (res, status) {
             if (res.err) return;
-            
-            for(i in res){
-                regionDensity[i] = {name: res[i].regionName,density: res[i].regionRadius}
+
+            for (i in res) {
+                regionDensity[i] = { name: res[i].regionName, density: res[i].playersPerRegion }
             }
-            $.getJSON("geodata/Portugal.json",function(data){
-                geojson = L.geoJson(data,{style: style, onEachFeature: onEachFeature}).addTo(mymap);
+            $.getJSON("geodata/Portugal.json", function (data) {
+                geojson = L.geoJson(data, { style: style, onEachFeature: onEachFeature }).addTo(mymap);
             });
 
 
@@ -103,37 +99,37 @@ function getRegions() {
     })
 }
 
-var info = L.control();
+var info = L.control({ position: 'topleft' });
 
-	info.onAdd = function (mymap) {
-		this._div = L.DomUtil.create('div', 'info');
-		this.update();
-		return this._div;
-	};
+info.onAdd = function (mymap) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+};
 
-	info.update = function (props) {
-		this._div.innerHTML = '<h4>Users by district</h4>' +  (props ?
-			'<b>' + props.name + '</b><br />' + props.density + ' users'
-            : 'Hover over a district <br>or no users registered');
-        
-	};
+info.update = function (props) {
+    this._div.innerHTML = '<h4>Users by district</h4>' + (props ?
+        '<b>' + props.name + '</b><br />' + props.density + ' users'
+        : 'Hover over a district <br>or no users registered');
 
-	info.addTo(mymap);
+};
+
+info.addTo(mymap);
 
 function getColor(name) {
     var d;
-    if(typeof name === 'number') d = name;
-    else{
-        for(i in regionDensity){
-            if (name == regionDensity[i].name) d = regionDensity[i].density; 
+    if (typeof name === 'number') d = name;
+    else {
+        for (i in regionDensity) {
+            if (name == regionDensity[i].name) d = regionDensity[i].density;
         }
     }
-    return d > 10  ? '#E31A1C' :
-           d > 8  ? '#FC4E2A' :
-           d > 6   ? '#FD8D3C' :
-           d > 4   ? '#FEB24C' :
-           d > 2   ? '#FED976' :
-                      '#FFEDA0';
+    return d > 10 ? '#E31A1C' :
+        d > 8 ? '#FC4E2A' :
+            d > 6 ? '#FD8D3C' :
+                d > 4 ? '#FEB24C' :
+                    d > 2 ? '#FED976' :
+                        '#FFEDA0';
 }
 function style(feature) {
     return {
@@ -173,33 +169,33 @@ function onEachFeature(feature, layer) {
     });
 }
 
-var legend = L.control({position: 'bottomright'});
+var legend = L.control({ position: 'topleft' });
 
-	legend.onAdd = function (mymap) {
+legend.onAdd = function (mymap) {
 
-		var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 2, 4, 6, 8, 10],
-            //colors =['#FFEDA0','#FED976','#FEB24C','#FD8D3C','#FC4E2A','#E31A1C'],
-			labels = [],
-			from, to;
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 2, 4, 6, 8, 10],
+        //colors =['#FFEDA0','#FED976','#FEB24C','#FD8D3C','#FC4E2A','#E31A1C'],
+        labels = [],
+        from, to;
 
-		for (var i = 0; i < grades.length; i++) {
-			from = grades[i];
-			to = grades[i + 1];
+    for (var i = 0; i < grades.length; i++) {
+        from = grades[i];
+        to = grades[i + 1];
 
-			labels.push(
-				'<i style="background:' + getColor(from + 1) + '"></i> ' +
-				from + (to ? '&ndash;' + to : '+'));
-		}
+        labels.push(
+            '<i style="background:' + getColor(from + 1) + '"></i> ' +
+            from + (to ? '&ndash;' + to : '+'));
+    }
 
-		div.innerHTML = labels.join('<br>');
-		return div;
-	};
+    div.innerHTML = labels.join('<br>');
+    return div;
+};
 
-    legend.addTo(mymap);
-    
-function toggle(){
-    if (toggled){
+legend.addTo(mymap);
+
+function toggle() {
+    if (toggled) {
         mymap.removeLayer(geojson);
         mymap.removeControl(legend)
         mymap.removeControl(info)
@@ -208,10 +204,10 @@ function toggle(){
         $("#btnHeatmap").addClass("btn-danger").text('Toggle Heatmap: OFF');
 
     }
-    else{
+    else {
         geojson.addTo(mymap)
-        legend.addTo(mymap)
         info.addTo(mymap)
+        legend.addTo(mymap)
         toggled = true;
         $("#btnHeatmap").removeClass("btn-danger");
         $("#btnHeatmap").addClass("btn-success").text('Toggle Heatmap: ON');
