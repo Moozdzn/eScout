@@ -9,14 +9,13 @@ $('#confirm').submit(function (evt) {
       username: $("#inputUsername").val(),
       password: $("#inputPassword").val(),
     }),
-    //ENTRA SEMPRE NO SUCESS, handle error
     success: function (res, status) {
       sessionStorage.userID = res[0].userID;
       sessionStorage.userType = res[0].userType;
       window.location.href = '/';
     }
-    , error: function () {
-      alert(JSON.stringify('error'));
+    , error: function (err) {
+      if(err.status === 401) alert('Combination is invalid');
     }
   });
 })

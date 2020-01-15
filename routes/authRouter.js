@@ -10,7 +10,12 @@ router.post("/", function(req,res,next){
             res.status(result.code).json(err);
             return;
         }
-        res.status(result.code).send(result.data);
+        else if(result.data.length === 1) res.status(result.code).send(result.data);
+        else {
+            res.statusMessage = "User not found";
+            res.status(401).json('Error retriving user');
+        }
+        
     }, next)
 
 });
