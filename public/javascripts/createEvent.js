@@ -11,6 +11,10 @@ var toggled = true;
 
 window.onload = function () {
     getRegions()
+    const myInput = document.getElementById('Eloc');
+    myInput.onpaste = function(e) {
+        e.preventDefault();
+    }
 }
 var mymap = L.map('mapid').setView([39.359785, -8.074951], 6);
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -32,11 +36,8 @@ var geocoder = L.Control.geocoder().on('markgeocode', function (event) {
     mymap.setView(center, mymap.getZoom());
 }).addTo(mymap);
 
-$('#createEvt').submit(function (evt) {
-    console.log($('#createEvt').valid())
-    if ($('#createEvt').valid()) {
-        console.log("fila da caixa")
-        evt.preventDefault();
+$('#evtForm').submit(function (evt) {
+    evt.preventDefault();
         var event = JSON.stringify({
             Ename: $("#Ename").val(),
             Egame: $("#Egame").val(),
@@ -66,19 +67,8 @@ $('#createEvt').submit(function (evt) {
                 alert(JSON.stringify('error'));
             }
         });
-    }
+    
 })
-
-
-
-
-$(document).ready(function () {
-    $("#Eloc").prop("disabled", true);
- 
-})
-
-
-
 
 //////////////////////////////////////////////////////////
 
@@ -95,7 +85,7 @@ function getRegions() {
             if (res.err) return;
 
             for (i in res) {
-                regionDensity[i] = { name: res[i].regionName, density: res[i].regionRadius }
+                regionDensity[i] = { name: res[i].regionName, density: res[i].playersPerRegion }
             }
             $.getJSON("geodata/Portugal.json", function (data) {
                 geojson = L.geoJson(data, { style: style, onEachFeature: onEachFeature }).addTo(mymap);
@@ -109,7 +99,7 @@ function getRegions() {
     })
 }
 
-var info = L.control();
+var info = L.control({ position: 'topleft' });
 
 info.onAdd = function (mymap) {
     this._div = L.DomUtil.create('div', 'info');
@@ -179,7 +169,7 @@ function onEachFeature(feature, layer) {
     });
 }
 
-var legend = L.control({ position: 'bottomright' });
+var legend = L.control({ position: 'topleft' });
 
 legend.onAdd = function (mymap) {
 
@@ -216,8 +206,8 @@ function toggle() {
     }
     else {
         geojson.addTo(mymap)
-        legend.addTo(mymap)
         info.addTo(mymap)
+        legend.addTo(mymap)
         toggled = true;
         $("#btnHeatmap").removeClass("btn-danger");
         $("#btnHeatmap").addClass("btn-success").text('Toggle Heatmap: ON');

@@ -1,35 +1,31 @@
 <div class="container" style="margin-top: 20px;margin-bottom 20px;">
   <div class="row">
     <div class="col">
-      <form id="evtForm" class="needs-validation" novalidate>
-       <div class='form-row'>
-          {{!-- <div class='form-group col-md-6'>
-            <label>Organizer name</label><input class="form-control" type="text" id="Oname" name="Oname">
-          </div> --}}
-        <div class='form-group col-md-6'>
+      <form id="evtForm" class="was-validated"autocomplete="off">
+        <div class='form-group'>
           <label>Event Name</label> <input class="form-control" type="text" id="Ename" name="Ename"
             class="form-control is-invalid" required>
              <div class="invalid-feedback">
             Please choose an event name.
           </div>
         </div>
-    </div>
+      <div class="form-group">
+        <label>Address</label><input type='text' class="form-control" id="Eloc"
+          name="Eloc" onkeydown="return false;"
+                style="caret-color: transparent !important;background-color:lightgrey" required>
+         <div class="invalid-feedback">
+            Please choose an address by searching it on the map
+          </div>
+      </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label>Address (Type it on the map)</label><input type='text' class="form-control" id="Eloc"
-          name="Eloc" required="true"></textarea>
+        <label>Date</label><input class="form-control" type="date" id="Edate" name="Edate" required>
          <div class="invalid-feedback">
             Please choose a date.
           </div>
       </div>
-      <div class="form-group col-md-4">
-        <label>Date</label><input class="form-control" type="date" id="Edate" name="Edate" required="true">
-         <div class="invalid-feedback">
-            Please choose a date.
-          </div>
-      </div>
-      <div class="form-group col-md-2">
-        <label>StartTime</label><input class="form-control" type="time" id="Estart" name="Estart" required="true">
+      <div class="form-group col-md-6">
+        <label>StartTime</label><input class="form-control" type="time" id="Estart" name="Estart" required>
          <div class="invalid-feedback">
             Please choose a start time.
           </div>
@@ -37,15 +33,21 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label>Description </label> <input class="form-control" type="text" id="Edesc" name="Edesc">
+        <label>Description </label> <input class="form-control" type="text" id="Edesc" name="Edesc" required>
+        <div class="invalid-feedback">
+            Please choose an event description.
+          </div>
       </div>
       <div class="form-group col-md-6">
-        <label>Ticket Price </label><input class="form-control" type="number" id="Eprice" name="Eprice">
+        <label>Ticket Price </label><input class="form-control" type="number" id="Eprice" name="Eprice" required>
+        <div class="invalid-feedback">
+            Please choose a ticket price.
+          </div>
       </div>
     </div>
     <div class="form-row">
       <div class='form-group col-md-6'>
-        <label>Game</label><select class="custom-select" name="Game">
+        <label>Game</label><select class="custom-select" name="Game" id="Egame">
           <option value="PUBG" selected>PUBG</option>
           <option value="CSGO">CS:GO</option>
           <option value="LOL">League of Legends</option>
@@ -54,7 +56,7 @@
 
     </div>
 
-    <button type="submit" class="btn btn-primary" id="createEvt">Submit</button> 
+    <button type="submit" class="btn btn-primary" >Submit</button> 
     
 
     </form>
