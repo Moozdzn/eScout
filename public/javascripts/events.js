@@ -110,7 +110,7 @@ function getRoute() {
                 createMarker: function() {return null;}
             }).addTo(mymap).on('routingerror', function(e) {
                 alert('The OSRM demo server appears down, or a network error occured. Please try again later.');
-            }).hide;
+            });
 
         }
         else {
