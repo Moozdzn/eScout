@@ -109,10 +109,8 @@ function getRoute() {
                 ],
                 createMarker: function() {return null;}
             }).addTo(mymap).on('routingerror', function(e) {
-                console.log(e);
-                var mapDiv = document.getElementById('map');
-                mapDiv.innerHTML += '<div class="alert alert-danger alert-dismissible fade show" id="osrmError" role="alert"><h4 class="alert-heading">Sorry!</h4><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><hr><p class="mb-0">The OSRM demo server appears down, or a network error occured.</p></div>'
-            });
+                alert('The OSRM demo server appears down, or a network error occured. Please try again later.');
+            }).hide;
 
         }
         else {
