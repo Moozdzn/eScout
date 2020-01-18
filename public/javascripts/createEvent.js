@@ -10,6 +10,8 @@ var geojson;
 var toggled = true;
 
 window.onload = function () {
+    if(sessionStorage.userType == undefined || sessionStorage != 'EO')
+        window.location.href = '/';
     getRegions()
 }
 var mymap = L.map('mapid').setView([39.359785, -8.074951], 6);

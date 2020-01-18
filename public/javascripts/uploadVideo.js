@@ -1,3 +1,8 @@
+window.onload = function(){
+    if(sessionStorage.userType == undefined || sessionStorage.userType != 'Player' || sessionStorage.userType != 'Pro')
+        window.location.href = 'home'
+}
+
 
 $('#sendVideo').click(function (evt) {
     evt.preventDefault();
