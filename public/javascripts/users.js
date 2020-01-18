@@ -23,6 +23,9 @@ window.onload = function () {
         if (user != undefined)
             buttons.innerHTML = '<button type="button" class="btn btn-warning" onclick="message()">Message</button>';
     }
+    else if(sessionStorage.userType == undefined){
+        window.location.href = 'auth'
+    }
     else {
         getProfile(user);
         getVideos(user);

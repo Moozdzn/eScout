@@ -10,6 +10,8 @@ var geojson;
 var toggled = true;
 
 window.onload = function () {
+    if(sessionStorage.userType == undefined || sessionStorage != 'EO')
+        window.location.href = '/';
     getRegions()
     const myInput = document.getElementById('Eloc');
     myInput.onpaste = function(e) {
