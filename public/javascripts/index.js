@@ -29,7 +29,7 @@ function showVids(game) {
 			var html = "";
 			var best = "";
 			var bv = res.splice(0, 1);
-			best = '<div class="col-md-4" ><iframe id="' + bv[0].videoID + '" class="card-img-top" src="https://drive.google.com/file/d/' + bv[0].reference + '/preview" ></iframe></div><div class="col-md-8" ><div class="card-body"><h4 class="card-title"><a href="#">' + bv[0].videoTitle + '</a></h4><p class="card-text">' + bv[0].videoDescription + '</p><a href="profile?id=' + bv[0].userID + '&type=' + bv[0].userType + '" >' + bv[0].username + '</a>'
+			best = '<div class="col-md-8 mt-auto"><iframe width="900" height="350" id="' + bv[0].videoID + '" class="card-img-top" src="https://drive.google.com/file/d/' + bv[0].reference + '/preview" ></iframe></div><div class="col-md-4" ><div class="card-body"><h4 class="card-title"><a href="#">' + bv[0].videoTitle + '</a></h4><p class="card-text">' + bv[0].videoDescription + '</p><a href="profile?id=' + bv[0].userID + '&type=' + bv[0].userType + '" >' + bv[0].username + '</a>'
 			best += '<p><i id="like' + bv[0].videoID + '" onclick="rating(' + bv[0].videoID + ')" class="fas fa-thumbs-up"></i> Rating: ' + bv[0].rating + '</p></div></div></div></div>';
 
 			for (i in res) {
