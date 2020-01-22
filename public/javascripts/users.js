@@ -23,7 +23,7 @@ window.onload = function () {
         if (user != undefined)
             buttons.innerHTML = '<button type="button" class="btn btn-warning" onclick="message()">Message</button>';
     }
-    else if(sessionStorage.userType == undefined){
+    else if (sessionStorage.userType == undefined) {
         window.location.href = 'auth'
     }
     else {
@@ -58,7 +58,7 @@ function message() {
 
 function getProfile(id, bool) {
     $.ajax({
-        url: "/api/users/"+ id +"/profile" ,
+        url: "/api/users/" + id + "/profile",
         method: "get",
         dataType: "json",
         success: function (res, status) {
@@ -108,10 +108,8 @@ function getVideos(id) {
             var html = "";
             for (i in res) {
                 html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100"><iframe id="' + res[i].videoID + '" class="card-img-top" src="https://drive.google.com/file/d/' + res[i].reference + '/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">' + res[i].videoTitle + '</a></h4><p class="card-text">' + res[i].videoDescription + '</p></a>';
-                if (sessionStorage.userType == 'Scout')
-                    html += '<p><i id="like' + res[i].videoID + '" onclick="rating(' + res[i].videoID + ')" class="fas fa-thumbs-up"></i> Rating: ' + res[i].rating + '</p></div></div></div></div>';
-                else
-                    html += '<p>Rating: ' + res[i].rating + '</p></div></div></div></div>';
+                html += '<p><i id="like' + res[i].videoID + '" onclick="rating(' + res[i].videoID + ')" class="fas fa-thumbs-up"></i> Rating: ' + res[i].rating + '</p></div></div></div></div>';
+
                 videos[res[i].videoID] = res[i].rating;
             }
             videosList.innerHTML = html;
