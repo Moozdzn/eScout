@@ -69,7 +69,7 @@ module.exports.newMessage = function(body,cb,next){
             return;
         }
 
-            conn.query("INSERT INTO Message (messageToID,messageFromID,message) VALUES (?,?,?);",[body.contacts,body.user,body.message] , function (err, results) {
+            conn.query("INSERT INTO Message (messageToID,messageFromID,message) VALUES (?,?,?);",[body.contact,body.user,body.message] , function (err, results) {
                 conn.release();
                 if (err) {
                     cb(err, { code: 500, status: "Error in a database query" });
