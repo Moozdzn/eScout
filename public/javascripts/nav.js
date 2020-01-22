@@ -56,6 +56,11 @@ function showClickedHighlight() {
             profilePage.classList.add("active");
             activePage = profilePage;
             break;
+        case '/team':
+            activePage.classList.remove("active");
+            profilePage.classList.add("active");
+            activePage = profilePage;
+            break;
 
 
     }

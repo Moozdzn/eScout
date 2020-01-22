@@ -67,12 +67,13 @@ function getProfile(id, bool) {
 
             var s = JSON.stringify(res);
             var data = JSON.parse(s);
-
+            console.log(data)
             pusername.innerHTML = data[0].username;
             pName.innerHTML += data[0].name;
             pAge.innerHTML += currentDate.getFullYear() - data[0].birthDate.substring(0, data[0].birthDate.length - 20);
             pRegion.innerHTML += data[0].region;
-            pGame.innerHTML += data[0].game;
+            if (data[0].game != null)
+                pGame.innerHTML = 'Game: ' + data[0].game;
             if (data[0].mainPosition != null)
                 pMainPos.innerHTML = "Main Position: " + data[0].mainPosition;
             if (data[0].teamName != 'Null')
