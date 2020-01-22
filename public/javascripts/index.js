@@ -88,8 +88,6 @@ var monitor = setInterval(function () {
 		console.log('Clicked ' + elem.id);
 		elem.blur();
 		videos[elem.id].viewed = 1;
-		//clearInterval(monitor);
-
 	} else {
 
 	}

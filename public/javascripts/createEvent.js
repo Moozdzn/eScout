@@ -60,9 +60,6 @@ $('#evtForm').submit(function (evt) {
             data: event,
             processData: false,
             success: function (res, status) {
-                //document.getElementById("res").innerHTML = JSON.stringify(res); 
-                console.log("aqui puta")
-
                 window.location.href = "events";
             }
             , error: function () {
@@ -177,7 +174,6 @@ legend.onAdd = function (mymap) {
 
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [0, 2, 4, 6, 8, 10],
-        //colors =['#FFEDA0','#FED976','#FEB24C','#FD8D3C','#FC4E2A','#E31A1C'],
         labels = [],
         from, to;
 

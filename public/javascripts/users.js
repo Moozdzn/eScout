@@ -42,18 +42,6 @@ function message() {
     sessionStorage.messageToID = urlParams.get('id');
     sessionStorage.messageToName = $('#pusername').text();
     window.location.href = 'chat';
-    /* $.ajax({
-        url: "/api/users/" + sessionStorage.userID + "/messages/" + parseInt(urlParams.get('id')) + "/new",
-        method: "post",
-        contentType: "application/json",
-        data: JSON.stringify({ message: 'Started a conversation.' }),
-
-        success: function (res, status) {
-            window.location.href = 'chat';
-        }
-        , error: function () { }
-
-    }); */
 };
 
 function getProfile(id, bool) {
@@ -156,8 +144,6 @@ var monitor = setInterval(function () {
         console.log('Clicked ' + elem.id);
         elem.blur();
         videos[elem.id].viewed = 1;
-        //clearInterval(monitor);
-
     } else {
 
     }

@@ -4,8 +4,7 @@ var profileDAO = require('../models/usersDAO');
 var videoDAO = require('../models/videosDAO');
 var router = express.Router();
 var response = {};
-
-// id,profile 
+ 
 router.get("/:id/profile", function(req,res,next){
     var user = req.params.id;
     profileDAO.getProfileInfo(user,function(err,result){
@@ -18,7 +17,7 @@ router.get("/:id/profile", function(req,res,next){
     }, next)
 
 });
-// id, contacts
+
 router.get("/:id/contacts", function(req,res,next){
     var user = req.params.id;
     profileDAO.getContacts(user,function(err,result){
@@ -31,7 +30,6 @@ router.get("/:id/contacts", function(req,res,next){
     }, next)
 });
 
-//id, contacts, idcontact (. messages)
 router.get("/:id/contacts/:contactID/messages", function(req,res,next){
     req.body["user"] = req.params.id;
     req.body["contact"] = req.params.contactID;

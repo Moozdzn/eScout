@@ -1,6 +1,5 @@
 $( document ).ready(function() {
     var userArray = [];
-      //FAZER A COMPARACAO NO JAVASCRIPT(-SEGURO,so 1 ajax get) OU NO NODEJS(+SEGURO, precisa de um post cada vez que for verificar)??
     $.ajax({
         url: '/api/auth/register?querySelect=userList',
         method: 'get',

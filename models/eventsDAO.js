@@ -31,7 +31,6 @@ module.exports.newEvent = function (body, cb, next) {
         lastLocationID++;
         var eventDate = body.Edate + " " + body.Estart;
         conn.query("INSERT INTO `EventLocation`(`latitude`, `longitude`, `eventlocationName`) VALUES (?,?,?); INSERT INTO Event (eventName, eventGame, eventDescription, eventStartTime, eventTicketPrice, locationID) VALUES (?,?,?,?,?,?);",[body.Elat, body.Elng, body.Eadress,body.Ename, body.Egame, body.Edesc, eventDate, body.Eprice, lastLocationID], function (err, results) {
-            //INSERT INTO AttendeeType (userID,eventID,type) VALUES ("+ userID + ","+ eventID + "," + type + ");"
             conn.release();
             if (err) {
                 cb(err, { code: 500, status: "Error in a database query" })
@@ -64,7 +63,7 @@ module.exports.getRegions = function (cb,next) {
         if (err) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
-        }//mudar o nome 
+        } 
         conn.query("SELECT Region.regionID, Region.regionName , COUNT(userID) AS playersPerRegion, Region.regionLat, Region.regionLong FROM User INNER JOIN Region ON User.regionID = Region.regionID GROUP BY Region.regionID;", function (err, results) {
             conn.release();
             if (err) {
