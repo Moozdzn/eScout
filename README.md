@@ -12,6 +12,37 @@ Y3S1 Project - eScout - Universidade Europeia
 <h2>Market Analysis</h2>
 <img src="https://raw.githubusercontent.com/Moozdzn/eScout/master/deliverables/Lean%20Canvas%20and%20Market%20Analysis/Market%20Analysis.png"></img>
 <br>
+<h2>Scenarios</h2>
+<br>
+<h3>Main Scenario: The scout gets in touch with the player after evaluating one or more of this highlights</h3>
+<ul>
+  <li>The player uploads videos to his profile to highlight his individual skills. All videos will be
+displayed in the uploader’s profile, filtered by most recent;
+</li>
+  <li>The scout has in its homepage a set of highlight videos from the players, filtered by the
+ratio views/rating. The scout can also choose custom filters;</li>
+  <li>After evaluating each video, if a player stands out the scout may contact him through a
+message system
+</li>
+  
+</ul>
+<br>
+<h3>Secondary Scenarios</h3>
+<h4>1: Event organizers create and showcase events</h4>
+<ul>
+  <li>The event organizers, in the event tab, have a density map which indicates the mass of
+players per region so these can make an analysis and decide the best place to make the
+event;</li>
+  <li>Event organizers will be able to create and showcase the events where they will be
+inserted in a map in which will be the description and the place where they will be held;</li>
+  <li>Users have the option to get the directions from their point to the event location;</li>
+</ul>
+<h4>2: Videos uploaded by players appear on their profiles</h4>
+<ul>
+  <li>After uploading a video, the player is redirected to his profile where he has a list of all his
+uploaded videos to date.</li>
+</ul>
+<br>
 <h4>Work done by</h4>
 <table>
   <tr>
