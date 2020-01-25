@@ -6,10 +6,10 @@ Y3S1 Project - eScout - Universidade Europeia
 <p>Our platform allows players to share their highlights with other users in order to make them, through a rating system, relevant enough to get the attention of scouts belonging to teams looking for players. The platform also integrates a messaging system that enables communication between the various entities. Additionally, it is possible for Event Organizers to create and showcase their events that will appear next to a map for all users.</p>
 <p>A market study was created to evaluate market competition. We analyzed four platforms that are already in the market, the first two related to esports (Challengermode and FaceIT) and the other two related to sports but with features that could be adapted to esports.</p>
 <br>
-<h2>Context Diagram</h2>
+<h2>LEAN Canvas</h2>
 <img src="https://raw.githubusercontent.com/Moozdzn/eScout/master/deliverables/Lean%20Canvas%20and%20Market%20Analysis/Lean%20Canvas%20FInal.png"></img>
 <br>
-<h2>Context Diagram</h2>
+<h2>Market Analysis</h2>
 <img src="https://raw.githubusercontent.com/Moozdzn/eScout/master/deliverables/Lean%20Canvas%20and%20Market%20Analysis/Market%20Analysis.png"></img>
 <br>
 <h4>Work done by</h4>
