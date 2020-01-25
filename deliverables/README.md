@@ -1,9 +1,9 @@
-<h2>Deliverables</h2>
+<h3>Deliverables</h3>
 
 <p>All versions below are considered final</p>
  
 
-<h2>------------------------------------------------------------------------------</h2>
+<h2>------------------------------------------------------------------------------<br><br></h2>
 
 <h2>Context Diagram</h2>
 <img src="https://raw.githubusercontent.com/Moozdzn/eScout/master/deliverables/Context%20Diagram/Context%20Diagram%20Final.png"></img>
