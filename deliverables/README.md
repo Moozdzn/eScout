@@ -21,4 +21,4 @@
 <img src="https://raw.githubusercontent.com/Moozdzn/eScout/master/deliverables/statemachine%20diagram/Event%20State%20Machine%20Final.png"></img>
 
 <h2>Use Case Diagram</h2>
-<img src="https://raw.githubusercontent.com/Moozdzn/eScout/master/deliverables/statemachine%20diagram/Use%20Case%20Diagram%20FInal.jpg"></img>
+<img src="https://raw.githubusercontent.com/Moozdzn/eScout/master/deliverables/use%20case%20diagram/Use%20Case%20Diagram%20FInal.jpg"></img>
