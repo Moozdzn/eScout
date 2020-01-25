@@ -11,3 +11,17 @@ Y3S1 Project - eScout - Universidade Europeia
 <br>
 <h2>Context Diagram</h2>
 <img src="https://raw.githubusercontent.com/Moozdzn/eScout/master/deliverables/Lean%20Canvas%20and%20Market%20Analysis/Market%20Analysis.png"></img>
+<br>
+<h4>Work done by</h4>
+<table>
+  <tr>
+    <th>50038023</th>
+    <th>Diogo Santos</th>
+    <th>Moozdzn@gmail.com</th>
+  </tr>
+    <tr>
+      <th>50037301</th>
+    <th>Francisco Cordeiro</th>
+    <th>50037301@iade.pt</th>
+  </tr>
+  </table>
