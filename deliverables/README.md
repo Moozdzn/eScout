@@ -1,4 +1,4 @@
-<h3>Deliverables</h3>
+<h1>Deliverables</h1>
 
 <p>All versions below are considered final</p>
  
