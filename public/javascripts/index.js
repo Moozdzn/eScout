@@ -20,28 +20,30 @@ function showVids(game) {
 	activeGame = currGame;
 
 	$.ajax({
-		url: '/api/videos/' + game,
-		method: 'get',
-		dataType: 'json',
-		success: function (res, status) {
-			if (res.err) return;
+        url: '/api/videos/' + game,
+        method: 'get',
+        dataType: 'json',
+        success: function (res, status) {
+            if (res.err) return;
 
-			var html = "";
-			var best = "";
-			var bv = res.splice(0, 1);
-			best = '<div class="col-md-8 mt-auto"><iframe width="900" height="350" id="' + bv[0].videoID + '" class="card-img-top" src="https://drive.google.com/file/d/' + bv[0].reference + '/preview" ></iframe></div><div class="col-md-4" ><div class="card-body"><h4 class="card-title"><a href="#">' + bv[0].videoTitle + '</a></h4><p class="card-text">' + bv[0].videoDescription + '</p><a href="profile?id=' + bv[0].userID + '&type=' + bv[0].userType + '" >' + bv[0].username + '</a>'
-			best += '<p><i id="like' + bv[0].videoID + '" onclick="rating(' + bv[0].videoID + ')" class="fas fa-thumbs-up"></i> Rating: ' + bv[0].rating + '</p></div></div></div></div>';
+            var html = "";
+            var best = "";
 
-			for (i in res) {
-				html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100" ><iframe id="' + res[i].videoID + '" class="card-img-top" src="https://drive.google.com/file/d/' + res[i].reference + '/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">' + res[i].videoTitle + '</a></h4><p class="card-text">' + res[i].videoDescription + '</p><a href="profile?id=' + res[i].userID + '&type=' + res[i].userType + '" >' + res[i].username + '</a>';
-				html += '<p><i id="like' + res[i].videoID + '" onclick="rating(' + res[i].videoID + ')" class="fas fa-thumbs-up"></i> Rating: ' + res[i].rating + '</p></div></div></div>';
+            for (i in res) {
+                if (i == 0) {
+                    best = '<div class="col-md-8 mt-auto"><iframe width="900" height="350" id="' + res[i].videoID + '" class="card-img-top" src="https://drive.google.com/file/d/' + res[i].reference + '/preview" ></iframe></div><div class="col-md-4" ><div class="card-body"><h4 class="card-title"><a href="#">' + res[i].videoTitle + '</a></h4><p class="card-text">' + res[i].videoDescription + '</p><a href="profile?id=' + res[i].userID + '&type=' + res[i].userType + '" >' + res[i].username + '</a>'
+                    best += '<p><i id="like' + res[i].videoID + '" onclick="rating(' + res[i].videoID + ')" class="fas fa-thumbs-up"></i> Rating: ' + res[i].rating + '</p></div></div></div></div>';
 
-				videos[res[i].videoID] = res[i].rating;
-			}
-			homevideos.innerHTML = html;
-			bestvid.innerHTML = best;
-		}
-	})
+                } else {
+                    html += '<div class="col-lg-4 col-md-6 mb-4" ><div class="card h-100" ><iframe id="' + res[i].videoID + '" class="card-img-top" src="https://drive.google.com/file/d/' + res[i].reference + '/preview" ></iframe> <div class="card-body"><h4 class="card-title"><a href="#">' + res[i].videoTitle + '</a></h4><p class="card-text">' + res[i].videoDescription + '</p><a href="profile?id=' + res[i].userID + '&type=' + res[i].userType + '" >' + res[i].username + '</a>';
+                    html += '<p><i id="like' + res[i].videoID + '" onclick="rating(' + res[i].videoID + ')" class="fas fa-thumbs-up"></i> Rating: ' + res[i].rating + '</p></div></div></div>';
+                }
+                videos[res[i].videoID] = res[i].rating;
+            }
+            homevideos.innerHTML = html;
+            bestvid.innerHTML = best;
+        }
+    })
 };
 
 function goToProfile(user) {
