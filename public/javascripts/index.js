@@ -52,47 +52,4 @@ function goToProfile(user) {
 }
 
 
-function rating(videoID) {
-	var thumbsUp = document.getElementById('like' + videoID);
-	var parent = thumbsUp.parentElement;
-	if (sessionStorage.userID != undefined) {
-		if (thumbsUp.hasAttribute('style')) {
-			thumbsUp.removeAttribute('style');
-			parent.innerHTML = thumbsUp.outerHTML + " Rating: " + videos[videoID];
-			updateRating({ vID: videoID, rating: false });
-		}
-		else {
-			thumbsUp.style.color = "green";
-			parent.innerHTML = thumbsUp.outerHTML + " Rating: " + parseInt(videos[videoID] + 1);
-			updateRating({ vID: videoID, rating: true });
-		}
-	}
-	else alert("You must be logged in to rate videos.")
-}
-function updateRating(rating) {
-	$.ajax({
-		url: "/api/videos/updateRating",
-		method: "post",
-		contentType: "application/json",
-		data: JSON.stringify(rating),
-		success: function (res, status) {
-			console.log(res);
-		}
-		, error: function (res) { console.log(res); }
-	});
-}
-
-
-
-var monitor = setInterval(function () {
-	var elem = document.activeElement;
-	if (elem && elem.tagName == 'IFRAME') {
-		console.log('Clicked ' + elem.id);
-		elem.blur();
-		videos[elem.id].viewed = 1;
-	} else {
-
-	}
-}, 500);
-
 

@@ -3,12 +3,7 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
 	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
 	<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-	<link rel="stylesheet" href="stylesheets/events.css" />
-
 </head>
-
-
-
 <!-- Page Content -->
 <div class="container">
 	<div class="row">
@@ -24,24 +19,24 @@
 				<a href="#" class="list-group-item" onclick="showEvents('LOL')" id="LOL">LOL</a>
 				<a href="#" class="list-group-item" onclick="showEvents('CSGO')" id="CSGO">CS:GO</a>
 			</div>
-
 		</div>
 		<div class="col">
 			<div class="row" id="eventslist"></div>
 		</div>
 		<div class="col">
 			<button type="button" class="btn btn-block btn-primary" onclick="getRoute()">Click me to see a Route to event</button>
-			<div id="mapid"></div>
-			
+			<div id="mapid" style="height: 400px;"></div>
 		</div>
-
 	</div>
 	<!-- /.row -->
-
 </div>
 <!-- /.container -->
-
-
-
-<!-- <script src="javascripts/map.js"></script> -->
 <script src="javascripts/events.js"></script>
+<style>
+	.card.h-100:hover {
+    transform: scale(1.1);
+    box-shadow: 10px 10px 5px grey;
+    background-color: #d9d9d9;
+    cursor:pointer;
+  }
+</style>

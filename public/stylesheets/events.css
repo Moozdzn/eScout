@@ -1,7 +1,0 @@
-#mapid { height: 400px; }
-.card.h-100:hover {
-    transform: scale(1.1);
-    box-shadow: 10px 10px 5px grey;
-    background-color: #d9d9d9;
-    cursor:pointer;
-  }

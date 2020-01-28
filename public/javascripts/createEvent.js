@@ -3,8 +3,7 @@
 var eventCoords;
 var eventAdressProperties;
 var eventAdressName;
-var regionRadius;
-var regionCircles = [];
+
 var regionDensity = [];
 var geojson;
 var toggled = true;
