@@ -3,7 +3,7 @@ window.onload = function () {
         window.location.href = '/'
 }
 
-
+//Submits a new video to the server
 $('#sendVideo').click(function (evt) {
     evt.preventDefault();
     $(this).prop('disabled', true);

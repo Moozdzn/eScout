@@ -4,6 +4,7 @@ var contactList = [];
 
 var active;
 
+//Loads and displays messages for the chosen contact
 function getMessages(contactID) {
     manageActive(contactID);
     $.ajax({
@@ -35,7 +36,7 @@ function getMessages(contactID) {
         }
     })
 }
-
+// Loads and list of contacts for logged user
 function getContacts() {
     $.ajax({
         url: '/api/users/' + sessionStorage.userID + '/contacts',
@@ -62,6 +63,7 @@ function getContacts() {
     })
 }
 
+//Sends a new message to the user whos conversation is displaying
 $('#sendMessage').click(function (evt) {
     evt.preventDefault();
     var contact = active.id;
@@ -86,7 +88,7 @@ setInterval(function () {
     if (active.id != undefined)
         getMessages(active.id)
 }, 5000)
-
+// Creates contact box for a new contact
 function newContactBox(id,name){
     for(i in contactList){
         if(contactList[i] == id){
@@ -101,6 +103,7 @@ function newContactBox(id,name){
     manageActive(id);
     getMessages(id);
 }
+//Receives contact from alert box and sends to database to check id contact exists in DB
 function newContact(){
     var user = prompt("Enter username (WARNING: Usernames are case sensitive)", "ex:Mooz");
 
@@ -121,9 +124,4 @@ function newContact(){
     }
 }
 
-function manageActive(contactID){
-    if (active != undefined) active.classList.remove("active");
-    var curr = document.getElementById(contactID);
-    curr.classList.add("active");
-    active = curr;
-}
+

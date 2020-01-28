@@ -12,12 +12,9 @@ $(window).on('load', function () {
 
 	showVids('PUBG');
 });
-
+//Loads and displays videos based on game chosen
 function showVids(game) {
-	activeGame.classList.remove('active');
-	var currGame = document.getElementById(game)
-	currGame.classList.add('active');
-	activeGame = currGame;
+	manageActive(game)
 
 	$.ajax({
         url: '/api/videos/' + game,
@@ -45,7 +42,7 @@ function showVids(game) {
         }
     })
 };
-
+// Redirects user to the profile clicked
 function goToProfile(user) {
 	sessionStorage.seeProfile = user;
 	window.location.ref = "profile";

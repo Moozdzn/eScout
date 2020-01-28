@@ -17,6 +17,7 @@ window.onload = function () {
         e.preventDefault();
     }
 }
+//Loads and displays map
 var mymap = L.map('mapid').setView([39.359785, -8.074951], 6);
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
@@ -26,6 +27,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     id: 'mapbox.streets'
 }).addTo(mymap);
 
+//After user search by map, sets Event location form field with address received and its marker to the map
 var geocoder = L.Control.geocoder().on('markgeocode', function (event) {
     eventAdressName = event.geocode.name
     //event.properties.adress
@@ -36,7 +38,7 @@ var geocoder = L.Control.geocoder().on('markgeocode', function (event) {
     L.marker(center).addTo(mymap);
     mymap.setView(center, mymap.getZoom());
 }).addTo(mymap);
-
+// Submits event form to the server
 $('#evtForm').submit(function (evt) {
     evt.preventDefault();
         var event = JSON.stringify({

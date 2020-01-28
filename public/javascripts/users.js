@@ -16,7 +16,7 @@ var urlParams = new URLSearchParams(window.location.search);
 var user = sessionStorage.userID;
 
 window.onload = function () {
-    
+    //Determines which buttons to show
     if (urlParams.has('id') && urlParams.get('id') != user) {
         getProfile(parseInt(urlParams.get('id')), true);
         getVideos();
@@ -34,13 +34,13 @@ window.onload = function () {
             buttons.innerHTML = '<a href="uploadVideo"><button type="button" class="btn btn-primary">Upload</button></a>';
     }  
 }
-
+// Redirects to chat page
 function message() {
     sessionStorage.messageToID = urlParams.get('id');
     sessionStorage.messageToName = $('#pusername').text();
     window.location.href = 'chat';
 };
-
+// Loads and displays users profile info
 function getProfile(id, bool) {
     $.ajax({
         url: "/api/users/" + id + "/profile",
@@ -69,13 +69,11 @@ function getProfile(id, bool) {
 
             if (data[0].userType != 'Scout' && data[0].userType != 'EO' && bool == undefined)
                 buttons.innerHTML = '<a href="uploadVideo"><button type="button" class="btn btn-primary">Upload</button></a>';
-
         },
         error: function () {
             window.location.href = "auth";
         }
     })
-
 }
 
 

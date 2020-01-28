@@ -2,7 +2,7 @@ var urlParams = new URLSearchParams(window.location.search);
 var videos = [];
 
 videosList = document.getElementById("videosList");
-
+//Loads and displays videos
 function getVideos() {
     var url;
     var id;
@@ -38,7 +38,7 @@ function getVideos() {
         }
     })
 }
-
+//Manages visual rating and stores users rating per video
 function rating(videoID) {
     var thumbsUp = document.getElementById('like' + videoID);
     var parent = thumbsUp.parentElement;
@@ -56,7 +56,7 @@ function rating(videoID) {
     }
     else alert("You must be logged in to rate videos.")
 }
-
+//
 function updateRating(rating) {
     $.ajax({
         url: "/api/videos/updateRating",

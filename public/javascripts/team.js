@@ -7,7 +7,7 @@ window.onload = function () {
     getTeamInfo(urlParams.get('tid'));
     getVideos();
  };
-
+//Loads and displays team info
 function getTeamInfo(id) {
     $.ajax({
         url: '/api/team/' + id,

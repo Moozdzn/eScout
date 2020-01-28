@@ -1,4 +1,5 @@
 
+//Send login to server for validation
 $('#confirm').submit(function (evt) {
   evt.preventDefault();
   $.ajax({
@@ -19,7 +20,3 @@ $('#confirm').submit(function (evt) {
     }
   });
 })
-
-$(document).ready(function () {
-
-});

@@ -19,7 +19,7 @@ function logOut() {
 };
 
 
-
+// Nav Bar is common to all pages, higlights which page the user is at
 function showClickedHighlight() {
     var homePage = document.getElementById("homePage");
     var profilePage = document.getElementById("profilePage");

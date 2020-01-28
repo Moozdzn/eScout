@@ -32,10 +32,7 @@ window.onload = function () {
 
 function showEvents(game) {
     markerList = [];
-    activeEventGame.classList.remove('active');
-    var currGame = document.getElementById(game)
-    currGame.classList.add('active');
-    activeEventGame = currGame;
+    manageActive(game)
     $.ajax({
         url: '/api/events/' + game,
         method: 'get',
