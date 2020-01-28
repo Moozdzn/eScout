@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
@@ -16,6 +17,7 @@
     "googleapis": "^39.2.0",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "morgan": "~1.9.1",
     "mysql": "^2.17.1"

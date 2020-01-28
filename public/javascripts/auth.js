@@ -1,5 +1,6 @@
 
 //Send login to server for validation
+
 $('#confirm').submit(function (evt) {
   evt.preventDefault();
   $.ajax({
@@ -11,8 +12,9 @@ $('#confirm').submit(function (evt) {
       password: $("#inputPassword").val(),
     }),
     success: function (res, status) {
-      sessionStorage.userID = res[0].userID;
-      sessionStorage.userType = res[0].userType;
+      console.log(res)
+      sessionStorage.userID = res.user.id;
+      sessionStorage.userType = res.user.type;
       window.location.href = '/';
     }
     , error: function (err) {
