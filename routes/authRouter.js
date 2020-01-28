@@ -5,47 +5,12 @@ var router = express.Router();
 router.post("/", function(req,res,next){
 
     authDAO.verifyUser(req.body,function(err,result){
-        if(err){
-            res.statusMessage = result.status;
-            res.status(result.code).json(err);
-            return;
-        }
-        else if(result.data.length === 1) res.status(result.code).send(result.data);
-        else {
-            res.statusMessage = "User not found";
-            res.status(401).json('Error retriving user');
-        }
-        
+        if(err){return res.status(500).send({error:'Internal Server error'});}
+        if(result.data.length === 0) return res.status(404).send({error:'User with this combination does not exist'});
+        if(false) return res.status(401).send({error:'You are unauthorized to make this request'})
+        res.status(200).send(result.data);
     }, next)
 
-});
-
-router.post("/register", function(req,res,next){
-    
-    authDAO.newUser(req.body,function(err,result){
-        if(err){
-            res.statusMessage = result.status;
-            res.status(result.code).json(err);
-            return;
-        }
-        res.status(result.code).send(result.data);
-    }, next)
-});
-
-router.get("/register", function(req,res,next){
-    if(req.query.querySelect ==='userList'){
-        authDAO.userList(function(err,result){
-            if(err){
-                res.statusMessage = result.status;
-                res.status(result.code).json(err);
-                return;
-            }
-            res.status(result.code).send(result.data);
-        }, next)
-    }
-    else {
-        console.log('working');
-    }
 });
 
 module.exports = router;

@@ -6,11 +6,10 @@ var router = express.Router();
 router.get("/:id", function (req, res, next) {
     var id = req.params.id;
     teamDAO.getTeamInfo(id, function (err, result) {
-        if (err) {
-            res.statusMessage = result.status;
-            res.status(result.code).json(err);
-            return;
-        } res.status(result.code).send(result.data);
+        if(err){return res.status(500).send({error:'Internal Server error'});}
+        if(result.data.length === 0) return res.status(404).send({error:'No teams with selected ID'});
+        if(false) return res.status(401).send({error:'You are unauthorized to make this request'})
+        res.status(200).send(result.data);
     }, next)
 
 });
@@ -18,11 +17,10 @@ router.get("/:id", function (req, res, next) {
 router.get("/:id/videos", function (req, res, next) {
     var id = req.params.id;
     teamDAO.getTeamVideos(id, function (err, result) {
-        if (err) {
-            res.statusMessage = result.status;
-            res.status(result.code).json(err);
-            return;
-        } res.status(result.code).send(result.data);
+        if(err){return res.status(500).send({error:'Internal Server error'});}
+        if(result.data.length === 0) return res.status(404).send({error:'Team videos do not exist for this ID'});
+        if(false) return res.status(401).send({error:'You are unauthorized to make this request'})
+        res.status(200).send(result.data);
     }, next)
 
 });
