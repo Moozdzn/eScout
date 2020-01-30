@@ -15,7 +15,7 @@ router.get("/:game", function(req,res,next){
 
 });
 
-router.post("/updateRating",function(req,res,next){
+router.put("/updateRating",function(req,res,next){
     videosDAO.updateRating(req.body,function(err,result){
         if(err){return res.status(500).send({error:'Internal Server error'});}
         if(result.data.length === 0) return res.status(404).send({error:'Theres no videos for the chosen game'});

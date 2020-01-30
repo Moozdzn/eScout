@@ -60,7 +60,7 @@ function rating(videoID) {
 function updateRating(rating) {
     $.ajax({
         url: "/api/videos/updateRating",
-        method: "post",
+        method: "put",
         contentType: "application/json",
         data: JSON.stringify(rating),
         success: function (res, status) {
