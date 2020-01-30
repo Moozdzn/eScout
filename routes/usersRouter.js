@@ -1,5 +1,7 @@
 var express = require('express');
 const gdrive = require('./gdrive');
+var createError = require('http-errors');
+var verifyToken = require('../serverUtils/jwtToken').verifyToken;
 var profileDAO = require('../models/usersDAO');
 var videoDAO = require('../models/videosDAO');
 var router = express.Router();
@@ -49,41 +51,45 @@ router.get("/:id/videos", function(req,res,next){
     }, next)
 });
 
-router.post("/:id/videos", function(req,res){
-    try {
-        if(!req.files) {
-            res.send({
-                status: false,
-                message: 'No file uploaded'
-            });
-        }
-        
-        else {
-            let video = req.files.video;
-            
-            video.mv('./uploads/' + video.name);
+router.post("/:id/videos", verifyToken,function(req,res,next){
+    if(req.userId && (req.userType ==='Player' || req.userType ==='Pro')) {
+        if(req.userId == req.params.id){
             try {
-              gdrive.videoUpload(video.name, './uploads/' + video.name, (id) => {
-                
-                response = {
-                    status: true,
-                    driveMessage: 'File is uploaded',
-                    data: {
-                        name: video.name,
-                        mimetype: video.mimetype,
-                        size: video.size
+                if(!req.files) {
+                    res.send({
+                        status: false,
+                        message: 'No file uploaded'
+                    });
+                }
+                else {
+                    let video = req.files.video;
+                    
+                    video.mv('./uploads/' + video.name);
+                    try {
+                    gdrive.videoUpload(video.name, './uploads/' + video.name, (id) => {
+                        
+                        response = {
+                            status: true,
+                            driveMessage: 'File is uploaded',
+                            data: {
+                                name: video.name,
+                                mimetype: video.mimetype,
+                                size: video.size
+                            }
+                        }
+                        dataBase(req.body,id,res);
+                    });
+                }
+                    catch(err1) {
+                    res.status(500).send(err1);
                     }
                 }
-                dataBase(req.body,id,res);
-            });
-          }
-            catch(err1) {
-              res.status(500).send(err1);
-            }
-        }
-    } catch (err) {
-        res.status(500).send(err);
+            } catch (err) {
+                res.status(500).send(err);
+            }}
+        else{next(createError(403,'You cant upload on behalf of other users'))}
     }
+    else {next(createError(403,'You dont have permissions to make this request'))}
   });
   
   router.post("/:id/contacts/:contactID/messages", function(req,res,next){
