@@ -14,10 +14,10 @@ router.post("/", function(req,res,next){
         
         if(!validPassword) return res.status(401).send({auth: false, token: null})
 
-        var token = jwt.sign({id: result.data[0].userID},'secret',{
-            expiresIn: 86400
+        var token = jwt.sign({id: result.data[0].userID,type: result.data[0].userType},'secret',{
+            expiresIn: 18000
         });
-        
+        console.log(token)
         var cookieOptions = {
             httpOnly: true,
           }
