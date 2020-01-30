@@ -44,7 +44,7 @@ function showVids(game) {
 };
 // Redirects user to the profile clicked
 function goToProfile(user) {
-	sessionStorage.seeProfile = user;
+	localStorage.seeProfile = user;
 	window.location.ref = "profile";
 }
 

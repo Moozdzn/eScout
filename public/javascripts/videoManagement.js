@@ -15,8 +15,8 @@ function getVideos() {
         id = urlParams.get('id')
         url = "/api/users/" + id + "/videos";
     }
-    else if(sessionStorage.userID != null){
-        id = sessionStorage.userID;
+    else if(localStorage.userID != null){
+        id = localStorage.userID;
         url = "/api/users/" + id + "/videos";
     }
     else console.log('unexpected error');
@@ -42,7 +42,7 @@ function getVideos() {
 function rating(videoID) {
     var thumbsUp = document.getElementById('like' + videoID);
     var parent = thumbsUp.parentElement;
-    if (sessionStorage.userID != undefined) {
+    if (localStorage.userID != undefined) {
         if (thumbsUp.hasAttribute('style')) {
             thumbsUp.removeAttribute('style');
             parent.innerHTML = thumbsUp.outerHTML + " Rating: " + videos[videoID];

@@ -13,7 +13,7 @@ var buttons = document.getElementById("buttons");
 var highlight = document.getElementById("highlight");
 var urlParams = new URLSearchParams(window.location.search);
 
-var user = sessionStorage.userID;
+var user = localStorage.userID;
 
 window.onload = function () {
     //Determines which buttons to show
@@ -23,7 +23,7 @@ window.onload = function () {
         if (user != undefined)
             buttons.innerHTML = '<button type="button" class="btn btn-warning" onclick="message()">Message</button>';
     }
-    else if (sessionStorage.userType == undefined) {
+    else if (localStorage.userType == undefined) {
         window.location.href = 'auth'
     }
     else {
@@ -36,8 +36,8 @@ window.onload = function () {
 }
 // Redirects to chat page
 function message() {
-    sessionStorage.messageToID = urlParams.get('id');
-    sessionStorage.messageToName = $('#pusername').text();
+    localStorage.messageToID = urlParams.get('id');
+    localStorage.messageToName = $('#pusername').text();
     window.location.href = 'chat';
 };
 // Loads and displays users profile info

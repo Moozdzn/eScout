@@ -1,5 +1,5 @@
 window.onload = function () {
-    if (sessionStorage.userType === undefined || !(sessionStorage.userType === 'Player' || sessionStorage.userType === 'Pro'))
+    if (localStorage.userType === undefined || !(localStorage.userType === 'Player' || localStorage.userType === 'Pro'))
         window.location.href = '/'
 }
 
@@ -10,7 +10,7 @@ $('#sendVideo').click(function (evt) {
     $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Uploading...')
 
     var data = new FormData($("#formFile")[0]);
-    data.append('UserID', sessionStorage.userID)
+    data.append('UserID', localStorage.userID)
     $.ajax({
         url: "/api/users/:id/videos",
         method: "post",

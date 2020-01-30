@@ -3,7 +3,7 @@ $(document).ready(function(){
     var login = document.getElementById("ddlogin");
     var logout = document.getElementById("ddlogout");
     var messages = document.getElementById("ddmessages");
-    if (sessionStorage.userID != undefined) {
+    if (localStorage.userID != undefined) {
 
         profile.style.display = 'block';
         messages.style.display = 'block';
@@ -15,7 +15,7 @@ $(document).ready(function(){
 });
 
 function logOut() {
-    delete sessionStorage.userID;
+    delete localStorage.userID;
     $.ajax({
         url: "/api/auth",
         method: "get",

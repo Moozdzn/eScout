@@ -13,8 +13,8 @@ $('#confirm').submit(function (evt) {
     }),
     success: function (res, status) {
       console.log(res)
-      sessionStorage.userID = res.user.id;
-      sessionStorage.userType = res.user.type;
+      localStorage.userID = res.user.id;
+      localStorage.userType = res.user.type;
       window.location.href = '/';
     }
     , error: function (err) {

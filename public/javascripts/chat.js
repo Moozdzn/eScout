@@ -8,7 +8,7 @@ var active;
 function getMessages(contactID) {
     manageActive(contactID);
     $.ajax({
-        url: "/api/users/" + sessionStorage.userID + "/contacts/" + contactID+"/messages",
+        url: "/api/users/" + localStorage.userID + "/contacts/" + contactID+"/messages",
         method: "get",
         dataType: "json",
         success: function (res, status) {
@@ -19,7 +19,7 @@ function getMessages(contactID) {
 
                 date = res[i].messageDate.slice(0, 10);
                 time = res[i].messageDate.slice(11, 16);
-                if (res[i].messageFromID == sessionStorage.userID) {
+                if (res[i].messageFromID == localStorage.userID) {
                     html += '<div class="media w-50 ml-auto mb-3"><div class="media-body"><div class="bg-primary rounded py-2 px-3 mb-2"><p class="text-small mb-0 text-white">' + res[i].message + '</p></div><p class="small text-muted">' + date + ' | ' + time + '</p></div></div>'
                    
                 }
@@ -39,20 +39,20 @@ function getMessages(contactID) {
 // Loads and list of contacts for logged user
 function getContacts() {
     $.ajax({
-        url: '/api/users/' + sessionStorage.userID + '/contacts',
+        url: '/api/users/' + localStorage.userID + '/contacts',
         method: 'get',
         dataType: 'json',
         success: function (res, status) {
             if (res.err) return;
             var html = "";
             for (i in res) {
-                if(res[i].userID != sessionStorage.messageToID && sessionStorage.messageToName != res[i].username){
+                if(res[i].userID != localStorage.messageToID && localStorage.messageToName != res[i].username){
                     html += '<a id="' + res[i].userID + '" onclick="getMessages(' + res[i].userID + ')" class="list-group-item list-group-item-action  rounded-0"><div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">' + res[i].username + '</h6></div></div></div></a>'
                 }
-                if(sessionStorage.messageToID != undefined  && sessionStorage.messageToName != undefined) {
-                    newContactBox(sessionStorage.messageToID,sessionStorage.messageToName)
-                    sessionStorage.removeItem('messageToID');
-                    sessionStorage.removeItem('messageToName');  
+                if(localStorage.messageToID != undefined  && localStorage.messageToName != undefined) {
+                    newContactBox(localStorage.messageToID,localStorage.messageToName)
+                    localStorage.removeItem('messageToID');
+                    localStorage.removeItem('messageToName');  
                 }
                 contactList.push(res[i].userID)
 
@@ -68,7 +68,7 @@ $('#sendMessage').click(function (evt) {
     evt.preventDefault();
     var contact = active.id;
     $.ajax({
-        url: "/api/users/" + sessionStorage.userID + "/contacts/" + contact + "/messages",
+        url: "/api/users/" + localStorage.userID + "/contacts/" + contact + "/messages",
         method: "post",
         contentType: "application/json",
         data: JSON.stringify({ message: $('#Message').val() }),
