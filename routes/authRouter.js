@@ -10,12 +10,14 @@ router.post("/", function(req,res,next){
     authDAO.getUser(req.body.username,function(err,result){
         if(err){return res.status(500).send('Internal Server error');}
         if(result.data.length === 0) return res.status(404).send('No user found')
-        if(result.data[0].password != req.body.password) return res.status(401).send({auth: false, token: null})
+        var validPassword = bcrypt.compareSync(req.body.password,result.data[0].password)
+        
+        if(!validPassword) return res.status(401).send({auth: false, token: null})
 
         var token = jwt.sign({id: result.data[0].userID},'secret',{
             expiresIn: 86400
         });
-        console.log(token);
+        
         var cookieOptions = {
             httpOnly: true,
           }
@@ -23,32 +25,8 @@ router.post("/", function(req,res,next){
     }, next)
 });
 
-router.post("/register", function(req,res,next){
-    
-    authDAO.newUser(req.body,function(err,result){
-        if(err){
-            res.statusMessage = result.status;
-            res.status(result.code).json(err);
-            return;
-        }
-        res.status(result.code).send(result.data);
-    }, next)
-});
-
-router.get("/register", function(req,res,next){
-    if(req.query.querySelect ==='userList'){
-        authDAO.userList(function(err,result){
-            if(err){
-                res.statusMessage = result.status;
-                res.status(result.code).json(err);
-                return;
-            }
-            res.status(result.code).send(result.data);
-        }, next)
-    }
-    else {
-        console.log('working');
-    }
-});
+router.get('/', function(req,res,next){
+    res.clearCookie('keyboard').status(200).send('/');
+})
 
 module.exports = router;
