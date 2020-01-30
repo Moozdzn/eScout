@@ -47,7 +47,10 @@ module.exports.getUser = function (username,cb, next) {
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
-        conn.query("SELECT * FROM User WHERE username = ? ", [username], function (err, results) {
+        var query;
+        if(typeof username == "string") query = "SELECT * FROM User WHERE username = ? "; 
+        else query = "SELECT * FROM User WHERE userID = ? ";
+        conn.query(query, [username], function (err, results) {
             conn.release();
             if (err) {
                 cb(err, { code: 500, status: "Error in a database query" })
