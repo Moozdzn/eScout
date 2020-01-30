@@ -87,15 +87,10 @@ router.post("/:id/videos", function(req,res){
           }
             catch(err1) {
               res.status(500).send(err1);
-              
-  
             }
-            //send response
-            
         }
     } catch (err) {
         res.status(500).send(err);
-        
     }
   });
   
