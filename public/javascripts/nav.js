@@ -16,6 +16,18 @@ $(document).ready(function(){
 
 function logOut() {
     delete sessionStorage.userID;
+    $.ajax({
+        url: "/api/auth",
+        method: "get",
+        contentType: "application/json",
+        success: function (res, status) {
+          console.log(res)
+          window.location.href = res;
+        }
+        , error: function (err) {
+          console.log(err)
+        }
+      });
 };
 
 
