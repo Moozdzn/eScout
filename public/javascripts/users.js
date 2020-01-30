@@ -41,7 +41,7 @@ function message() {
     window.location.href = 'chat';
 };
 // Loads and displays users profile info
-function getProfile(id, bool) {
+ function getProfile(id, bool) {
     $.ajax({
         url: "/api/users/" + id + "/profile",
         method: "get",
@@ -74,6 +74,6 @@ function getProfile(id, bool) {
             window.location.href = "auth";
         }
     })
-}
+} 
 
 
