@@ -135,6 +135,7 @@ function getRoute() {
                     L.latLng(userPos._latlng.lat, userPos._latlng.lng),
                     eventCoord
                 ],
+                show: false,
                 createMarker: function() {return null;}
             }).addTo(mymap).on('routingerror', function(e) {
                 alert('The OSRM demo server appears down, or a network error occured. Please try again later.');
