@@ -83,7 +83,7 @@ function eventsNear(otherC){
                var d = mymap.distance(markerList[i][0]._latlng, circle.getLatLng());
                var isInside = d < circle.getRadius();
                if(isInside) {
-                   if(markerList[i][1] === false) showMarker(i)
+                   if(!markerList[i][1]) showMarker(i)
                 }
         }
     }
@@ -93,7 +93,7 @@ function showMarker(id) {
 
     var marker = markerList[id];
 
-    if (marker[1] === false) {
+    if (!marker[1]) {
         marker[0].addTo(mymap).openPopup();
         marker[1] = true;
         markedEvent = marker[0];
