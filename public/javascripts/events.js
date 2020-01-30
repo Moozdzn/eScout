@@ -60,6 +60,35 @@ function showEvents(game) {
     })
 };
 
+var circle;
+var exists = false;
+function eventsNear(otherC){
+    
+    var radius = parseFloat($("#radiusValue").val())*1000;
+
+    if(exists){
+        circle.removeFrom(mymap)
+        exists = !exists
+        if(otherC) eventsNear();
+    }
+    else {
+        circle = L.circle([userPos._latlng.lat, userPos._latlng.lng], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.2,
+            radius: radius
+        }).addTo(mymap);
+        exists = !exists;
+        for(i in markerList){
+               var d = mymap.distance(markerList[i][0]._latlng, circle.getLatLng());
+               var isInside = d < circle.getRadius();
+               if(isInside) {
+                   if(markerList[i][1] === false) showMarker(i)
+                }
+        }
+    }
+}
+
 function showMarker(id) {
 
     var marker = markerList[id];

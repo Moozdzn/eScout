@@ -26,6 +26,13 @@
 		<div class="col">
 			<button type="button" class="btn btn-block btn-primary" onclick="getRoute()">Click me to see a Route to event</button>
 			<div id="mapid" style="height: 400px;"></div>
+			<div class="input-group mb-3">
+  			<input type="number" class="form-control" id="radiusValue" placeholder="Radius(km)" aria-label="Radius(km)" aria-describedby="basic-addon2">
+  			<div class="input-group-append">
+    			<button class="btn btn-outline-primary" type="button" onclick="eventsNear(true)">See events near you</button>
+				<button class="btn btn-outline-danger" type="button" onclick="eventsNear(false)">Hide Circle</button>
+  			</div>
+		</div>
 		</div>
 	</div>
 	<!-- /.row -->
