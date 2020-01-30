@@ -1,23 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var jwt = require('jsonwebtoken');
 var createError = require('http-errors');
-
-function verifyToken(req, res, next) {
-
-  var token = req.cookies.keyboard;
-  if (!token)
-    return res.status(401).send('<p>No token provided. Click <a href="/auth">me</a> to login.</p>');
-    
-  jwt.verify(token, 'secret', function(err, decoded) {
-    if (err)
-    return res.status(401).send('<p>Your token is not valid. Click <a href="/auth">me</a> to login again.</p>');
-
-    req.userId = decoded.id;
-    req.userType = decoded.type;
-    next();
-  });
-}
+var verifyToken = require('../serverUtils/jwtToken').verifyToken;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
