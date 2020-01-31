@@ -1,5 +1,5 @@
 var express = require('express');
-const gdrive = require('./gdrive');
+const gdrive = require('../models/gdrive');
 var createError = require('http-errors');
 var verifyToken = require('../serverUtils/jwtToken').verifyToken;
 var profileDAO = require('../models/usersDAO');
