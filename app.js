@@ -50,7 +50,6 @@ app.use('/', indexRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/auth/register',authRouter);
 app.use('/api/videos', videosRouter);
 app.use('/api/team', teamRouter);
 
