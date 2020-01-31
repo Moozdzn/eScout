@@ -16,7 +16,7 @@ router.get("/:game", function (req, res, next) {
 
 });
 
-router.post("/newEvent",verifyToken, function (req, res, next) {
+router.post("/",verifyToken, function (req, res, next) {
     if(req.userId && req.userType ==='EO'){
         eventsDAO.newEvent(req.body, function (err, result) {
             if(err){return res.status(500).send({error:'Internal Server error'});}

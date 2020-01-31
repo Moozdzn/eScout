@@ -55,7 +55,7 @@ $('#evtForm').submit(function (evt) {
         })
 
         $.ajax({
-            url: "/api/events/newEvent",
+            url: "/api/events",
             method: "post",
             contentType: "application/json",
             data: event,
