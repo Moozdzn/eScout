@@ -26,12 +26,9 @@ window.onload = function () {
 
     if (localStorage.userType == 'EO')
         createEvtBtn.innerHTML = '<input type="button" value="Create Event">';
-
-
 }
 
 function showEvents(game) {
-    console.log(markerList)
     if (markerList.length != 0) {
         for (i in markerList) {
             mymap.removeLayer(markerList[i][0]);
@@ -39,7 +36,6 @@ function showEvents(game) {
         }
         markerList = [];
     }
-    console.log(markerList)
     manageActive(game)
     $.ajax({
         url: '/api/events/' + game,
