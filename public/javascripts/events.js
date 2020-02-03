@@ -10,7 +10,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 }).addTo(mymap);
 
 var userPos;
-var markerList;
+var markerList = [];
 var markedEvent;
 var initRoute = true;
 var Route;
@@ -24,14 +24,22 @@ window.onload = function () {
     showEvents('PUBG');
     getLocation();
 
-    if(localStorage.userType == 'EO')
+    if (localStorage.userType == 'EO')
         createEvtBtn.innerHTML = '<input type="button" value="Create Event">';
-   
+
 
 }
 
 function showEvents(game) {
-    markerList = [];
+    console.log(markerList)
+    if (markerList.length != 0) {
+        for (i in markerList) {
+            mymap.removeLayer(markerList[i][0]);
+            markerList[i][1] = false;
+        }
+        markerList = [];
+    }
+    console.log(markerList)
     manageActive(game)
     $.ajax({
         url: '/api/events/' + game,
@@ -40,17 +48,17 @@ function showEvents(game) {
         success: function (res, status) {
             if (res.err) return;
             var gameIcon = L.icon({
-                iconUrl: 'images/'+game+'.png',
-                iconSize:     [70, 70], 
-                iconAnchor:   [35, 63], 
-                popupAnchor:  [0, -63] 
+                iconUrl: 'images/' + game + '.png',
+                iconSize: [70, 70],
+                iconAnchor: [35, 63],
+                popupAnchor: [0, -63]
             });
             var html = "";
 
             for (i in res) {
                 date = res[i].eventStartTime.slice(0, 10);
                 time = res[i].eventStartTime.slice(11, 16);
-                markerList.push([L.marker([res[i].latitude, res[i].longitude],{icon: gameIcon}).bindPopup(res[i].eventName), false]);
+                markerList.push([L.marker([res[i].latitude, res[i].longitude], { icon: gameIcon }).bindPopup(res[i].eventName), false]);
                 html += '<div class="col-lg-4 col-md-6 mb-4" onclick="showMarker(' + i + ')" style="min-width: 200px"><div class="card h-100"><div class="card-body"> <h4 class="card-title"><a href="#">' + res[i].eventName + '</a></h4><p class="card-text">' + res[i].eventDescription + '</p><p>' + date + '  ' + time + 'H </p></div></div></div>';
             }
             eventslist.innerHTML = html;
@@ -62,14 +70,14 @@ function showEvents(game) {
 
 var circle;
 var exists = false;
-function eventsNear(otherC){
-    
-    var radius = parseFloat($("#radiusValue").val())*1000;
+function eventsNear(otherC) {
 
-    if(exists){
+    var radius = parseFloat($("#radiusValue").val()) * 1000;
+
+    if (exists) {
         circle.removeFrom(mymap)
         exists = !exists
-        if(otherC) eventsNear();
+        if (otherC) eventsNear();
     }
     else {
         circle = L.circle([userPos._latlng.lat, userPos._latlng.lng], {
@@ -79,12 +87,12 @@ function eventsNear(otherC){
             radius: radius
         }).addTo(mymap);
         exists = !exists;
-        for(i in markerList){
-               var d = mymap.distance(markerList[i][0]._latlng, circle.getLatLng());
-               var isInside = d < circle.getRadius();
-               if(isInside) {
-                   if(!markerList[i][1]) showMarker(i)
-                }
+        for (i in markerList) {
+            var d = mymap.distance(markerList[i][0]._latlng, circle.getLatLng());
+            var isInside = d < circle.getRadius();
+            if (isInside) {
+                if (!markerList[i][1]) showMarker(i)
+            }
         }
     }
 }
@@ -107,42 +115,42 @@ function showMarker(id) {
 function showPosition(position) {
     var userIcon = L.icon({
         iconUrl: 'images/position.png',
-        iconSize:     [50, 50], 
-        iconAnchor:   [25, 45], 
-        popupAnchor:  [0, -45]
+        iconSize: [50, 50],
+        iconAnchor: [25, 45],
+        popupAnchor: [0, -45]
     });
-    userPos = L.marker([position.coords.latitude, position.coords.longitude],{icon: userIcon}).addTo(mymap).bindPopup('You are here!<br>Or at least somewhere around').openPopup();
+    userPos = L.marker([position.coords.latitude, position.coords.longitude], { icon: userIcon }).addTo(mymap).bindPopup('You are here!<br>Or at least somewhere around').openPopup();
 }
 
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-    }  
+    }
 }
 
 function getRoute() {
-       try {
-            eventCoord = L.latLng(markedEvent._latlng.lat, markedEvent._latlng.lng)
-        } catch (TypeError) {
-            alert('You must select an event.');
-            return;
-        }
-        
-        if (initRoute) {
-            initRoute = false;
-            Route = L.Routing.control({
-                waypoints: [
-                    L.latLng(userPos._latlng.lat, userPos._latlng.lng),
-                    eventCoord
-                ],
-                show: false,
-                createMarker: function() {return null;}
-            }).addTo(mymap).on('routingerror', function(e) {
-                alert('The OSRM demo server appears down, or a network error occured. Please try again later.');
-            });
+    try {
+        eventCoord = L.latLng(markedEvent._latlng.lat, markedEvent._latlng.lng)
+    } catch (TypeError) {
+        alert('You must select an event.');
+        return;
+    }
 
-        }
-        else {
-            Route.spliceWaypoints(Route.getWaypoints().length - 1, 1, eventCoord);
-        }
+    if (initRoute) {
+        initRoute = false;
+        Route = L.Routing.control({
+            waypoints: [
+                L.latLng(userPos._latlng.lat, userPos._latlng.lng),
+                eventCoord
+            ],
+            show: false,
+            createMarker: function () { return null; }
+        }).addTo(mymap).on('routingerror', function (e) {
+            alert('The OSRM demo server appears down, or a network error occured. Please try again later.');
+        });
+
+    }
+    else {
+        Route.spliceWaypoints(Route.getWaypoints().length - 1, 1, eventCoord);
+    }
 } 
