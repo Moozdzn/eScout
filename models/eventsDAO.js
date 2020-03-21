@@ -41,9 +41,10 @@ module.exports.newEvent = function (body, cb, next) {
     })
 };
 
-module.exports.lastAddressID = function () {
+module.exports.lastAddressID = function (cb, next) {
     pool.getConnection(function (err, conn) {
         if (err) {
+            console.log(err);
             cb(err, { code: 500, status: "Error connecting to database." })
             return;
         }
