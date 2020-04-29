@@ -1,4 +1,4 @@
-# eScout <p> Note: Project is currently not online as www.remotemysql.com keeps deleting db and heroku cannot build the server, however all files needed are in this repo</p>
+# eScout 
 Y3S1 Project - eScout - Universidade Europeia
 <br>
 <h2>Executive Summary</h2>
@@ -56,3 +56,4 @@ uploaded videos to date.</li>
     <th>50037301@iade.pt</th>
   </tr>
   </table>
+  <p> Note: Project is currently not online as www.remotemysql.com keeps deleting db and heroku cannot build the server, however all files needed are in this repo</p>
