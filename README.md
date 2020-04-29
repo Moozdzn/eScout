@@ -1,4 +1,4 @@
-# eScout
+# eScout <p> Note: Project is currently not online as www.remotemysql.com keeps deleting db and heroku cannot build the server, however all files needed are in this repo</p>
 Y3S1 Project - eScout - Universidade Europeia
 <br>
 <h2>Executive Summary</h2>
