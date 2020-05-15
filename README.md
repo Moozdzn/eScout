@@ -53,7 +53,7 @@ uploaded videos to date.</li>
     <tr>
       <th>50037301</th>
     <th>Francisco Cordeiro</th>
-    <th>50037301@iade.pt</th>
+    <th>francisco.cordeiro.business@gmail.com</th>
   </tr>
   </table>
   <p> Note: Project is currently not online as www.remotemysql.com keeps deleting db and heroku cannot build the server, however all files needed are in this repo</p>
